@@ -1,10 +1,3 @@
-CREATE TABLE humans(
-	id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-	name VARCHAR(100),
-	age INT
-);
--- Create a dummy human for testing.
-INSERT INTO humans (name, age) VALUES ("Alice", 123), ("Bob", 456);
 
 -- Create a table to store user accounts in.
 CREATE TABLE accounts (
