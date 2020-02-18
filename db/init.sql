@@ -10,7 +10,6 @@ CREATE TABLE accounts (
 -- Create a dummy account for testing.
 INSERT INTO accounts (username, password) VALUES ("Alice", "abc123");
 
-
 -- Create a schedule.
 CREATE TABLE schedule(
 	id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
