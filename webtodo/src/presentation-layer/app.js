@@ -2,13 +2,12 @@ const path = require('path')
 const express = require('express')
 const expressHandlebars = require('express-handlebars')
 
-const session = require('express-session')
-const redis = require('redis')
-
 const variousRouter = require('./routers/variousRouter')
 const todolistRouter = require('./routers/todolistRouter')
 const accountRouter = require('./routers/accountsRouter')
 
+const session = require('express-session')
+const redis = require('redis')
 const redisClient = redis.createClient({
 	host: 'redis',
 	port: 6379

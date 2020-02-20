@@ -3,7 +3,11 @@ const express = require('express')
 const router = express.Router()
 
 router.get('/', function(request, response){
-	response.render('home.hbs')
+	if(request.session.key){
+		response.redirect('/todolist')
+	} else {
+		response.render('home.hbs')
+	}
 })
 
 router.get('/about', function(request, response){

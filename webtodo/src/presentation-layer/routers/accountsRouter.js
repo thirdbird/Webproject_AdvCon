@@ -1,12 +1,5 @@
 const express = require('express')
 const accountManager = require('../../business-logic-layer/accountManager')
-const session = require('express-session')
-const redis = require('redis')
-const redisClient = redis.createClient({
-	host: 'redis',
-	port: 6379
-})
-const redisStore = require('connect-redis')(session)
 
 const router = express.Router()
 
@@ -56,6 +49,10 @@ router.post('/sign-up', function(request, response, next){
 		request.session.success = true
 	}
 	response.redirect('/todolist')
+})
+
+router.post('/sign-in', function(request, response, next){
+	
 })
 
 module.exports = router
