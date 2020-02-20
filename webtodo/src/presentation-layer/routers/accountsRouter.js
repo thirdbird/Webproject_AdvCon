@@ -1,5 +1,12 @@
 const express = require('express')
 const accountManager = require('../../business-logic-layer/accountManager')
+const session = require('express-session')
+const redis = require('redis')
+const redisClient = redis.createClient({
+	host: 'redis',
+	port: 6379
+})
+const redisStore = require('connect-redis')(session)
 
 const router = express.Router()
 
@@ -35,6 +42,20 @@ router.get('/:username', function(request, response){
 		response.render("accounts-show-one.hbs", model)
 	})
 	
+})
+
+router.post('/sign-up', function(request, response, next){
+	request.check('username', 'Invalid username').accountManager.createAccount()
+	request.check('password1', 'Password is Invalid').isLength({min:4}).equals(request.body.password2)
+
+	var errors = request.validationErrors()
+	if(errors){
+		request.session.errors = errors
+		request.session.success = false
+	} else {
+		request.session.success = true
+	}
+	response.redirect('/todolist')
 })
 
 module.exports = router

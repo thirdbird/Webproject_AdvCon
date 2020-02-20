@@ -2,8 +2,14 @@
 	<h2>Sign in</h2>
 </div>
 
-<form>
-    <div>Username: <input type="text" name="username"></div>
-    <div>Password: <input type="password" name="password"></div>
+<form action="/sign-in" id="createAccountForm" method="POST">
+
+	<div>Username: <input type="text" name="username" id="username"></div>
+	
+	<div>Password: <input type="password" name="password1" id="password1"></div>
+	
+	<div>Password (repeat): <input type="password" name="password2" id="password2"></div>
+	
     <input type="submit" value="Sign in">
+
 </form>

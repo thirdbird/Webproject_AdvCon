@@ -9,6 +9,7 @@ services:
       - "./webtodo/src:/webtodo/src"
     depends_on: 
       - db
+      - redis
   db:
     build: ./db
     ports: 
@@ -16,3 +17,7 @@ services:
     environment: 
       - "MYSQL_ROOT_PASSWORD=abc123"
       - "MYSQL_DATABASE=myDB"
+  redis:
+    image: "redis"
+    ports: 
+      - "6379:6379"
