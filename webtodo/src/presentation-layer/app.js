@@ -41,10 +41,9 @@ app.use(session({
 	secret: SESS_SECRET,
 	name: SESS_NAME,
 	resave: false,
-	saveUninitialized: false,
+	saveUninitialized: true,
 	cookie: {
 		maxAge: SESS_LIFETIME,
-		sameSite: true,
 		secure: false
 	},
 	store: new redisStore({
@@ -52,6 +51,10 @@ app.use(session({
 		tt1: 86400
 	})
 }))
+
+//Enable hashing.
+//app.use(bodyParser.json())
+//app.use(bodyParser.urlencoded({extended: true}))
 
 //Attach all routers.
 app.use('/', variousRouter)
@@ -63,8 +66,7 @@ app.listen(8080, function(){
 	console.log('Web application running on 8080')
 })
 
-
-
+//Throw Redis error in case of ERROR.
 redisClient.on('error', (err) => {
 	console.log('Redis Error: ', err)
 })

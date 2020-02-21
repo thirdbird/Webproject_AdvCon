@@ -3,6 +3,7 @@ const express = require('express')
 const router = express.Router()
 
 router.get('/', function(request, response){
+	//create session object
 	if(request.session.key){
 		response.redirect('/todolist')
 	} else {

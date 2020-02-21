@@ -52,7 +52,20 @@ router.post('/sign-up', function(request, response, next){
 })
 
 router.post('/sign-in', function(request, response, next){
-	
+	//logged in user, send key to redis.
+	request.session.key = request.body.username
+	response.end('done')
+
+})
+
+router.post('/sign-out', function(request, response, next){
+	request.session.destroy(function(err){
+		if(err){
+			console.log(err)
+		} else {
+			response.redirect('/')
+		}
+	})
 })
 
 module.exports = router
