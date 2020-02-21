@@ -1,6 +1,6 @@
 const MIN_USERNAME_LENGTH = 3
 const MAX_USERNAME_LENGTH = 50
-const MIN_PASSWORD_LENGTH = 6
+const MIN_PASSWORD_LENGTH = 3
 const MAX_PASSWORD_LENGTH = 20
 
 exports.getErrorsNewAccount = function(account){
@@ -18,11 +18,17 @@ exports.getErrorsNewAccount = function(account){
 
 	//Validate password.
 	if(!account.hasOwnProperty("password")){
-		errors.push("passwardMissing")
+		errors.push("passwordMissing")
 	}else if(account.password.length < MIN_PASSWORD_LENGTH){
 		errors.push("passwordTooShort")
 	}else if(account.password.length > MAX_PASSWORD_LENGTH){
 		errors.push("passwordTooLong")
+	}
+
+	if(!account.hasOwnProperty("confirmPassword")){
+		errors.push("passwordMissing")
+	}else if(account.password != account.confirmPassword){
+		errors.push("passwordDontMatch")
 	}
 	
 	return errors

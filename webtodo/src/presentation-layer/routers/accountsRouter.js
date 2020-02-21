@@ -2,6 +2,7 @@ const express = require('express')
 const accountManager = require('../../business-logic-layer/accountManager')
 
 const router = express.Router()
+router.use(express.urlencoded({extended: false}))
 
 
 router.get("/sign-up", function(request, response){
@@ -37,28 +38,45 @@ router.get('/:username', function(request, response){
 	
 })
 
-router.post('/sign-up', function(request, response, next){
-	request.check('username', 'Invalid username').accountManager.createAccount()
-	request.check('password1', 'Password is Invalid').isLength({min:4}).equals(request.body.password2)
+router.post('/sign-up', function(request, response){
 
-	var errors = request.validationErrors()
-	if(errors){
-		request.session.errors = errors
-		request.session.success = false
-	} else {
-		request.session.success = true
+	//TODO catching and displaying errors
+	const account = {
+		username: request.body.username,
+		password: request.body.password,
+		confirmPassword: request.body.confirmPassword
 	}
-	response.redirect('/todolist')
+	accountManager.createAccount(account, function(errors,account){
+		const model = {
+			errors: errors,
+			account: account
+		}
+		response.render("accounts-sign-in.hbs", model)
+	})
 })
+/*
+router.post('/sign-in', function(request, response){
+	const account = {
+		username: request.body.username,
+		password: request.body.password
+	}
+	accountManager.getAccount(account, function(errors,account){
+		const model = {
+			errors: errors,
+			account: account
+		}
+		response.render("/accounts-show-one", model)
+	})
 
-router.post('/sign-in', function(request, response, next){
+
+
 	//logged in user, send key to redis.
 	request.session.key = request.body.username
 	response.end('done')
 
-})
+})*/
 
-router.post('/sign-out', function(request, response, next){
+router.post('/sign-out', function(request, response){
 	request.session.destroy(function(err){
 		if(err){
 			console.log(err)

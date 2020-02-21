@@ -37,8 +37,9 @@ exports.getAccountByUsername = function(username, callback){
 			callback([], accounts[0])
 		}
 	})
-	
 }
+
+
 
 /*
 	Creates a new account.
