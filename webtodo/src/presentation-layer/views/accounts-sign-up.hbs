@@ -1,25 +1,14 @@
+
 <div class="content">
+	
 	<h2>Sign up</h2>
 </div>
 {{#if errors.length}}
-	<p>Oh no, something went wrong:</p>
 	<ul>
 		{{#each errors}}
-			<li>{{this}}</li>
+			<li id="ErrorMessage">{{this}}</li>
 		{{/each}}
 	</ul>
-{{else}}
-	
-	{{#if accounts.length}}
-		<ul>
-			{{#each accounts}}
-				<li><a href="/accounts/{{username}}">{{username}}</a></li>
-			{{/each}}
-		</ul>
-	{{else}}
-		<p></p>
-	{{/if}}
-	
 {{/if}}
 <form action="" id="createAccountForm" method="POST">
 		
