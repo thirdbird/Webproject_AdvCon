@@ -40,6 +40,21 @@ exports.getAccountByUsername = function(username, callback){
 	
 }
 
+exports.getAccount = function(account, callback){
+	
+	const query = `SELECT * FROM accounts WHERE username = ? AND password = ? LIMIT 1`
+	const values = [account.username,account.password]
+	
+	db.query(query, values, function(error, accounts){
+		if(error){
+			callback(['databaseError'], null)
+		}else{
+			callback([], accounts[0])
+		}
+	})
+}
+
+
 /*
 	Creates a new account.
 	account: {username: "The username", password: "The password"}

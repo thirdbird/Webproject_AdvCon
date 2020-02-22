@@ -22,3 +22,7 @@ exports.createAccount = function(account, callback){
 exports.getAccountByUsername = function(username, callback){
 	accountRepository.getAccountByUsername(username, callback)
 }
+
+exports.getAccount = function(account, callback){
+	accountRepository.getAccount(account, callback)
+}

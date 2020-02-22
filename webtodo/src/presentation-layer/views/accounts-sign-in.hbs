@@ -1,9 +1,32 @@
 <div class="content">
 	<h2>Sign in</h2>
 </div>
+{{#if errors.length}}
+	<p>Oh no, something went wrong:</p>
+	<ul>
+		{{#each errors}}
+			<li>{{this}}</li>
+		{{/each}}
+	</ul>
+{{else}}
+	
+	{{#if accounts.length}}
+		<ul>
+			{{#each accounts}}
+				<li><a href="/accounts/{{username}}">{{username}}</a></li>
+			{{/each}}
+		</ul>
+	{{else}}
+		<p></p>
+	{{/if}}
+	
+{{/if}}
+<form action="" id="signInAccountForm" method="POST">
 
-<form>
-    <div>Username: <input type="text" name="username"></div>
-    <div>Password: <input type="password" name="password"></div>
+	<div>Username: <input type="text" name="username" id="username"></div>
+	
+	<div>Password: <input type="password" name="password" id="password"></div>
+	
     <input type="submit" value="Sign in">
+
 </form>
