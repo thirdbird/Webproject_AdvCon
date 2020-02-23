@@ -5,8 +5,22 @@ exports.getAllAccounts = function(callback){
 	accountRepository.getAllAccounts(callback)
 }
 
-exports.createAccount = function(account, callback){
+exports.getAccountByUsername = function(account, callback){
+	accountRepository.getAccountByUsername(account, callback)
+}
+
+exports.getAccount = function(account, callback){
+
+	const errors = accountValidator.getErrorsExistingAccount(account)
 	
+	if(0 < errors.length){
+		callback(errors, null)
+		return
+	}
+	accountRepository.getAccount(account, callback)
+}
+
+exports.createAccount = function(account, callback){
 	// Validate the account.
 	const errors = accountValidator.getErrorsNewAccount(account)
 	
@@ -19,12 +33,6 @@ exports.createAccount = function(account, callback){
 	
 }
 
-exports.getAccountByUsername = function(account, callback){
-	accountRepository.getAccountByUsername(account, callback)
-}
 
-exports.getAccount = function(account, callback){
-	accountRepository.getAccount(account, callback)
-}
 
 

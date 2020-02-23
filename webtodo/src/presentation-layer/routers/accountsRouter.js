@@ -48,10 +48,14 @@ router.post('/sign-up', function(request, response){
 		password: request.body.password,
 		confirmPassword: request.body.confirmPassword
 	}
+	const formHolder = {
+		usernameholder: request.body.username
+	}
 	accountManager.createAccount(account, function(errors,account){
 		const model = {
 			errors: errors,
-			account: account
+			account: account,
+			formHolder: formHolder
 		}
 		if(errors.length !=0){
 			response.render("accounts-sign-up.hbs", model)
@@ -69,13 +73,22 @@ router.post("/sign-in", function(request, response){
 		username: request.body.username,
 		password: request.body.password
 	}
+	const formHolder = {
+		usernameholder: request.body.username
+	}
 	accountManager.getAccount(account, function(errors,account){
 		const model = {
 			errors: errors,
-			account: account
+			account: account,
+			formHolder: formHolder
 		}
-		
-		response.render("accounts-sign-in.hbs",model)
+		if(errors.length !=0){
+			response.send("accounts-sign-in.hbs", model)
+		}
+		else{
+
+			response.render("home-logged-in.hbs", model)
+		}
 	})
 	/*
 	//logged in user, send key to redis.
@@ -86,13 +99,15 @@ router.post("/sign-in", function(request, response){
 })
 
 router.post('/sign-out', function(request, response){
-	request.session.destroy(function(err){
-		if(err){
-			console.log(err)
-		} else {
-			response.redirect('/')
-		}
-	})
+	if(request.session.key){
+		request.session.destroy(function(err){
+			if(err){
+				console.log(err)
+			} else {
+				response.redirect('/')
+			}
+		})
+	}
 })
 
 module.exports = router

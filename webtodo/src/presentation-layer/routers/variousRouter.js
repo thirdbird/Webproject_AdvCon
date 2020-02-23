@@ -5,7 +5,7 @@ const router = express.Router()
 router.get('/', function(request, response){
 	//create session object
 	if(request.session.key){
-		response.redirect('/todolist')
+		response.render('home-logged-in.hbs')
 	} else {
 		response.render('home.hbs')
 	}

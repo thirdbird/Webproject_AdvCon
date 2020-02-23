@@ -39,10 +39,15 @@ exports.getAccountByUsername = function(account, callback){
 	})
 }
 
+/*
+	Retrieves the account with the given username and password.
+	Possible errors: databaseError
+	Success value: The fetched account, or null if no account has that username with that password.
+*/
 exports.getAccount = function(account, callback){
-	
-	const query = `SELECT * FROM accounts WHERE username = ? AND password = ? LIMIT 1`
-	const values = [account.username,account.password]
+	//"SELECT * from user_login WHERE user_email='"+req.body.user_email+"' AND `user_password`='"+req.body.user_password+"'"
+	const query = `SELECT * FROM accounts WHERE username = ? AND password = ?`
+	const values = [account.username, account.password]
 	
 	db.query(query, values, function(error, accounts){
 		if(error){

@@ -1,6 +1,5 @@
 
 <div class="content">
-	
 	<h2>Sign up</h2>
 </div>
 {{#if errors.length}}
@@ -12,7 +11,7 @@
 {{/if}}
 <form action="" id="createAccountForm" method="POST">
 		
-	<div>Username: <input type="text" name="username" id="username"></div>
+	<div>Username: <input type="text" name="username" id="username" value="{{formHolder.usernameholder}}"></div>
 	
 	<div>Password: <input type="password" name="password" id="password"></div>
 	
