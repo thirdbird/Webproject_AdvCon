@@ -10,13 +10,6 @@ exports.getAccountByUsername = function(account, callback){
 }
 
 exports.getAccount = function(account, callback){
-
-	const errors = accountValidator.getErrorsExistingAccount(account)
-	
-	if(0 < errors.length){
-		callback(errors, null)
-		return
-	}
 	accountRepository.getAccount(account, callback)
 }
 

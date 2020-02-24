@@ -50,10 +50,10 @@ exports.getAccount = function(account, callback){
 	const values = [account.username, account.password]
 	
 	db.query(query, values, function(error, accounts){
-		if(error){
-			callback(['databaseError'], null)
-		}else{
+		if(accounts.length > 0){
 			callback([], accounts[0])
+		}else{
+			callback(["Username or password doesn't match"], null)
 		}
 	})
 }
@@ -72,7 +72,7 @@ exports.createAccount = function(account, callback){
 	db.query(query, values, function(error, results){
 		if(error){
 			// TODO: Look for usernameUnique violation.
-			callback(['databaseError'], null)
+			callback(['Username already exists'], null)
 		}else{
 			callback([], results.insertId)
 		}

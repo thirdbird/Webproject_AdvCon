@@ -8,8 +8,8 @@ exports.getErrorsNewAccount = function(account){
 	const errors = []
 	
 	// Validate username.
-	if(!account.hasOwnProperty("username")){
-		errors.push("Username is missing")
+	if(account.username.length == 0){
+		errors.push("You have to enter a username")
 	}else if(account.username.length < MIN_USERNAME_LENGTH){
 		errors.push("Username is too short")
 	}else if(MAX_USERNAME_LENGTH < account.username.length){
@@ -17,8 +17,8 @@ exports.getErrorsNewAccount = function(account){
 	}
 
 	//Validate password.
-	if(!account.hasOwnProperty("password")){
-		errors.push("Password is missing")
+	if(account.password.length == 0){
+		errors.push("You have to enter a password")
 	}else if(account.password.length < MIN_PASSWORD_LENGTH){
 		errors.push("Password is too short")
 	}else if(account.password.length > MAX_PASSWORD_LENGTH){
@@ -26,8 +26,8 @@ exports.getErrorsNewAccount = function(account){
 	}
 
 	//Validate second password match.
-	if(!account.hasOwnProperty("confirmPassword")){
-		errors.push("Password is missing")
+	if(account.confirmPassword.length == 0){
+		errors.push("Password(repeat) is missing")
 	}else if(account.password != account.confirmPassword){
 		errors.push("Password doesn't match")
 	}
@@ -38,6 +38,18 @@ exports.getErrorsNewAccount = function(account){
 exports.getErrorsExistingAccount = function(account){
 	const errors= []
 
+	//Validate account.
+	if(account.username.length == 1){
+		errors.push("You have to enter a username")
+	}else if(account.username.length == 1){
+		errors.push("Username is too short")
+	}
+	//Validate password.
+	if(account.password.length == 1){
+		errors.push("You have to enter a password")
+	}else if(account.password.length == 1){
+		errors.push("Password is too short")
+	}
 	//TODO
 
 	return errors

@@ -1,6 +1,6 @@
 const express = require('express')
 const accountManager = require('../../business-logic-layer/accountManager')
-
+const app = require('../app')
 const router = express.Router()
 router.use(express.urlencoded({extended: false}))
 
@@ -9,6 +9,7 @@ router.use(express.urlencoded({extended: false}))
 
 router.get("/sign-up", function(request, response){
 	response.render("accounts-sign-up.hbs")
+	console.log(request.sessionID)
 })
 
 router.get("/sign-in", function(request, response){
@@ -57,7 +58,7 @@ router.post('/sign-up', function(request, response){
 			account: account,
 			formHolder: formHolder
 		}
-		if(errors.length !=0){
+		if(errors.length != 0){
 			response.render("accounts-sign-up.hbs", model)
 		}
 		else{
@@ -82,11 +83,11 @@ router.post("/sign-in", function(request, response){
 			account: account,
 			formHolder: formHolder
 		}
-		if(errors.length !=0){
-			response.send("accounts-sign-in.hbs", model)
+		if(errors.length != 0){
+			response.render("accounts-sign-in.hbs", model)
 		}
 		else{
-
+			request.session.userId = account.id
 			response.render("home-logged-in.hbs", model)
 		}
 	})
@@ -99,11 +100,12 @@ router.post("/sign-in", function(request, response){
 })
 
 router.post('/sign-out', function(request, response){
-	if(request.session.key){
+	if(request.session.userId){
 		request.session.destroy(function(err){
 			if(err){
 				console.log(err)
 			} else {
+				response.clearCookie(request.sessionID)
 				response.redirect('/')
 			}
 		})

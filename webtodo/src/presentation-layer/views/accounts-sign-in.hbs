@@ -3,14 +3,13 @@
 	<h2>Sign in</h2>
 </div>
 {{#if errors.length}}
-	<p>Oh no, something went wrong:</p>
 	<ul>
 		{{#each errors}}
 			<li id="ErrorMessage">{{this}}</li>
 		{{/each}}
 	</ul>
 {{/if}}
-<form action="sign-in" id="signInAccountForm" method="POST">
+<form action="" id="signInAccountForm" method="POST">
 
 	<div>Username: <input type="text" name="username" id="username" value="{{formHolder.usernameholder}}"></div>
 	
