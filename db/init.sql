@@ -8,7 +8,10 @@ CREATE TABLE accounts (
 );
 
 -- Create a dummy account for testing.
-INSERT INTO accounts (username, password) VALUES ("Alice", "abc123");
+INSERT INTO accounts (username, password) VALUES ("Alice", "123");
+INSERT INTO accounts (username, password) VALUES ("Bob", "123");
+INSERT INTO accounts (username, password) VALUES ("Claire", "123");
+INSERT INTO accounts (username, password) VALUES ("Max", "123");
 
 -- Create a schedule.
 CREATE TABLE schedule(

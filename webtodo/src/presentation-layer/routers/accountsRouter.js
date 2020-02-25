@@ -1,6 +1,6 @@
 const express = require('express')
 const accountManager = require('../../business-logic-layer/accountManager')
-const app = require('../app')
+
 const router = express.Router()
 router.use(express.urlencoded({extended: false}))
 
@@ -8,11 +8,12 @@ router.use(express.urlencoded({extended: false}))
 //------------------GET REQUEST------------------//
 
 router.get("/sign-up", function(request, response){
+
 	response.render("accounts-sign-up.hbs")
-	console.log(request.sessionID)
 })
 
 router.get("/sign-in", function(request, response){
+
 	response.render("accounts-sign-in.hbs")
 })
 
@@ -21,7 +22,9 @@ router.get("/", function(request, response){
 		console.log(errors, accounts)
 		const model = {
 			errors: errors,
-			accounts: accounts
+			accounts: accounts,
+			account: request.session.account,
+			loggedIn: request.session.loggedIn
 		}
 		response.render("accounts-list-all.hbs", model)
 	})
@@ -34,7 +37,8 @@ router.get('/:username', function(request, response){
 	accountManager.getAccountByUsername(account, function(errors, account){
 		const model = {
 			errors: errors,
-			account: account
+			account: request.session.account,
+			loggedIn: request.session.loggedIn
 		}
 		response.render("accounts-show-one.hbs", model)
 	})
@@ -69,14 +73,18 @@ router.post('/sign-up', function(request, response){
 
 router.post("/sign-in", function(request, response){
 
-	//TODO catching and displaying errors
+	
 	const account = {
 		username: request.body.username,
 		password: request.body.password
 	}
+	
 	const formHolder = {
 		usernameholder: request.body.username
 	}
+	console.log('session id:', request.session.userId) //undefined
+	console.log('session string:', request.sessionID)	//string
+
 	accountManager.getAccount(account, function(errors,account){
 		const model = {
 			errors: errors,
@@ -87,16 +95,13 @@ router.post("/sign-in", function(request, response){
 			response.render("accounts-sign-in.hbs", model)
 		}
 		else{
+			model.loggedIn = true
+			request.session.loggedIn = true
 			request.session.userId = account.id
+			request.session.account = account
 			response.render("home-logged-in.hbs", model)
 		}
 	})
-	/*
-	//logged in user, send key to redis.
-	request.session.key = request.body.username
-	response.end('done')
-	*/
-	
 })
 
 router.post('/sign-out', function(request, response){
@@ -105,9 +110,12 @@ router.post('/sign-out', function(request, response){
 			if(err){
 				console.log(err)
 			} else {
-				response.clearCookie(request.sessionID)
-				response.redirect('/')
+				response.clearCookie(request.session)
+				response.render('/about')
+				console.log(request.session)
+				console.log('...')
 			}
+			// -----TODO----- //
 		})
 	}
 })
