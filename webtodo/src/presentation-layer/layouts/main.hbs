@@ -33,19 +33,19 @@
 					<a class="navbar-item" href="/todolist">Your todo lists</a>
 					<a class="navbar-item" href="/accounts">Accounts</a>
 					{{#if loggedIn}}
-							<a class="navbar-item" id="loggedAs">Signed in as: {{account.username}}</a>
+						<a class="navbar-item" id="loggedAs">Signed in as: {{account.username}}</a>
 					{{/if}}
 				</div>
 				
 				<div class="navbar-end">
 					<div class="navbar-item">
 						<div class="buttons">
-							<a class="button is-primary" href="/accounts/sign-up">Sign up</a>
-								{{#if loggedIn}}
-									<a class="button is-dark" id="loginButton" href="/accounts/sign-out">Sign out</a>
-									{{else}}
-										<a class="button is-dark" id="loginButton" href="/accounts/sign-in">Sign in</a>
-								{{/if}}
+							{{#if loggedIn}}
+								<a class="button is-danger" id="logOutButton" href="/accounts/sign-out">Sign out</a>
+								{{else}}
+									<a class="button is-primary" href="/accounts/sign-up">Sign up</a>
+									<a class="button is-dark" id="loginButton" href="/accounts/sign-in">Sign in</a>
+							{{/if}}
 						</div>
 					</div>
 				</div>
@@ -64,6 +64,5 @@
 		</footer>
 		
 	</div>
-	
 </body>
 </html>

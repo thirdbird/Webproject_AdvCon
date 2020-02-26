@@ -8,13 +8,17 @@ router.use(express.urlencoded({extended: false}))
 //------------------GET REQUEST------------------//
 
 router.get("/sign-up", function(request, response){
-
 	response.render("accounts-sign-up.hbs")
 })
 
 router.get("/sign-in", function(request, response){
-
 	response.render("accounts-sign-in.hbs")
+})
+
+router.get("/sign-out", function(request, response){
+	request.session.destroy()
+	response.redirect('/')
+	console.log(session)
 })
 
 router.get("/", function(request, response){
@@ -102,22 +106,6 @@ router.post("/sign-in", function(request, response){
 			response.render("home-logged-in.hbs", model)
 		}
 	})
-})
-
-router.post('/sign-out', function(request, response){
-	if(request.session.userId){
-		request.session.destroy(function(err){
-			if(err){
-				console.log(err)
-			} else {
-				response.clearCookie(request.session)
-				response.render('/about')
-				console.log(request.session)
-				console.log('...')
-			}
-			// -----TODO----- //
-		})
-	}
 })
 
 module.exports = router

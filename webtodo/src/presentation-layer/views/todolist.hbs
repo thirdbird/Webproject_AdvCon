@@ -1,6 +1,30 @@
-<h1>your to do lists</h1>
+<div class="container">
+
+    <form method="POST">
+        <label for="new-task">Add Todo</label>
+        <input name="todo" type="text">
+        <input type="submit" value="Add">
+    </form>
+    <div class="content">
+        {{#if errors.length}}
+        <ul>
+            {{#each errors}}
+            <p id="ErrorMessage">{{this}}</p>
+            {{/each}}
+        </ul>
+        {{/if}}
+    </div>
 
 
+    <h3 class="has-text-weight-bold">Todo</h3>
+    {{#if todos.length}}
+    <ul>
+        {{#each todos}}
+        <li><input type="checkbox">{{todo}}<button class="delete">Delete</button></li>
+        {{/each}}
+    </ul>
+    {{/if}}
 
+    <h3 class="has-text-weight-bold">Completed</h3>
 
-
+</div>

@@ -17,7 +17,6 @@ exports.getAllAccounts = function(callback){
 			callback([], accounts)
 		}
 	})
-	
 }
 
 /*

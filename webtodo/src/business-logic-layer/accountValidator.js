@@ -26,9 +26,7 @@ exports.getErrorsNewAccount = function(account){
 	}
 
 	//Validate second password match.
-	if(account.confirmPassword.length == 0){
-		errors.push("Password(repeat) is missing")
-	}else if(account.password != account.confirmPassword){
+	if(account.password != account.confirmPassword){
 		errors.push("Password doesn't match")
 	}
 	
@@ -54,3 +52,4 @@ exports.getErrorsExistingAccount = function(account){
 
 	return errors
 }
+

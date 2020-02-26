@@ -13,17 +13,11 @@ INSERT INTO accounts (username, password) VALUES ("Bob", "123");
 INSERT INTO accounts (username, password) VALUES ("Claire", "123");
 INSERT INTO accounts (username, password) VALUES ("Max", "123");
 
--- Create a schedule.
-CREATE TABLE schedule(
+-- Create a todo.
+CREATE TABLE todos (
 	id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-	monday VARCHAR(100) NULL,
-	tuesday VARCHAR(100) NULL,
-	wednesday VARCHAR(100) NULL,
-	thursday VARCHAR(100) NULL,
-	friday VARCHAR(100) NULL,
-	saturday VARCHAR(100) NULL,
-	sunday VARCHAR(100) NULL
+	todo VARCHAR(100) NOT NULL
 );
 
--- Create a dummy schedule for testing.
-INSERT INTO schedule (tuesday, wednesday, saturday) VALUES ("Need to go and get groceries at Willy's.", "Haircut appointment at 16.30", "Pick up girlfriend at the airport, plane arrival 11.30");
+-- Create a dummy todo for testing.
+INSERT INTO todos (todo) VALUES ("Do the dishes");
