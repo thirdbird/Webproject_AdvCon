@@ -1,12 +1,12 @@
-//const db = require('./db')
+const db = require('./db')
 
-module.exports = function ({ dbConnection }) {
+module.exports = function ({ }) {
 
 	return {
 		getAllAccounts: function (callback) {
 			const query = `SELECT * FROM accounts ORDER BY username`
 			const values = []
-			dbConnection.query(query, values, function (error, accounts) {
+			db.query(query, values, function (error, accounts) {
 				if (error) {
 					callback(['databaseError'], null)
 				} else {
@@ -19,7 +19,7 @@ module.exports = function ({ dbConnection }) {
 			const query = `SELECT * FROM accounts WHERE username = ? LIMIT 1`
 			const values = [account.username]
 
-			dbConnection.query(query, values, function (error, accounts) {
+			db.query(query, values, function (error, accounts) {
 				if (error) {
 					callback(['databaseError'], null)
 				} else {
@@ -41,11 +41,11 @@ module.exports = function ({ dbConnection }) {
 			})
 		},
 		
-		createAccount = function(account, callback){
+		createAccount: function(account, callback){
 			const query = `INSERT INTO accounts (username, password) VALUES (?, ?)`
 			const values = [account.username, account.password]
 		
-			dbConnection.query(query, values, function(error, results){
+			db.query(query, values, function(error, results){
 				if(error){
 					// TODO: Look for usernameUnique violation.
 					callback(['Username already exists'], null)

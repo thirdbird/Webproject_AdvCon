@@ -4,9 +4,9 @@ const MIN_PASSWORD_LENGTH = 3
 const MAX_PASSWORD_LENGTH = 255
 
 exports.getErrorsNewAccount = function(account){
-	
+
 	const errors = []
-	
+
 	// Validate username.
 	if(account.username.length == 0){
 		errors.push("You have to enter a username")
@@ -29,7 +29,7 @@ exports.getErrorsNewAccount = function(account){
 	if(account.password != account.confirmPassword){
 		errors.push("Password doesn't match")
 	}
-	
+
 	return errors
 }
 
@@ -52,4 +52,3 @@ exports.getErrorsExistingAccount = function(account){
 
 	return errors
 }
-

@@ -1,12 +1,13 @@
+const db = require('./db')
 
-module.exports = function ({ dbConnection }) {
+module.exports = function ({}) {
 
 	return {
 		getAllTodos: function (callback) {
 			const query = `SELECT * FROM todos`
 			const values = []
 
-			dbConnection.query(query, values, function (error, todos) {
+			db.query(query, values, function (error, todos) {
 				if (error) {
 					console.log(error)
 					callback(['databaseError'], null)
@@ -20,7 +21,7 @@ module.exports = function ({ dbConnection }) {
 			const query = `INSERT INTO todos (todo) VALUES (?)`
 			const values = [todo]
 
-			dbConnection.query(query, values, function (error, results) {
+			db.query(query, values, function (error, results) {
 				if (error) {
 					// TODO: Look for todoUnique violation.
 					callback(['databaseError'], null)

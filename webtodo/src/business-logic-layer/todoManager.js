@@ -1,7 +1,7 @@
 //const todoRepository = require('../data-access-layer/todoRepository')
-//const todoValidator = require('./todoValidator')
+const todoValidator = require('./todoValidator')
 
-module.exports = function({todoRepository,todoValidator}){
+module.exports = function({todoRepository}){
 	return{
 		getAllTodos: function(callback){
 			todoRepository.getAllTodos(function(errors, todos){

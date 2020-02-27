@@ -1,6 +1,7 @@
 const path = require('path')
 const express = require('express')
 const expressHandlebars = require('express-handlebars')
+const awilix = require('../main')
 
 const variousRouter = require('./routers/variousRouter')
 const todolistRouter = require('./routers/todolistRouter')
@@ -57,9 +58,9 @@ app.use(session({
 //app.use(bodyParser.urlencoded({extended: true}))
 
 //Attach all routers.
-app.use('/', variousRouter)
-app.use('/accounts', accountRouter)
-app.use('/todolist', todolistRouter)
+app.use('/', awilix.theVariousRouter)
+app.use('/accounts',awilix.theAccountRouter)
+app.use('/todolist',awilix.theTodolistRouter )
 
 //Start listening for incoming HTTP requests!
 app.listen(8080, function(){

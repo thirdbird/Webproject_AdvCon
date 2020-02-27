@@ -1,6 +1,7 @@
 //const accountRepository = require('../data-access-layer/accountRepository')
-//const accountValidator = require('./accountValidator')
-module.exports = function({accountRepository,accountValidator}){
+const accountValidator = require('./accountValidator')
+
+module.exports = function({accountRepository}){
 	return{
 		getAllAccounts: function(callback){
 			accountRepository.getAllAccounts(function(errors,accounts){
@@ -22,10 +23,10 @@ module.exports = function({accountRepository,accountValidator}){
 
 		createAccount: function(account, callback){
 			// Validate the account.
-			const errors = accountValidator.getErrorsNewAccount(account)
+			const error = accountValidator.getErrorsNewAccount(account)
 			
-			if(0 < errors.length){
-				callback(errors, null)
+			if(0 < error.length){
+				callback(error, null)
 				return
 			}
 			
