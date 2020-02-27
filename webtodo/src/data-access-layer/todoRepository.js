@@ -1,10 +1,53 @@
-const db = require('./db')
+
+module.exports = function ({ dbConnection }) {
+
+	return {
+		getAllTodos: function (callback) {
+			const query = `SELECT * FROM todos`
+			const values = []
+
+			dbConnection.query(query, values, function (error, todos) {
+				if (error) {
+					console.log(error)
+					callback(['databaseError'], null)
+				} else {
+					callback([], todos)
+				}
+			})
+		},
+
+		createTodo: function (todo, callback) {
+			const query = `INSERT INTO todos (todo) VALUES (?)`
+			const values = [todo]
+
+			dbConnection.query(query, values, function (error, results) {
+				if (error) {
+					// TODO: Look for todoUnique violation.
+					callback(['databaseError'], null)
+				} else {
+					callback([], results.insertId)
+				}
+			})
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+/*const db = require('./db')
 
 exports.getAllTodos = function(callback){
-	
+
 	const query = `SELECT * FROM todos`
 	const values = []
-	
+
 	db.query(query, values, function(error, todos){
 		if(error){
             console.log(error)
@@ -13,14 +56,14 @@ exports.getAllTodos = function(callback){
 			callback([], todos)
 		}
 	})
-	
+
 }
 
 exports.createTodo = function(todo, callback){
-	
+
 	const query = `INSERT INTO todos (todo) VALUES (?)`
 	const values = [todo]
-	
+
 	db.query(query, values, function(error, results){
 		if(error){
 			// TODO: Look for todoUnique violation.
@@ -29,7 +72,7 @@ exports.createTodo = function(todo, callback){
 			callback([], results.insertId)
 		}
 	})
-	
-}
+
+}*/
 
 //make todo as marked completed or just delete it

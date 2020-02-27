@@ -1,7 +1,45 @@
-const accountRepository = require('../data-access-layer/accountRepository')
-const accountValidator = require('./accountValidator')
+//const accountRepository = require('../data-access-layer/accountRepository')
+//const accountValidator = require('./accountValidator')
+module.exports = function({accountRepository,accountValidator}){
+	return{
+		getAllAccounts: function(callback){
+			accountRepository.getAllAccounts(function(errors,accounts){
+				callback(errors,accounts)
+			})
+		},
 
-exports.getAllAccounts = function(callback){
+		getAccountByUsername: function(account, callback){
+			accountRepository.getAccountByUsername(account,function(errors,account){
+				callback(errors,account)
+			})
+		},
+
+		getAccount: function(account, callback){
+			accountRepository.getAccount(account,function(errors,account){
+				callback(errors,accounts)
+			})
+		},
+
+		createAccount: function(account, callback){
+			// Validate the account.
+			const errors = accountValidator.getErrorsNewAccount(account)
+			
+			if(0 < errors.length){
+				callback(errors, null)
+				return
+			}
+			
+			accountRepository.createAccount(account,function(errors,account){
+				callback(errors,account)
+			})
+			
+		}
+
+	}
+
+}
+
+/*exports.getAllAccounts = function(callback){
 	accountRepository.getAllAccounts(callback)
 }
 
@@ -25,7 +63,7 @@ exports.createAccount = function(account, callback){
 	accountRepository.createAccount(account, callback)
 	
 }
-
+*/
 
 
 

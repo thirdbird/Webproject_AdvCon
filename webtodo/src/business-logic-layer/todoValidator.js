@@ -1,4 +1,3 @@
-
 exports.checkErrors = function(todo){
     const errors = []
 
