@@ -4,8 +4,8 @@ const awilix = require('awilix')
 const accountRepository = require('./data-access-layer/accountRepository')
 const todoRepository = require('./data-access-layer/todoRepository')
 
-//const accountValidator = require('./business-logic-layer/accountValidator')
-//const todoValidator = require('./business-logic-layer/todoValidator')
+const accountValidator = require('./business-logic-layer/accountValidator')
+const todoValidator = require('./business-logic-layer/todoValidator')
 
 const accountManager = require('./business-logic-layer/accountManager')
 const todoManager = require('./business-logic-layer/todoManager')
@@ -19,8 +19,8 @@ const container = awilix.createContainer()
 container.register("accountRepository", awilix.asFunction(accountRepository))
 container.register("todoRepository", awilix.asFunction(todoRepository))
 
-//container.register("accountValidator", awilix.asFunction(accountValidator))
-//container.register("todoValidator", awilix.asFunction(todoValidator))
+container.register("accountValidator", awilix.asFunction(accountValidator))
+container.register("todoValidator", awilix.asFunction(todoValidator))
 
 container.register("accountManager", awilix.asFunction(accountManager))
 container.register("todoManager", awilix.asFunction(todoManager))

@@ -8,7 +8,7 @@ module.exports = function ({ todoManager }) {
     router.use(express.urlencoded({ extended: false }))
 
     router.get('/', function (request, response) {
-        todoManager.getAllTodos(function(errors, todos){
+        todoManager.getAllTodos(function (errors, todos) {
             const model = {
                 errors: errors,
                 todos: todos,
@@ -42,6 +42,7 @@ module.exports = function ({ todoManager }) {
     })
 
     return router
+
 }
 
 // router delete // delete the todo and mark it as complete or delete it from the list

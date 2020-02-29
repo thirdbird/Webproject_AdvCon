@@ -1,6 +1,6 @@
 const db = require('./db')
 
-module.exports = function ({}) {
+module.exports = function ({ }) {
 
 	return {
 		getAllTodos: function (callback) {

@@ -40,22 +40,21 @@ module.exports = function ({ }) {
 				}
 			})
 		},
-		
-		createAccount: function(account, callback){
+
+		createAccount: function (account, callback) {
 			const query = `INSERT INTO accounts (username, password) VALUES (?, ?)`
 			const values = [account.username, account.password]
-		
-			db.query(query, values, function(error, results){
-				if(error){
+
+			db.query(query, values, function (error, results) {
+				if (error) {
 					// TODO: Look for usernameUnique violation.
 					callback(['Username already exists'], null)
-				}else{
+				} else {
 					callback([], results.insertId)
 				}
 			})
-		
-		}
 
+		}
 	}
 }
 

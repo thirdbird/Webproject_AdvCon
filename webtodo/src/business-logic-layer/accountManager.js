@@ -1,43 +1,42 @@
 //const accountRepository = require('../data-access-layer/accountRepository')
-const accountValidator = require('./accountValidator')
+//const accountValidator = require('./accountValidator')
 
-module.exports = function({accountRepository}){
-	return{
-		getAllAccounts: function(callback){
-			accountRepository.getAllAccounts(function(errors,accounts){
-				callback(errors,accounts)
+module.exports = function ({ accountRepository, accountValidator }) {
+	
+	return {
+		getAllAccounts: function (callback) {
+			accountRepository.getAllAccounts(function (errors, accounts) {
+				callback(errors, accounts)
 			})
 		},
 
-		getAccountByUsername: function(account, callback){
-			accountRepository.getAccountByUsername(account,function(errors,account){
-				callback(errors,account)
+		getAccountByUsername: function (account, callback) {
+			accountRepository.getAccountByUsername(account, function (errors, account) {
+				callback(errors, account)
 			})
 		},
 
-		getAccount: function(account, callback){
-			accountRepository.getAccount(account,function(errors,account){
-				callback(errors,accounts)
+		getAccount: function (account, callback) {
+			accountRepository.getAccount(account, function (errors, account) {
+				callback(errors, account)
 			})
 		},
 
-		createAccount: function(account, callback){
+		createAccount: function (account, callback) {
 			// Validate the account.
 			const error = accountValidator.getErrorsNewAccount(account)
-			
-			if(0 < error.length){
+
+			if (0 < error.length) {
 				callback(error, null)
 				return
 			}
-			
-			accountRepository.createAccount(account,function(errors,account){
-				callback(errors,account)
+
+			accountRepository.createAccount(account, function (errors, account) {
+				callback(errors, account)
 			})
-			
+
 		}
-
 	}
-
 }
 
 /*exports.getAllAccounts = function(callback){
@@ -55,14 +54,14 @@ exports.getAccount = function(account, callback){
 exports.createAccount = function(account, callback){
 	// Validate the account.
 	const errors = accountValidator.getErrorsNewAccount(account)
-	
+
 	if(0 < errors.length){
 		callback(errors, null)
 		return
 	}
-	
+
 	accountRepository.createAccount(account, callback)
-	
+
 }
 */
 

@@ -3,7 +3,6 @@ const express = require('express')
 
 module.exports = function ({ accountManager }) {
 
-
 	const router = express.Router()
 	router.use(express.urlencoded({ extended: false }))
 
@@ -49,9 +48,9 @@ module.exports = function ({ accountManager }) {
 			}
 			response.render("accounts-show-one.hbs", model)
 		})
-
 	})
 
+	
 	//------------------POST REQUEST------------------//
 
 	router.post('/sign-up', function (request, response) {

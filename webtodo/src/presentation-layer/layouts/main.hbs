@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,18 +9,20 @@
 	<link rel="stylesheet" href="/css/bulma.min.css">
 	<link rel="stylesheet" href="/css/layout.css">
 </head>
+
 <body>
 
 	<div id="entire-page">
-		
+
 		<header class="is-size-1 has-text-centered">
 			To Do List
 		</header>
-		
+
 		<nav class="navbar has-background-light" role="navigation" aria-label="main navigation">
-			
+
 			<div class="navbar-brand">
-				<a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbar">
+				<a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+					data-target="navbar">
 					<span aria-hidden="true"></span>
 					<span aria-hidden="true"></span>
 					<span aria-hidden="true"></span>
@@ -27,34 +30,34 @@
 			</div>
 
 			<div id="navbar" class="navbar-menu is-active">
-				
+
 				<div class="navbar-start">
 					<a class="navbar-item" href="/">Home</a>
 					<a class="navbar-item" href="/todolist">Your todo lists</a>
 					<a class="navbar-item" href="/accounts">Accounts</a>
 					{{#if loggedIn}}
-						<a class="navbar-item" id="loggedAs">Signed in as: {{account.username}}</a>
+					<a class="navbar-item" id="loggedAs">Signed in as: {{account.username}}</a>
 					{{/if}}
 				</div>
-				
+
 				<div class="navbar-end">
 					<div class="navbar-item">
 						<div class="buttons">
 							{{#if loggedIn}}
-								<a class="button is-danger" id="logOutButton" href="/accounts/sign-out">Sign out</a>
-								{{else}}
-									<a class="button is-primary" href="/accounts/sign-up">Sign up</a>
-									<a class="button is-dark" id="loginButton" href="/accounts/sign-in">Sign in</a>
+							<a class="button is-danger" id="logOutButton" href="/accounts/sign-out">Sign out</a>
+							{{else}}
+							<a class="button is-primary" href="/accounts/sign-up">Sign up</a>
+							<a class="button is-dark" id="loginButton" href="/accounts/sign-in">Sign in</a>
 							{{/if}}
 						</div>
 					</div>
 				</div>
-				
+
 			</div>
 		</nav>
-		
+
 		<main>{{{body}}}</main>
-		
+
 		<footer class="footer">
 			<div class="content has-text-centered">
 				This is the footer |
@@ -62,7 +65,8 @@
 				<a href="/contact">Contact</a>
 			</div>
 		</footer>
-		
+
 	</div>
 </body>
+
 </html>

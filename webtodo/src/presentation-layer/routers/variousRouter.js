@@ -1,6 +1,5 @@
 const express = require('express')
 
-
 module.exports = function ({ }) {
 
 	const router = express.Router()
@@ -58,6 +57,7 @@ module.exports = function ({ }) {
 	})
 
 	return router
+
 }
 
 //module.exports = router

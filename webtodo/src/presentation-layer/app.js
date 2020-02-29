@@ -3,9 +3,9 @@ const express = require('express')
 const expressHandlebars = require('express-handlebars')
 const awilix = require('../main')
 
-const variousRouter = require('./routers/variousRouter')
-const todolistRouter = require('./routers/todolistRouter')
-const accountRouter = require('./routers/accountsRouter')
+//const variousRouter = require('./routers/variousRouter')
+//const todolistRouter = require('./routers/todolistRouter')
+//const accountRouter = require('./routers/accountsRouter')
 
 const session = require('express-session')
 const redis = require('redis')
@@ -60,7 +60,7 @@ app.use(session({
 //Attach all routers.
 app.use('/', awilix.theVariousRouter)
 app.use('/accounts',awilix.theAccountRouter)
-app.use('/todolist',awilix.theTodolistRouter )
+app.use('/todolist',awilix.theTodolistRouter)
 
 //Start listening for incoming HTTP requests!
 app.listen(8080, function(){
