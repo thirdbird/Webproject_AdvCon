@@ -1,7 +1,21 @@
 const path = require('path')
 const express = require('express')
+const mysql2 = require('mysql2')
 const expressHandlebars = require('express-handlebars')
 const awilix = require('../main')
+
+const Sequelize = require('sequelize')
+const sequelize = new Sequelize('myDB2', 'root', 'abc123', {
+    host: 'db2',
+    dialect: 'mysql',
+
+    pool: {
+        max: 5,
+        min: 0,
+        acquire: 30000,
+        idle: 10000
+    }
+});
 
 //const variousRouter = require('./routers/variousRouter')
 //const todolistRouter = require('./routers/todolistRouter')
@@ -66,6 +80,11 @@ app.use('/todolist',awilix.theTodolistRouter)
 app.listen(8080, function(){
 	console.log('Web application running on 8080')
 })
+
+sequelize.authenticate()
+	.then(() => console.log("yes"))
+	.catch( err => console.log("no", err))
+
 
 //Throw Redis error in case of ERROR.
 redisClient.on('error', (err) => {
