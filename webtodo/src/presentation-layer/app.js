@@ -4,18 +4,8 @@ const mysql2 = require('mysql2')
 const expressHandlebars = require('express-handlebars')
 const awilix = require('../main')
 
-const Sequelize = require('sequelize')
-const sequelize = new Sequelize('myDB2', 'root', 'abc123', {
-    host: 'db2',
-    dialect: 'mysql',
+const sequelize = require('../data-access-layer-sequelize/db')
 
-    pool: {
-        max: 5,
-        min: 0,
-        acquire: 30000,
-        idle: 10000
-    }
-});
 
 //const variousRouter = require('./routers/variousRouter')
 //const todolistRouter = require('./routers/todolistRouter')
@@ -73,19 +63,35 @@ app.use(session({
 
 //Attach all routers.
 app.use('/', awilix.theVariousRouter)
-app.use('/accounts',awilix.theAccountRouter)
-app.use('/todolist',awilix.theTodolistRouter)
+app.use('/accounts', awilix.theAccountRouter)
+app.use('/todolist', awilix.theTodolistRouter)
 
 //Start listening for incoming HTTP requests!
-app.listen(8080, function(){
+app.listen(8080, function () {
 	console.log('Web application running on 8080')
 })
 
 sequelize.authenticate()
-	.then(() => console.log("yes"))
-	.catch( err => console.log("no", err))
+	.then(() => {
+		sequelize.sync()
+		console.log("Database connected...")
+	})
+	.catch(err => console.log("@@@@@@@@@@@@@@@@@@@@@@@", err))
 
-
+/*
+while (1) {
+	setTimeout(function () {
+		
+		sequelize.authenticate()
+			.then(() => {
+				sequelize.sync()
+				console.log("Database connected...")
+				break})
+			.catch(err => console.log("@@@@@@@@@@@@@@@@@@@@@@@", err))
+		
+	}, 500)
+}
+*/
 //Throw Redis error in case of ERROR.
 redisClient.on('error', (err) => {
 	console.log('Redis Error: ', err)

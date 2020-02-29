@@ -1,11 +1,15 @@
 const db = require('./db')
+const sequelize = require('./sequelizeModels')
 
-module.exports = function ({ }) {
+module.exports = function ({}) {
 
 	return {
 
-        
-		getAllAccounts: function (callback) {
+        getAllAccounts: function(){
+           
+        }
+
+		/*getAllAccounts: function (callback) {
 			const query = `SELECT * FROM accounts ORDER BY username`
 			const values = []
 			db.query(query, values, function (error, accounts) {
@@ -57,6 +61,6 @@ module.exports = function ({ }) {
 				}
 			})
 
-		}
+		}*/
 	}
 }
