@@ -25,7 +25,7 @@ module.exports = function ({ accountManager }) {
 
 	router.get("/", function (request, response) {
 		accountManager.getAllAccounts(function (errors, accounts) {
-			console.log(errors, accounts)
+			console.log(errors,accounts)
 			const model = {
 				errors: errors,
 				accounts: accounts,

@@ -4,13 +4,6 @@ const mysql2 = require('mysql2')
 const expressHandlebars = require('express-handlebars')
 const awilix = require('../main')
 
-const sequelize = require('../data-access-layer-sequelize/db')
-
-
-//const variousRouter = require('./routers/variousRouter')
-//const todolistRouter = require('./routers/todolistRouter')
-//const accountRouter = require('./routers/accountsRouter')
-
 const session = require('express-session')
 const redis = require('redis')
 const redisClient = redis.createClient({
@@ -71,6 +64,7 @@ app.listen(8080, function () {
 	console.log('Web application running on 8080')
 })
 
+/*
 sequelize.authenticate()
 	.then(() => {
 		sequelize.sync()
@@ -78,7 +72,7 @@ sequelize.authenticate()
 	})
 	.catch(err => console.log("@@@@@@@@@@@@@@@@@@@@@@@", err))
 
-/*
+
 while (1) {
 	setTimeout(function () {
 		

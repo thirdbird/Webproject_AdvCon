@@ -1,3 +1,4 @@
+/*
 const mysql = require("mysql")
 
 const dbConnection = mysql.createConnection({
@@ -8,3 +9,4 @@ const dbConnection = mysql.createConnection({
 })
 
 module.exports = dbConnection
+*/
