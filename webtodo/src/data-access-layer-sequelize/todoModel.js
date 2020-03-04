@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('./db')
 
-const Todos = db.define('todos',{
+const Todos = db.define('todos', {
     todo: Sequelize.TEXT,
 })
 

@@ -5,9 +5,7 @@ module.exports = function ({ todoRepository, todoValidator }) {
 	
 	return {
 		getAllTodos: function (callback) {
-			todoRepository.getAllTodos(function (errors, todos) {
-				callback(errors, todos)
-			})
+			todoRepository.getAllTodos(callback)
 		},
 
 		createTodo: function (todo, callback) {
@@ -16,9 +14,7 @@ module.exports = function ({ todoRepository, todoValidator }) {
 				callback(errors, null)
 				return
 			}
-			todoRepository.createTodo(todo, function (errors, todo) {
-				callback(errors, todo)
-			})
+			todoRepository.createTodo(todo, callback)
 		}
 	}
 }

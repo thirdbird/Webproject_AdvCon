@@ -66,13 +66,13 @@ app.listen(8080, function () {
 	console.log('Web application running on 8080')
 })
 
-
+/*
 sequelize.authenticate()
 	.then(() => {
 		sequelize.sync()
 		console.log("Database connected...")
 	})
-	.catch(err => console.log("@@@@@@@@@@@@@@@@@@@@@@@", err))
+	.catch(err => console.log("@@@@@@@@@@@@@@@@@@@@@@@", err))*/
 
 /*
 while (1) {

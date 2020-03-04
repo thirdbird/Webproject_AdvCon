@@ -5,21 +5,15 @@ module.exports = function ({ accountRepository, accountValidator }) {
 	
 	return {
 		getAllAccounts: function (callback) {
-			accountRepository.getAllAccounts(function (errors, accounts) {
-				callback(errors, accounts)
-			})
+			accountRepository.getAllAccounts(callback)
 		},
 
 		getAccountByUsername: function (account, callback) {
-			accountRepository.getAccountByUsername(account, function (errors, account) {
-				callback(errors, account)
-			})
+			accountRepository.getAccountByUsername(account, callback)
 		},
 
 		getAccount: function (account, callback) {
-			accountRepository.getAccount(account, function (errors, account) {
-				callback(errors, account)
-			})
+			accountRepository.getAccount(account, callback)
 		},
 
 		createAccount: function (account, callback) {
@@ -31,10 +25,7 @@ module.exports = function ({ accountRepository, accountValidator }) {
 				return
 			}
 
-			accountRepository.createAccount(account, function (errors, account) {
-				callback(errors, account)
-			})
-
+			accountRepository.createAccount(account, callback)
 		}
 	}
 }

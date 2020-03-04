@@ -20,12 +20,12 @@ module.exports = function ({ accountManager }) {
 	router.get("/sign-out", function (request, response) {
 		request.session.destroy()
 		response.redirect('/')
-		console.log(session)
+		//console.log(session)
 	})
 
 	router.get("/", function (request, response) {
 		accountManager.getAllAccounts(function (errors, accounts) {
-			console.log(errors,accounts)
+			console.log(errors, accounts)
 			const model = {
 				errors: errors,
 				accounts: accounts,
@@ -43,6 +43,7 @@ module.exports = function ({ accountManager }) {
 		accountManager.getAccountByUsername(account, function (errors, account) {
 			const model = {
 				errors: errors,
+				accounts: account,
 				account: request.session.account,
 				loggedIn: request.session.loggedIn
 			}
@@ -50,7 +51,7 @@ module.exports = function ({ accountManager }) {
 		})
 	})
 
-	
+
 	//------------------POST REQUEST------------------//
 
 	router.post('/sign-up', function (request, response) {
@@ -106,6 +107,7 @@ module.exports = function ({ accountManager }) {
 				request.session.userId = account.id
 				request.session.account = account
 				response.render("home-logged-in.hbs", model)
+				console.log('hue',model)
 			}
 		})
 	})
