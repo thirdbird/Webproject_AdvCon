@@ -5,9 +5,13 @@ module.exports = function ({ }) {
     return {
 
         getAllTodos: function (callback) {
-            todoModel.findAll()
-                .then(function (todos) { callback([], todos) })
-                .catch(function (error) { callback([error], null) })
+            todoModel.findAll({ raw: true})
+                .then(function (todos) {
+                    callback([], todos)
+                })
+                .catch(function (error) {
+                    callback([error], null)
+                })
 
         },
 

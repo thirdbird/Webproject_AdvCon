@@ -1,14 +1,18 @@
 const accountModel = require('./accountModel')
 
-
 module.exports = function ({ }) {
 
 	return {
 
 		getAllAccounts: function (callback) {
-			accountModel.findAll()
-				.then(function (accounts) { callback([], accounts) })
-				.catch(function (error) { callback([error], null) })
+			accountModel.findAll({ raw: true})
+				.then(function (accounts) {
+					callback([], accounts)
+					
+				})
+				.catch(function (error) {
+					callback([error], null)
+				})
 		},
 
 		getAccountByUsername: function (account, callback) {

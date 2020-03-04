@@ -55,6 +55,10 @@ module.exports = function ({ }) {
 
 			return errors
 
+		},
+
+		validateSequelizeDataValues: function(accounts) {
+			console.log("fix the db",accounts)
 		}
 	}
 }

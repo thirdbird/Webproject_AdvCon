@@ -2,7 +2,7 @@
 //const accountValidator = require('./accountValidator')
 
 module.exports = function ({ accountRepository, accountValidator }) {
-	
+
 	return {
 		getAllAccounts: function (callback) {
 			accountRepository.getAllAccounts(callback)
@@ -29,6 +29,8 @@ module.exports = function ({ accountRepository, accountValidator }) {
 		}
 	}
 }
+
+
 
 /*exports.getAllAccounts = function(callback){
 	accountRepository.getAllAccounts(callback)
