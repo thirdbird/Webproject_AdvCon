@@ -6,6 +6,4 @@ const Accounts = db.define('accounts',{
     password: Sequelize.TEXT
 })
 
-//Accounts.create({username: "Bob",password: "abc123"}) 
-
 module.exports = Accounts

@@ -2,8 +2,10 @@ const awilix = require('awilix')
 
 // Import the ones we want to use (real or mockup), real in this case.
 const accountRepository = require('./data-access-layer-sequelize/accountRepository')//sequelize
-//const accountRepository = require('./data-access-layer/accountRepository')
-const todoRepository = require('./data-access-layer/todoRepository')
+//const accountRepository = require('./data-access-layer/accountRepository')//sql db
+//const todoRepository = require('./data-access-layer/todoRepository')//sql db
+
+const todoRepository = require('./data-access-layer-sequelize/todoRepository')
 
 const accountValidator = require('./business-logic-layer/accountValidator')
 const todoValidator = require('./business-logic-layer/todoValidator')

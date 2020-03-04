@@ -70,7 +70,7 @@ body {
 	margin: 0;
 	text-transform: uppercase;
   }
-  input[type="text"] {
+  input[type="inputField"] {
 	margin: 0;
 	font-size: 18px;
 	line-height: 18px;

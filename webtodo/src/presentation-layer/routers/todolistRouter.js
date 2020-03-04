@@ -30,6 +30,7 @@ module.exports = function ({ todoManager }) {
                     todo: todo,
                     todos: todos
                 }
+                console.log(todo)
                 if (errors.length != 0) {
                     response.render("todolist.hbs", model)
                 }
