@@ -5,10 +5,10 @@ module.exports = function ({ }) {
 	return {
 
 		getAllAccounts: function (callback) {
-			accountModel.findAll({ raw: true})
+			accountModel.findAll({ raw: true })
 				.then(function (accounts) {
 					callback([], accounts)
-					
+
 				})
 				.catch(function (error) {
 					callback([error], null)
@@ -16,15 +16,25 @@ module.exports = function ({ }) {
 		},
 
 		getAccountByUsername: function (account, callback) {
-			accountModel.findOne({ where: { username: account.username } })
-				.then(function (accounts) { callback([], accounts[0]) })
-				.catch(function (error) { callback[error], null })
+			accountModel.findOne({ where: { username: account.username }, raw: true })
+				.then(function (accounts) {
+					callback([], accounts)
+					console.log("inside from the repo", accounts)
+
+				})
+				.catch(function (error) {
+					callback[error], null
+				})
 		},
 
 		getAccount: function (account, callback) {
-			accountModel.findOne({ where: { username: account.username, password: account.password } })
-				.then(function (accounts) { callback([], accounts[0]) })
-				.catch(function (error) { callback([error], null) })
+			accountModel.findOne({ where: { username: account.username, password: account.password }, raw: true })
+				.then(function (accounts) {
+					callback([], accounts)
+				})
+				.catch(function (error) {
+					callback([error], null)
+				})
 		},
 
 		createAccount: function (account, callback) {

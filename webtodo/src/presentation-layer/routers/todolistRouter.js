@@ -28,7 +28,9 @@ module.exports = function ({ todoManager }) {
                     errors: errors,
                     errors2: errors2,
                     todo: todo,
-                    todos: todos
+                    todos: todos,
+                    account: request.session.account,
+                    loggedIn: request.session.loggedIn
                 }
                 console.log(todo)
                 if (errors.length != 0) {
