@@ -57,8 +57,8 @@ module.exports = function ({ }) {
 
 		},
 
-		validateSequelizeDataValues: function(accounts) {
-			console.log("fix the db",accounts)
+		usernameExists: function(account) {
+			
 		}
 	}
 }

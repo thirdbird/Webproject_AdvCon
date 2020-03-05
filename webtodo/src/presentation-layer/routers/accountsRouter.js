@@ -97,16 +97,19 @@ module.exports = function ({ accountManager }) {
 				account: account,
 				formHolder: formHolder
 			}
+			console.log('Något fucked up',errors.length)
 			if (errors.length != 0) {
 				response.render("accounts-sign-in.hbs", model)
 			}
 			else {
+				console.log('HEUHEUHEUHEUHEUE',account.id)
 				model.loggedIn = true
 				request.session.loggedIn = true
+				console.log("we are under true loggedin")
 				request.session.userId = account.id
-				request.session.account = account
+				request.session.account = account	
 				response.render("home-logged-in.hbs", model)
-				console.log('hue',model)
+				console.log("bottom of else")
 			}
 		})
 	})
