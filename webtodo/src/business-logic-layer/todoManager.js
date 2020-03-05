@@ -9,7 +9,7 @@ module.exports = function ({ todoRepository, todoValidator }) {
 		},
 
 		createTodo: function (todo, callback) {
-			const errors = todoValidator.checkErrors(todo)
+			const errors = todoValidator.todoErrors(todo)
 			if (0 < errors.length) {
 				callback(errors, null)
 				return

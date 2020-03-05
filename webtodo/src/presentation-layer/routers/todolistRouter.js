@@ -22,6 +22,9 @@ module.exports = function ({ todoManager }) {
     //router post // create a todo
     router.post('/', function (request, response) {
         const todo = request.body.todo
+        const formHolder = {
+            todo: request.body.todo
+        }
         todoManager.createTodo(todo, function (errors, todo) {
             todoManager.getAllTodos(function (errors2, todos) { //if we get db error the errors2 is not gonna display it because hbs file does not catch that error
                 const model = {
@@ -30,7 +33,8 @@ module.exports = function ({ todoManager }) {
                     todo: todo,
                     todos: todos,
                     account: request.session.account,
-                    loggedIn: request.session.loggedIn
+                    loggedIn: request.session.loggedIn,
+                    formHolder: formHolder
                 }
                 console.log(todo)
                 if (errors.length != 0) {

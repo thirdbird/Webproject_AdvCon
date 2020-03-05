@@ -2,10 +2,8 @@ const Sequelize = require('sequelize')
 const db = require('./db')
 
 const Accounts = db.define('accounts', {
-    username: {
-        type: Sequelize.TEXT,
-        unique: true},
-    password: {type: Sequelize.TEXT},
+    username: Sequelize.TEXT,
+    password: Sequelize.TEXT
     //usernameUnique: {unique: 'username'}
 })
 
