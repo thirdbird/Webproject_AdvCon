@@ -22,14 +22,12 @@ padding: 8px;
 color: red;
 }
 
-
 .container {
   display: block;
   width: 400px;
-  margin: 100px auto 0;
+  margin: 5px auto 0;
 }
 
-/* Heading */
 h3,
 label[for='new-task'] {
   color: #333;
@@ -40,7 +38,8 @@ label[for='new-task'] {
   margin: 0;
   text-transform: uppercase;
 }
-input[type="inputField"] {
+
+input[type="todoInput"] {
   margin: 0;
   font-size: 18px;
   line-height: 18px;
@@ -106,4 +105,18 @@ textarea{
 	border-radius: 4px;
 	background-color: #fff;
 	resize: none;
-  }
+}
+
+.todoInput{
+  width: 100%;
+}
+
+input.todoButton{
+  background-color: #333;
+  margin-top: 10px;
+  color: white;
+  padding: 8px 10px;
+  border: none;
+  border-radius: 10px;
+  float: right;
+}

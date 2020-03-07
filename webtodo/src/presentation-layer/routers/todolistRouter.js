@@ -15,6 +15,7 @@ module.exports = function ({ todoManager }) {
                 account: request.session.account,
                 loggedIn: request.session.loggedIn
             }
+            console.log(todos)
             response.render('todolist.hbs', model)
         })
     })

@@ -4,22 +4,6 @@ module.exports = function ({ }) {
 
 	const router = express.Router()
 
-	/*const redirectLogin = (request, response, next) => {
-		if(!request.session.userId){
-			response.redirect('/sign-in')
-		}else{
-			next()
-		}
-	}
-	
-	const redirectHome = (request, response, next) => {
-		if(!request.session.userId){
-			response.redirect('/')
-		}else{
-			next()
-		}
-	}*/
-
 	router.get('/', function (request, response) {
 
 		let sess = request.session

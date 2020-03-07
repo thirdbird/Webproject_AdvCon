@@ -3,8 +3,8 @@
 
     <form method="POST">
         <label for="new-task">Add Todo</label>
-        <input name="todo" type="text">
-        <input type="submit" value="Add">
+        <input name="todo" type="todoInput" class="todoInput">
+        <input type="submit" value="Add" class="todoButton">
     </form>
     <div class="content">
         {{#if errors.length}}
@@ -21,11 +21,8 @@
     {{#if todos.length}}
     <ul>
         {{#each todos}}
-        <li>{{todo}}<button class="delete">Delete</button></li>
+        <li>{{todo}}</li>  <!-- <button class="delete">Delete</button>  -->
         {{/each}}
     </ul>
     {{/if}}
-
-    
-
 </div>
