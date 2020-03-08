@@ -43,6 +43,17 @@ module.exports = function ({ }) {
 				.catch(function (error) {
 					callback([error], null)
 				})
+		},
+
+		deleteAccount: function (account,callback){
+			accountModel.destroy({ where:{ username: account.username}
+				.then(function(deleteAccount){
+					callback([],deleteAccount)
+				})
+				.catch(function(error){
+					callback([error], null)
+				})
+			})
 		}
 
 	}

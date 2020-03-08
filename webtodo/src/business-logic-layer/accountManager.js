@@ -26,6 +26,10 @@ module.exports = function ({ accountRepository, accountValidator }) {
 			}
 
 			accountRepository.createAccount(account, callback)
+		},
+
+		deleteAccount: function (account,callback){
+			accountRepository.deleteAccount(account,callback)
 		}
 	}
 }
