@@ -1,6 +1,3 @@
-//const todoRepository = require('../data-access-layer/todoRepository')
-//const todoValidator = require('./todoValidator')
-
 module.exports = function ({ todoRepository, todoValidator }) {
 	
 	return {
@@ -15,26 +12,10 @@ module.exports = function ({ todoRepository, todoValidator }) {
 				return
 			}
 			todoRepository.createTodo(todo, callback)
+		},
+
+		updateTodoById: function(todo, id, callback){
+			todoRepository.updateTodoById(todo,id,callback)
 		}
 	}
 }
-
-
-
-/*
-exports.getAllTodos = function(callback){
-	todoRepository.getAllTodos(callback)
-}
-
-exports.createTodo = function(todo, callback){
-
-    const errors = todoValidator.checkErrors(todo)
-    console.log(errors)
-    if(0 < errors.length){
-		callback(errors, null)
-		return
-	}
-
-	todoRepository.createTodo(todo, callback)
-}
-*/

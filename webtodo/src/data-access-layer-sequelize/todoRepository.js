@@ -19,6 +19,12 @@ module.exports = function ({ }) {
             todoModel.create({ todo: todo })
                 .then(function (todo) { callback([], todo) })
                 .catch(function (error) { callback([error], null) })
+        },
+
+        updateTodoById: function(todo,id,callback){
+            todoModel.findOneById(id)
+                .then(todo.save())
+                .catch(callback(["databaseError"], null))
         }
     }
 }

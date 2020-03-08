@@ -78,13 +78,10 @@ module.exports = function ({ accountManager }) {
 	})
 
 	router.post("/sign-in", function (request, response) {
-
-
 		const account = {
 			username: request.body.username,
 			password: request.body.password
 		}
-
 		const formHolder = {
 			usernameholder: request.body.username
 		}
@@ -97,7 +94,6 @@ module.exports = function ({ accountManager }) {
 				account: account,
 				formHolder: formHolder
 			}
-			console.log('Något fucked up',errors.length)
 			if (errors.length != 0) {
 				response.render("accounts-sign-in.hbs", model)
 			}

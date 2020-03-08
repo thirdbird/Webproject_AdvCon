@@ -17,34 +17,26 @@ module.exports = function ({ accountManager }) {
 	})
 
 	router.get("/", function (request, response) {
-        try {
-            accountManager.getAllAccounts(function (errors, accounts) {
-                const model = {
-                    errors: errors,
-                    accounts: accounts,
-                }
-                response.status(200).json(model)
-            })
-        } catch (error) {
-           response.status(500).json({message: error}) 
-        }
+        accountManager.getAllAccounts(function(errors, accounts){
+            if(0 < errors.length){
+                response.status(500).end()
+            }else{
+                response.status(200).json(accounts)
+            }
+        })
 	})
 
 	router.get('/:username', function (request, response) {
-
 		const account = { username: request.params.username }
-        try {
-            accountManager.getAccountByUsername(account, function (errors, account) {
-                const model = {
-                    errors: errors,
-                    accounts: account,
-                }
-                response.status(200).json(model)
-            })
-        } catch (error) { //TODO if username doesnt exist status code 404
-            response.status(500).end()
-        }
-		
+        accountManager.getAccountByUsername(account, function(errors, account){
+            if(0 < errors.length){
+                response.status(500).end()
+            }else if(!account){
+                response.status(404).end()
+            }else{
+                response.status(200).json(account)
+            }
+        })
     })
 
     //POSTS
@@ -57,11 +49,13 @@ module.exports = function ({ accountManager }) {
         }
         try {
             accountManager.createAccount(account, function (errors, account) {
-                const model = {
-                    errors: errors,
-                    account: account,
+                if(0 < errors.length){
+                    response.status(400).json(errors)
                 }
-                response.status(201).json(model)    
+                else{
+                    response.setHeader("Location", "/accounts/"+account.username)
+                    response.status(201).end()
+                }
             })
         } catch (error) {
             response.status(500).end()
@@ -75,15 +69,33 @@ module.exports = function ({ accountManager }) {
         }
         try {
             accountManager.getAccount(account, function (errors, account) {
-                const model = {
-                    errors: errors,
-                    account: account,
+                if(0 < errors.length){
+                    response.status(400).json(errors)
                 }
-                response.status(200).json(model)
+                else{
+                    response.status(200).json(account)
+                }
             })
         } catch (error) {
             response.status(500).json.end()
         }
+    })
+
+    router.put("/:username", function(request,response){
+        const account = {
+            username: request.body.username
+        }
+        accountManager.updateAccountById(account,function(errors,accountExists){
+            if(errors.includes("databaseError")){
+                response.status(500).end()
+            }else if(0 < errors.length){
+                response.status(400).json(errors)
+            }else if(!accountExists){
+                response.status(404).end()
+            }else{
+                response.status(204).end()
+            }
+        })
     })
     
 

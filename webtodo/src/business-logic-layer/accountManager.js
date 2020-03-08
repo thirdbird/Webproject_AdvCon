@@ -30,6 +30,16 @@ module.exports = function ({ accountRepository, accountValidator }) {
 
 		deleteAccount: function (account,callback){
 			accountRepository.deleteAccount(account,callback)
+		},
+
+		updateAccountbyId: function (account,callback){
+
+			
+			const repo = accountRepository.getAccountByUsername(account,callback)
+			console.log(repo)
+
+
+			//accountRepository.updateAccountbyId(account,callback)
 		}
 	}
 }

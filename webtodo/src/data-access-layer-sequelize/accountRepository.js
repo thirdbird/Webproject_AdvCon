@@ -21,7 +21,7 @@ module.exports = function ({ }) {
 					callback([], accounts)
 				})
 				.catch(function (error) {
-					callback[error], null
+					callback([error], null)
 				})
 		},
 
@@ -41,7 +41,7 @@ module.exports = function ({ }) {
 					callback([], createdAccount)
 				})
 				.catch(function (error) {
-					callback([error], null)
+					callback(["databaseError"], null)
 				})
 		},
 
@@ -53,6 +53,13 @@ module.exports = function ({ }) {
 				.catch(function(error){
 					callback([error], null)
 				})
+			})
+		},
+
+		updateAccountbyId: function (account,callback){
+			accountModel.findOne({
+				where: {username: account.username}
+				.then()
 			})
 		}
 
