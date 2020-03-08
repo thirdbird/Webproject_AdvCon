@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon src/presentation-layer/app.js -L",
+    "start": "nodemon src/presentation-layer-REST-API/app.js -L",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "awilix": "^4.2.4",
+    "body-parser": "^1.19.0",
     "connect-redis": "^4.0.4",
     "express": "^4.16.4",
     "express-handlebars": "^3.0.0",

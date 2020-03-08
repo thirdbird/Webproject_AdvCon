@@ -19,6 +19,9 @@ const accountRouter = require('./presentation-layer/routers/accountsRouter')
 const todolistRouter = require('./presentation-layer/routers/todolistRouter')
 const variousRouter = require('./presentation-layer/routers/variousRouter')
 
+//API
+const todolistRouterAPI = require('./presentation-layer-REST-API/todolistRouterAPI')
+
 // Create a container and add the dependencies we want to use.
 const container = awilix.createContainer()
 
@@ -36,9 +39,13 @@ container.register("accountRouter", awilix.asFunction(accountRouter))
 container.register("todolistRouter", awilix.asFunction(todolistRouter))
 container.register("variousRouter", awilix.asFunction(variousRouter))
 
+//API
+container.register("todolistRouterAPI", awilix.asFunction(todolistRouterAPI))
+
 // Retrieve the router, which resolves all other dependencies.
 const theAccountRouter = container.resolve("accountRouter")
 const theTodolistRouter = container.resolve("todolistRouter")
 const theVariousRouter = container.resolve("variousRouter")
+const theTodolistRouterAPI = container.resolve("todolistRouterAPI")
 
-module.exports = {theAccountRouter,theTodolistRouter,theVariousRouter}
+module.exports = {theAccountRouter,theTodolistRouterAPI,theVariousRouter}

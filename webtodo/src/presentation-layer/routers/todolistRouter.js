@@ -15,7 +15,6 @@ module.exports = function ({ todoManager }) {
                 account: request.session.account,
                 loggedIn: request.session.loggedIn
             }
-            console.log(todos)
             response.render('todolist.hbs', model)
         })
     })
@@ -37,13 +36,11 @@ module.exports = function ({ todoManager }) {
                     loggedIn: request.session.loggedIn,
                     formHolder: formHolder
                 }
-                console.log(todo)
                 if (errors.length != 0) {
                     response.render("todolist.hbs", model)
                 }
                 else {
                     response.render("todolist.hbs", model)
-
                 }
             })
         })
