@@ -1,0 +1,27 @@
+<div class="content">
+<h1>Blog post</h1>
+{{#if errors.length}}
+	<p>Oh no, something went wrong:</p>
+	<ul>
+		{{#each errors}}
+			<li>{{this}}</li>
+		{{/each}}
+	</ul>
+{{else}}
+	
+	{{#if blogPost}}
+		<dl>
+			
+			<dt>Title:</dt>
+			<dd>{{blogPost.title}}</dd>
+			
+			<dt>Post:</dt>
+			<dd>{{blogPost.post}}</dd>
+			
+		</dl>
+	{{else}}
+		<p>No, that blog post doesn't exist.</p>
+	{{/if}}
+	
+{{/if}}
+</div>

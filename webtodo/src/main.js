@@ -22,6 +22,7 @@ const todoManager = require('./business-logic-layer/todoManager')
 const accountRouter = require('./presentation-layer/routers/accountsRouter')
 const todolistRouter = require('./presentation-layer/routers/todolistRouter')
 const variousRouter = require('./presentation-layer/routers/variousRouter')
+const blogsRouter = require('./presentation-layer/routers/blogsRouter')
 
 //API
 const todolistRouterAPI = require('./presentation-layer-REST-API/todolistRouterAPI')
@@ -43,6 +44,7 @@ container.register("todoManager", awilix.asFunction(todoManager))
 container.register("accountRouter", awilix.asFunction(accountRouter))
 container.register("todolistRouter", awilix.asFunction(todolistRouter))
 container.register("variousRouter", awilix.asFunction(variousRouter))
+container.register("blogsRouter", awilix.asFunction(blogsRouter))
 
 //Models
 container.register("accountModel", awilix.asFunction(accountModel))
@@ -57,8 +59,9 @@ container.register("todolistRouterAPI", awilix.asFunction(todolistRouterAPI))
 const theAccountRouter = container.resolve("accountRouter")
 const theTodolistRouter = container.resolve("todolistRouter")
 const theVariousRouter = container.resolve("variousRouter")
+const theBlogsRouter = container.resolve("blogsRouter")
 
 const theAccountRouterAPI = container.resolve("accountsRouterAPI")
 const theTodolistRouterAPI = container.resolve("todolistRouterAPI")
 
-module.exports = {theAccountRouterAPI,theTodolistRouterAPI,theVariousRouter}
+module.exports = {theAccountRouter,theTodolistRouter,theVariousRouter, theBlogsRouter}

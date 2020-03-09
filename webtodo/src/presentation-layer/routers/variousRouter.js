@@ -5,7 +5,6 @@ module.exports = function ({ }) {
 	const router = express.Router()
 
 	router.get('/', function (request, response) {
-
 		let sess = request.session
 		console.log(sess)
 		if (sess.userId === undefined) {
