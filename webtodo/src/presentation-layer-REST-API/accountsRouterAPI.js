@@ -1,29 +1,47 @@
 const express = require('express')
 const jwt = require('jsonwebtoken')
 const serverSecret = "sdfkjdslkfjslkfd"
+const serverIdSecret = "eqjhrgbczvlkuyearjhbjhg"
 
 module.exports = function ({ accountManager }) {
 
     const router = express.Router()
 
-    router.get("/sign-up", function (request, response) {
-        //response the sign up page
+    function retrieveToken(request, response, next) {
+        const authorizationHeader = request.get('authorization')
+        if (typeof authorizationHeader !== 'undefined') {
+            const accessToken = authorizationHeader.substr("Bearer ".length)
+            request.token = accessToken
+            next()
+        } else {
+            response.sendStatus(403)
+        }
+    }
+
+    router.get("/signUp", function (request, response) {
+        response.status(200).end()
     })
 
-    router.get("/sign-in", function (request, response) {
-        //response the sign in page
+    router.get("/signIn", function (request, response) {
+        response.status(200).end()
     })
 
-    router.get("/sign-out", function (request, response) {
-        // response sign out page
+    router.get("/signOut", function (request, response) {
+        response.status(200).end()
     })
 
-    router.get("/", verifyToken, function (request, response) {
-        accountManager.getAllAccounts(function (errors, accounts) {
-            if (0 < errors.length) {
-                response.status(500).end()
+    router.get("/", retrieveToken, function (request, response) {
+        jwt.verify(request.token, serverSecret, function (error, decoded) {
+            if (error) {
+                response.sendStatus(403)
             } else {
-                response.status(200).json(accounts)
+                accountManager.getAllAccounts(function (errors, accounts) {
+                    if (0 < errors.length) {
+                        response.status(500).end()
+                    } else {
+                        response.status(200).json({ accounts })
+                    }
+                })
             }
         })
     })
@@ -43,7 +61,7 @@ module.exports = function ({ accountManager }) {
 
     //POSTS
 
-    router.post('/sign-up', function (request, response) {
+    router.post('/tokens/create', function (request, response) {
         const account = {
             username: request.body.username,
             password: request.body.password,
@@ -64,7 +82,7 @@ module.exports = function ({ accountManager }) {
         }
     })
 
-    router.post("/sign-in", function (request, response) {
+    router.post("/tokens", function (request, response) {
         const account = {
             username: request.body.username,
             password: request.body.password
@@ -74,12 +92,16 @@ module.exports = function ({ accountManager }) {
                 if (0 < errors.length) {
                     response.status(400).json(errors)
                 } else {
-                    jwt.sign({ account }, serverSecret, (err, token) => {
-                        if (err) {
-                            response.status(500).json(err)
-                        } else {
-                            response.status(200).json({ token, account })
-                        }
+                    jwt.sign({ userId: account.id, username: account.username }, serverIdSecret, { expiresIn: '10min' }, function (errorId, idToken) {
+                        jwt.sign({ id: account.id }, serverSecret, { expiresIn: '10min' }, function (errorAccess, accessToken) {
+                            if (errorId) {
+                                response.status(500).json(errorId)
+                            } else if (errorAccess) {
+                                response.status(500).json(errorAccess)
+                            } else {
+                                response.status(200).json({ accessToken, idToken, account })
+                            }
+                        })
                     })
                 }
             })
@@ -112,21 +134,6 @@ module.exports = function ({ accountManager }) {
         //delete username 
     })
 
-    router.put("/:username", function (request, response) {
-        //update username info 
-    })
-
-
-    function verifyToken(request, response, next) {
-        const authorizationHeader = request.get('authorization')
-        const accessToken = authorizationHeader.substr("Bearer ".length)
-        if(typeof authorizationHeader !== 'undefined'){
-            response.status(200).json(accessToken)
-            next()
-        } else {
-            response.status(403).end()
-        }
-    }
 
     return router
 
