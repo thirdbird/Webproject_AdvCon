@@ -32,26 +32,39 @@ module.exports = function ({ todoManager }) {
         })
     })
 
-    router.put('/:id', function(request,response){
-        const id = request.params.id
-        const todo = request.body.todo
+    router.put('/', function(request,response){
+        const todo = {
+            id: request.body.id,
+            todo: request.body.todo
+        }
 
-        todoManager.updateTodoById(todo,id,function(errors,todoExists){
-            if(errors.includes("databaseError")){
+        try {
+            todoManager.updateTodoById(todo,function(errors,todo){
+                if(0 < errors.length){
+                    response.status(400).json(errors)
+                }else if(todo == 0){
+                    response.status(404).end()
+                }else{
+                    response.status(204).end()
+                }
+            })
+        }catch{
+            response.status(500).end()
+        }
+    })
+
+    router.delete('/', function(request,response){
+        const id = request.body.id
+
+        todoManager.deleteTodo(id,function(errors,todo){
+            if(0 < errors.length){
                 response.status(500).end()
-            }else if(0 < errors.length){
-                response.status(400).json(errors)
-            }else if(!todoExists){
+            }else if(todo == 0){
                 response.status(404).end()
             }else{
                 response.status(204).end()
             }
         })
-
-    })
-
-    router.delete('/', function(request,response){
-        //delete a todo
     })
 
     return router

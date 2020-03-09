@@ -14,8 +14,12 @@ module.exports = function ({ todoRepository, todoValidator }) {
 			todoRepository.createTodo(todo, callback)
 		},
 
-		updateTodoById: function(todo, id, callback){
-			todoRepository.updateTodoById(todo,id,callback)
+		updateTodoById: function(todo, callback){
+			todoRepository.updateTodoById(todo,callback)
+		},
+
+		deleteTodo: function(id,callback){
+			todoRepository.deleteTodo(id,callback)
 		}
 	}
 }

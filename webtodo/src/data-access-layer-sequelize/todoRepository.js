@@ -20,10 +20,22 @@ module.exports = function ({ todoModel }) {
                 .catch(function (error) { callback([error], null) })
         },
 
-        updateTodoById: function(todo,id,callback){
-            todoModel.findOneById(id)
-                .then(todo.save())
-                .catch(callback(["databaseError"], null))
+        updateTodoById: function(todo,callback){
+            todoModel.update({todo: todo.todo}, {where: {id:todo.id}})
+                .then(function(todo){
+                    callback([], todo)
+                })
+                .catch(function(error){
+                    callback([error])
+                })
+        },
+
+        deleteTodo: function(id,callback){
+            todoModel.destroy({where: {id: id}})
+            .then(function(deleteTodo){
+                callback([],deleteTodo)
+            })
+
         }
     }
 }

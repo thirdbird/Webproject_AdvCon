@@ -61,4 +61,4 @@ const theVariousRouter = container.resolve("variousRouter")
 const theAccountRouterAPI = container.resolve("accountsRouterAPI")
 const theTodolistRouterAPI = container.resolve("todolistRouterAPI")
 
-module.exports = {theAccountRouter,theTodolistRouter,theVariousRouter}
+module.exports = {theAccountRouterAPI,theTodolistRouterAPI,theVariousRouter}
