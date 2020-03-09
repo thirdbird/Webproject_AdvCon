@@ -9,6 +9,10 @@ const awilix = require('awilix')
 const accountRepository = require('./data-access-layer-sequelize/accountRepository')//sequelize
 const todoRepository = require('./data-access-layer-sequelize/todoRepository')//sequelize
 
+//Sequelize Models
+const accountModel = require('./data-access-layer-sequelize/accountModel')
+const todoModel = require('./data-access-layer-sequelize/todoModel')
+
 const accountValidator = require('./business-logic-layer/accountValidator')
 const todoValidator = require('./business-logic-layer/todoValidator')
 
@@ -40,9 +44,14 @@ container.register("accountRouter", awilix.asFunction(accountRouter))
 container.register("todolistRouter", awilix.asFunction(todolistRouter))
 container.register("variousRouter", awilix.asFunction(variousRouter))
 
+//Models
+container.register("accountModel", awilix.asFunction(accountModel))
+container.register("todoModel", awilix.asFunction(todoModel))
+
 //API
-container.register("todolistRouterAPI", awilix.asFunction(todolistRouterAPI))
 container.register("accountsRouterAPI", awilix.asFunction(accountsRouterAPI))
+container.register("todolistRouterAPI", awilix.asFunction(todolistRouterAPI))
+
 
 // Retrieve the router, which resolves all other dependencies.
 const theAccountRouter = container.resolve("accountRouter")
@@ -52,4 +61,4 @@ const theVariousRouter = container.resolve("variousRouter")
 const theAccountRouterAPI = container.resolve("accountsRouterAPI")
 const theTodolistRouterAPI = container.resolve("todolistRouterAPI")
 
-module.exports = {theAccountRouterAPI,theTodolistRouterAPI,theVariousRouter}
+module.exports = {theAccountRouter,theTodolistRouter,theVariousRouter}

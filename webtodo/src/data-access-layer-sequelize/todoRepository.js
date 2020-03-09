@@ -1,6 +1,5 @@
-const todoModel = require('./todoModel')
 
-module.exports = function ({ }) {
+module.exports = function ({ todoModel }) {
 
     return {
 

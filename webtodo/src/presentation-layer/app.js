@@ -3,9 +3,6 @@ const express = require('express')
 const mysql2 = require('mysql2')
 const expressHandlebars = require('express-handlebars')
 const awilix = require('../main')
-
-const sequelize = require('../data-access-layer-sequelize/db')
-
 const session = require('express-session')
 const redis = require('redis')
 const redisClient = redis.createClient({
@@ -66,28 +63,6 @@ app.listen(8080, function () {
 	console.log('Web application running on 8080')
 })
 
-/*
-sequelize.authenticate()
-	.then(() => {
-		sequelize.sync()
-		console.log("Database connected...")
-	})
-	.catch(err => console.log("@@@@@@@@@@@@@@@@@@@@@@@", err))*/
-
-/*
-while (1) {
-	setTimeout(function () {
-		
-		sequelize.authenticate()
-			.then(() => {
-				sequelize.sync()
-				console.log("Database connected...")
-				break})
-			.catch(err => console.log("@@@@@@@@@@@@@@@@@@@@@@@", err))
-		
-	}, 500)
-}
-*/
 //Throw Redis error in case of ERROR.
 redisClient.on('error', (err) => {
 	console.log('Redis Error: ', err)

@@ -1,6 +1,6 @@
-const accountModel = require('./accountModel')
+//const accountModel = require('./accountModel')
 
-module.exports = function ({ }) {
+module.exports = function ({ accountModel }) {
 
 	return {
 

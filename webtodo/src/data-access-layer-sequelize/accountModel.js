@@ -1,11 +1,23 @@
 const Sequelize = require('sequelize')
 const db = require('./db')
 
-const Accounts = db.define('accounts', {
-    username: Sequelize.TEXT,
-    password: Sequelize.TEXT
-    //usernameUnique: {unique: 'username'}
-})
+module.exports = function ({ }) {
+    const Accounts = db.define('accounts', {
+        username: {
+            type: Sequelize.TEXT,
+            allowNull: false
+            //unique: true
+        },
+        password: {
+            type: Sequelize.TEXT,
+            allowNull: false
+        },
+    },
+        {
+            indexes: [
+                //{ fields: ['username'], unique: true }
+            ]
+        })
 
-module.exports = Accounts
-
+    return Accounts
+}

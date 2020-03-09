@@ -1,9 +1,18 @@
 const Sequelize = require('sequelize')
 const db = require('./db')
 
-const Todos = db.define('todos', {
-    todo: Sequelize.TEXT
-      
-})
+module.exports = function ({ }) {
+    const Todos = db.define('todos', {
+        todo: {
+            type: Sequelize.TEXT,
+            allowNull: false
+        },
+    },
+        {
+            indexes: [
+                //{ fields: ['todo'], unique: true }
+            ]
+        })
 
-module.exports = Todos
+    return Todos
+}
