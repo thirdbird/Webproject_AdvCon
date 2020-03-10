@@ -105,7 +105,7 @@ module.exports = function ({ accountManager }) {
                     })
                 }
             })
-        } catch (errors) {
+        }catch(errors) {
             response.status(500).json.end()
         }
     })

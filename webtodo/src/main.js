@@ -8,16 +8,19 @@ const awilix = require('awilix')
 
 const accountRepository = require('./data-access-layer-sequelize/accountRepository')//sequelize
 const todoRepository = require('./data-access-layer-sequelize/todoRepository')//sequelize
+const blogsRepository = require('./data-access-layer-sequelize/blogsRepository')//sequelize
 
 //Sequelize Models
 const accountModel = require('./data-access-layer-sequelize/accountModel')
 const todoModel = require('./data-access-layer-sequelize/todoModel')
+const blogsModel = require('./data-access-layer-sequelize/blogsModel')
 
 const accountValidator = require('./business-logic-layer/accountValidator')
 const todoValidator = require('./business-logic-layer/todoValidator')
 
 const accountManager = require('./business-logic-layer/accountManager')
 const todoManager = require('./business-logic-layer/todoManager')
+const blogsManager = require('./business-logic-layer/blogsManager')
 
 const accountRouter = require('./presentation-layer/routers/accountsRouter')
 const todolistRouter = require('./presentation-layer/routers/todolistRouter')
@@ -33,12 +36,14 @@ const container = awilix.createContainer()
 
 container.register("accountRepository", awilix.asFunction(accountRepository))
 container.register("todoRepository", awilix.asFunction(todoRepository))
+container.register("blogsRepository", awilix.asFunction(blogsRepository))
 
 container.register("accountValidator", awilix.asFunction(accountValidator))
 container.register("todoValidator", awilix.asFunction(todoValidator))
 
 container.register("accountManager", awilix.asFunction(accountManager))
 container.register("todoManager", awilix.asFunction(todoManager))
+container.register("blogsManager", awilix.asFunction(blogsManager))
 
 
 container.register("accountRouter", awilix.asFunction(accountRouter))
@@ -49,6 +54,7 @@ container.register("blogsRouter", awilix.asFunction(blogsRouter))
 //Models
 container.register("accountModel", awilix.asFunction(accountModel))
 container.register("todoModel", awilix.asFunction(todoModel))
+container.register("blogsModel", awilix.asFunction(blogsModel))
 
 //API
 container.register("accountsRouterAPI", awilix.asFunction(accountsRouterAPI))

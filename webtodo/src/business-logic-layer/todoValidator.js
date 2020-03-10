@@ -13,6 +13,22 @@ module.exports = function ({ }) {
 			}
 
 			return errors
+		},
+	
+		blogErrors: function (blogPost) {
+			const errors = []
+
+			if(blogPost.title.length == 0){
+				errors.push("You have to enter a title")
+			}
+			else if(blogPost.title.length < 10){
+				errors.push("Your title is too short")
+			}
+			if(blogPost.post.length == 0){
+				errors.push("You have to write something")
+			}
+
+			return errors
 		}
 	}
 }

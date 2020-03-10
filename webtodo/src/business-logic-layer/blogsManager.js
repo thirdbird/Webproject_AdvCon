@@ -1,7 +1,6 @@
-const blogsRepository = require('../data-access-layer-sequelize/blogsRepository')
 
 
-module.exports = function ({ }) {
+module.exports = function ({blogsRepository, todoValidator}) {
 
 	return {
         
@@ -14,7 +13,18 @@ module.exports = function ({ }) {
         
         //create a blog post
         createBlogPost: function(blogPost,callback){
+            const errors = todoValidator.blogErrors(blogPost)
+
+			if (0 < errors.length) {
+				callback(errors, null)
+				return
+            }
+            
             blogsRepository.createBlogPost(blogPost,callback)
+        },
+
+        getAllBlogPosts: function(callback){
+            blogsRepository.getAllBlogPosts(callback)
         }
 
         

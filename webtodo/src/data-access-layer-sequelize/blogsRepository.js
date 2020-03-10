@@ -1,6 +1,5 @@
-const blogsModel = require('./blogsModel')
 
-module.exports = function ({  }) {
+module.exports = function ({ blogsModel}) {
 
 	return {
 

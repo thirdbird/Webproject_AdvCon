@@ -3,9 +3,11 @@
 
     <form method="POST">
         <label for="new-task">Add Blog Post</label>
+        <p>Title:</p>
         <input name="title" type="todoInput" class="todoInput">
-        <input name="post" type="todoInput" class="todoInput">
-        <input type="submit" value="Add" class="todoButton">
+        <p>Post:</p>
+        <textarea id="subject" name="post" placeholder="Write something.." style="height:200px"></textarea>
+        <input type="submit" value="Add" class="todoButton button is-success">
     </form>
     <div class="content">
         {{#if errors.length}}
@@ -17,12 +19,11 @@
         {{/if}}
     </div>
 
-
     <h3 class="has-text-weight-bold">All Blog Posts</h3>
     {{#if blogPosts.length}}
     <ul>
         {{#each blogPosts}}
-        <li class="todosList">{{blogPosts.title}}</li>  <!-- <button class="delete">Delete</button>  -->
+        <li class="todosList"><a href="/blogs/{{id}}">{{title}}</a></li>
         {{/each}}
     </ul>
     {{/if}}
