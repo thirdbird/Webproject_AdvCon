@@ -7,39 +7,46 @@ module.exports = function ({ blogsManager }) {
     router.use(express.urlencoded({ extended: false }))
 
     router.get('/', function (request, response) {
-        blogsManager.getAllBlogPosts(function(errors,blogPosts){
+        blogsManager.getAllBlogPosts(function (errors, blogPosts) {
             const model = {
                 errors: errors,
                 blogPosts: blogPosts,
+                account: request.session.account,
+                loggedIn: request.session.loggedIn
             }
             if (errors.length != 0) {
-                response.render("blogs.hbs", model)
+                response.render("blogs-list-all.hbs", model)
             } else {
-                response.render("blogs.hbs", model)
+                response.render("blogs-list-all.hbs", model)
             }
         })
     })
 
     //read blog post
     router.get('/:id', function (request, response) {
-        const id = request.params.id
+        const id = { id: request.params.id }
 
         blogsManager.getBlogPostById(id, function (errors, blogPost) {
             const model = {
                 errors: errors,
-                blogPost: blogPost
+                blogPost: blogPost,
+                account: request.session.account,
+                loggedIn: request.session.loggedIn
             }
             console.log(model)
-            response.render("blog-post-show-one", model)
+            response.render("blog-post-show-one.hbs", model)
         })
     })
 
     //create blog
     router.post('/', function (request, response) {
-
         const blogPost = {
             title: request.body.title,
             post: request.body.post
+        }
+        const formHolder = {
+            titleholder: request.body.title,
+            postholder: request.body.post
         }
         blogsManager.createBlogPost(blogPost, function (errors, blogPost) {
             blogsManager.getAllBlogPosts(function (errors2, blogPosts) {
@@ -47,12 +54,15 @@ module.exports = function ({ blogsManager }) {
                     errors: errors,
                     errors2: errors2,
                     blogPosts: blogPosts,
+                    account: request.session.account,
+                    loggedIn: request.session.loggedIn,
+                    formHolder: formHolder
                 }
                 if (errors.length != 0) {
-                    response.render("blogs.hbs", model)
+                    response.render("blogs-list-all.hbs", model)
                 } else {
                     console.log(model)
-                    response.render("blogs.hbs", model)
+                    response.render("blogs-list-all.hbs", model)
                 }
             })
         })

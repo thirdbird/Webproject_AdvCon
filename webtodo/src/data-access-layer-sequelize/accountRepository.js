@@ -1,4 +1,3 @@
-//const accountModel = require('./accountModel')
 
 module.exports = function ({ accountModel }) {
 
@@ -26,7 +25,7 @@ module.exports = function ({ accountModel }) {
 
 		getAccount: function (account, callback) {
 			accountModel.findOne({ where: { username: account.username, password: account.password }, raw: true })
-				.then(function(loggedAccount){
+				.then(function (loggedAccount) {
 					callback([], loggedAccount)
 				})
 				.catch(function () {
@@ -44,23 +43,23 @@ module.exports = function ({ accountModel }) {
 				})
 		},
 
-		deleteAccount: function (account,callback){
-			accountModel.destroy({ where:{ username: account.username}
-				.then(function(deleteAccount){
-					callback([],deleteAccount)
-				})
-				.catch(function(error){
-					callback([error], null)
-				})
+		deleteAccount: function (account, callback) {
+			accountModel.destroy({
+				where: { username: account.username }
+					.then(function (deleteAccount) {
+						callback([], deleteAccount)
+					})
+					.catch(function (error) {
+						callback([error], null)
+					})
 			})
 		},
 
-		updateAccountbyId: function (account,callback){
+		updateAccountbyId: function (account, callback) {
 			accountModel.findOne({
-				where: {username: account.username}
-				.then()
+				where: { username: account.username }
+					.then()
 			})
 		}
-
 	}
 }

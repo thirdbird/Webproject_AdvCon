@@ -1,5 +1,4 @@
 const express = require('express')
-//const todoManager = require('../../business-logic-layer/todoManager')
 
 module.exports = function ({ todoManager }) {
 
@@ -15,7 +14,7 @@ module.exports = function ({ todoManager }) {
                 account: request.session.account,
                 loggedIn: request.session.loggedIn
             }
-            response.render('todolist.hbs', model)
+            response.render('todolist-list-all.hbs', model)
         })
     })
 
@@ -37,10 +36,10 @@ module.exports = function ({ todoManager }) {
                     formHolder: formHolder
                 }
                 if (errors.length != 0) {
-                    response.render("todolist.hbs", model)
+                    response.render("todolist-list-all.hbs", model)
                 }
                 else {
-                    response.render("todolist.hbs", model)
+                    response.render("todolist-list-all.hbs", model)
                 }
             })
         })
@@ -52,4 +51,3 @@ module.exports = function ({ todoManager }) {
 
 // router delete // delete the todo and mark it as complete or delete it from the list
 
-//module.exports = router

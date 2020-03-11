@@ -1,10 +1,9 @@
 const express = require('express')
-//const accountManager = require('../../business-logic-layer/accountManager')
 
 module.exports = function ({ accountManager }) {
 
 	const router = express.Router()
-	
+
 	router.use(express.urlencoded({ extended: false }))
 
 
@@ -37,7 +36,6 @@ module.exports = function ({ accountManager }) {
 	})
 
 	router.get('/:username', function (request, response) {
-
 		const account = { username: request.params.username }
 
 		accountManager.getAccountByUsername(account, function (errors, account) {
@@ -99,12 +97,12 @@ module.exports = function ({ accountManager }) {
 				response.render("accounts-sign-in.hbs", model)
 			}
 			else {
-				console.log('HEUHEUHEUHEUHEUE',account.id)
+				console.log('HEUHEUHEUHEUHEUE', account.id)
 				model.loggedIn = true
 				request.session.loggedIn = true
 				console.log("we are under true loggedin")
 				request.session.userId = account.id
-				request.session.account = account	
+				request.session.account = account
 				response.render("home-logged-in.hbs", model)
 				console.log("bottom of else")
 			}
@@ -115,5 +113,3 @@ module.exports = function ({ accountManager }) {
 
 }
 
-
-//module.exports = router

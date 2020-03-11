@@ -2,41 +2,42 @@ const awilix = require('awilix')
 
 // Import the ones we want to use (real or mockup), real in this case.
 
-//const accountRepository = require('./data-access-layer/accountRepository')//sql db
-//const todoRepository = require('./data-access-layer/todoRepository')//sql db
-
-
-const accountRepository = require('./data-access-layer-sequelize/accountRepository')//sequelize
-const todoRepository = require('./data-access-layer-sequelize/todoRepository')//sequelize
-const blogsRepository = require('./data-access-layer-sequelize/blogsRepository')//sequelize
-
-//Sequelize Models
-const accountModel = require('./data-access-layer-sequelize/accountModel')
-const todoModel = require('./data-access-layer-sequelize/todoModel')
-const blogsModel = require('./data-access-layer-sequelize/blogsModel')
-
+//Validators
 const accountValidator = require('./business-logic-layer/accountValidator')
 const todoValidator = require('./business-logic-layer/todoValidator')
 
+//Managers
 const accountManager = require('./business-logic-layer/accountManager')
 const todoManager = require('./business-logic-layer/todoManager')
 const blogsManager = require('./business-logic-layer/blogsManager')
 
+//SQL repositories
+//const accountRepository = require('./data-access-layer/accountRepository')
+//const todoRepository = require('./data-access-layer/todoRepository')
+//const blogsRepository = require('./data-access-layer/blogsRepository')
+
+//Sequelize repositories
+const accountRepository = require('./data-access-layer-sequelize/accountRepository')
+const todoRepository = require('./data-access-layer-sequelize/todoRepository')
+const blogsRepository = require('./data-access-layer-sequelize/blogsRepository')
+
+//Routers
 const accountRouter = require('./presentation-layer/routers/accountsRouter')
 const todolistRouter = require('./presentation-layer/routers/todolistRouter')
 const variousRouter = require('./presentation-layer/routers/variousRouter')
 const blogsRouter = require('./presentation-layer/routers/blogsRouter')
 
-//API
+//Models
+const accountModel = require('./data-access-layer-sequelize/accountModel')
+const todoModel = require('./data-access-layer-sequelize/todoModel')
+const blogsModel = require('./data-access-layer-sequelize/blogsModel')
+
+//API routers
 const todolistRouterAPI = require('./presentation-layer-REST-API/todolistRouterAPI')
 const accountsRouterAPI = require('./presentation-layer-REST-API/accountsRouterAPI')
 
 // Create a container and add the dependencies we want to use.
 const container = awilix.createContainer()
-
-container.register("accountRepository", awilix.asFunction(accountRepository))
-container.register("todoRepository", awilix.asFunction(todoRepository))
-container.register("blogsRepository", awilix.asFunction(blogsRepository))
 
 container.register("accountValidator", awilix.asFunction(accountValidator))
 container.register("todoValidator", awilix.asFunction(todoValidator))
@@ -45,6 +46,9 @@ container.register("accountManager", awilix.asFunction(accountManager))
 container.register("todoManager", awilix.asFunction(todoManager))
 container.register("blogsManager", awilix.asFunction(blogsManager))
 
+container.register("accountRepository", awilix.asFunction(accountRepository))
+container.register("todoRepository", awilix.asFunction(todoRepository))
+container.register("blogsRepository", awilix.asFunction(blogsRepository))
 
 container.register("accountRouter", awilix.asFunction(accountRouter))
 container.register("todolistRouter", awilix.asFunction(todolistRouter))

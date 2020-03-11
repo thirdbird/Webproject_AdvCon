@@ -1,5 +1,3 @@
-//const accountRepository = require('../data-access-layer/accountRepository')
-//const accountValidator = require('./accountValidator')
 
 module.exports = function ({ accountRepository, accountValidator }) {
 
@@ -28,14 +26,14 @@ module.exports = function ({ accountRepository, accountValidator }) {
 			accountRepository.createAccount(account, callback)
 		},
 
-		deleteAccount: function (account,callback){
-			accountRepository.deleteAccount(account,callback)
+		deleteAccount: function (account, callback) {
+			accountRepository.deleteAccount(account, callback)
 		},
 
-		updateAccountbyId: function (account,callback){
+		updateAccountbyId: function (account, callback) {
 
-			
-			const repo = accountRepository.getAccountByUsername(account,callback)
+
+			const repo = accountRepository.getAccountByUsername(account, callback)
 			console.log(repo)
 
 
