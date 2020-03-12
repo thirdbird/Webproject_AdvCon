@@ -1,4 +1,4 @@
-
+/*
 const Sequelize = require('sequelize')
 
 const sequelize = new Sequelize('myDB2', 'root', 'abc123', {
@@ -29,3 +29,4 @@ makeConnectionBeforeSync(sequelize, false)
 
 module.exports = sequelize
 
+*/

@@ -10,43 +10,78 @@ module.exports = function ({ accountManager }) {
 	//------------------GET REQUEST------------------//
 
 	router.get("/sign-up", function (request, response) {
-		response.render("accounts-sign-up.hbs")
+		const auth = {
+            errors: ["You have to be logged in to see this"],
+            account: request.session.account,
+            loggedIn: request.session.loggedIn
+		}
+		if(auth.loggedIn){
+			response.render("home.hbs",auth)
+		}else{
+			response.render("accounts-sign-up.hbs")
+		}
 	})
 
 	router.get("/sign-in", function (request, response) {
-		response.render("accounts-sign-in.hbs")
+		const auth = {
+            errors: ["You have to be logged in to see this"],
+            account: request.session.account,
+            loggedIn: request.session.loggedIn
+		}
+		if(auth.loggedIn){
+			response.render("home.hbs", auth)
+		}else{
+			response.render("accounts-sign-in.hbs")
+		}
 	})
 
 	router.get("/sign-out", function (request, response) {
 		request.session.destroy()
 		response.redirect('/')
-		//console.log(session)
 	})
 
 	router.get("/", function (request, response) {
-		accountManager.getAllAccounts(function (errors, accounts) {
-			const model = {
-				errors: errors,
-				accounts: accounts,
-				account: request.session.account,
-				loggedIn: request.session.loggedIn
-			}
-			response.render("accounts-list-all.hbs", model)
-		})
+		const auth = {
+            errors: ["You have to be logged in to see this"],
+            account: request.session.account,
+            loggedIn: request.session.loggedIn
+		}
+		if(auth.loggedIn){
+			accountManager.getAllAccounts(function (errors, accounts) {
+				const model = {
+					errors: errors,
+					accounts: accounts,
+					account: request.session.account,
+					loggedIn: request.session.loggedIn
+				}
+				response.render("accounts-list-all.hbs", model)
+			})
+		}else{
+			response.render("accounts-list-all.hbs",auth)
+		}
 	})
 
 	router.get('/:username', function (request, response) {
 		const account = { username: request.params.username }
 
-		accountManager.getAccountByUsername(account, function (errors, account) {
-			const model = {
-				errors: errors,
-				accounts: account,
-				account: request.session.account,
-				loggedIn: request.session.loggedIn
-			}
-			response.render("accounts-show-one.hbs", model)
-		})
+		const auth = {
+            errors: ["You have to be logged in to see this"],
+            account: request.session.account,
+            loggedIn: request.session.loggedIn
+		}
+		if(auth.loggedIn){
+			accountManager.getAccountByUsername(account, function (errors, account) {
+				const model = {
+					errors: errors,
+					accounts: account,
+					account: request.session.account,
+					loggedIn: request.session.loggedIn
+				}
+				response.render("accounts-show-one.hbs", model)
+			})
+		}else{
+			response.render("accounts-show-one.hbs", auth)
+		}
 	})
 
 
@@ -61,6 +96,7 @@ module.exports = function ({ accountManager }) {
 		const formHolder = {
 			usernameholder: request.body.username
 		}
+
 		accountManager.createAccount(account, function (errors, account) {
 			const model = {
 				errors: errors,
@@ -74,6 +110,7 @@ module.exports = function ({ accountManager }) {
 				response.render("accounts-sign-in.hbs")
 			}
 		})
+		
 	})
 
 	router.post("/sign-in", function (request, response) {
@@ -86,6 +123,7 @@ module.exports = function ({ accountManager }) {
 		}
 		console.log('session id:', request.session.userId) //undefined
 		console.log('session string:', request.sessionID)	//string
+
 
 		accountManager.getAccount(account, function (errors, account) {
 			const model = {
@@ -107,6 +145,7 @@ module.exports = function ({ accountManager }) {
 				console.log("bottom of else")
 			}
 		})
+		
 	})
 
 	return router

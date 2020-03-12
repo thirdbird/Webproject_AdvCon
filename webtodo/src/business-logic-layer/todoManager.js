@@ -2,17 +2,17 @@
 module.exports = function ({ todoRepository, todoValidator }) {
 
 	return {
-		getAllTodos: function (callback) {
-			todoRepository.getAllTodos(callback)
+		getAllTodos: function (accountId,callback) {
+			todoRepository.getAllTodos(accountId, callback)
 		},
 
-		createTodo: function (todo, callback) {
+		createTodo: function (todo, accountId, callback) {
 			const errors = todoValidator.todoErrors(todo)
 			if (0 < errors.length) {
 				callback(errors, null)
 				return
 			}
-			todoRepository.createTodo(todo, callback)
+			todoRepository.createTodo(todo, accountId, callback)
 		},
 
 		updateTodoById: function (todo, callback) {

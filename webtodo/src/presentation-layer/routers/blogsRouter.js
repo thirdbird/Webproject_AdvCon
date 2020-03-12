@@ -33,7 +33,6 @@ module.exports = function ({ blogsManager }) {
                 account: request.session.account,
                 loggedIn: request.session.loggedIn
             }
-            console.log(model)
             response.render("blog-post-show-one.hbs", model)
         })
     })
@@ -48,26 +47,44 @@ module.exports = function ({ blogsManager }) {
             titleholder: request.body.title,
             postholder: request.body.post
         }
-        blogsManager.createBlogPost(blogPost, function (errors, blogPost) {
-            blogsManager.getAllBlogPosts(function (errors2, blogPosts) {
+
+        const auth = {
+            account: request.session.account,
+            loggedIn: request.session.loggedIn
+        }
+        if (auth.loggedIn) {
+            blogsManager.createBlogPost(blogPost, function (errors, blogPost) {
+                blogsManager.getAllBlogPosts(function (errors2, blogPosts) {
+                    const model = {
+                        errors: errors,
+                        errors2: errors2,
+                        blogPosts: blogPosts,
+                        account: request.session.account,
+                        loggedIn: request.session.loggedIn,
+                        formHolder: formHolder
+                    }
+                    if (errors.length != 0) {
+                        response.render("blogs-list-all.hbs", model)
+                    } else {
+                        response.render("blogs-list-all.hbs", model)
+                    }
+                })
+            })
+        } else {
+            blogsManager.getAllBlogPosts(function (errors, blogPosts) {
                 const model = {
-                    errors: errors,
-                    errors2: errors2,
+                    errors: ["You have to be logged in to write a post"],
                     blogPosts: blogPosts,
                     account: request.session.account,
-                    loggedIn: request.session.loggedIn,
-                    formHolder: formHolder
+                    loggedIn: request.session.loggedIn
                 }
                 if (errors.length != 0) {
                     response.render("blogs-list-all.hbs", model)
                 } else {
-                    console.log(model)
                     response.render("blogs-list-all.hbs", model)
                 }
             })
-        })
-
-
+        }
     })
 
     return router

@@ -3,9 +3,9 @@ const db = require('./db')
 module.exports = function ({ }) {
 
 	return {
-		getAllTodos: function (callback) {
-			const query = `SELECT * FROM todos`
-			const values = []
+		getAllTodos: function (accountId, callback) {
+			const query = `SELECT * FROM todos WHERE account_id = ?`
+			const values = [accountId]
 
 			db.query(query, values, function (error, todos) {
 				if (error) {
@@ -17,13 +17,12 @@ module.exports = function ({ }) {
 			})
 		},
 
-		createTodo: function (todo, callback) {
-			const query = `INSERT INTO todos (todo) VALUES (?)`
-			const values = [todo]
+		createTodo: function (todo, accountId, callback) {
+			const query = `INSERT INTO todos (todo, account_id) VALUES (?, ?)`
+			const values = [todo, accountId]
 
 			db.query(query, values, function (error, results) {
 				if (error) {
-					// TODO: Look for todoUnique violation.
 					callback(['databaseError'], null)
 				} else {
 					callback([], results.insertId)

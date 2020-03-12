@@ -12,14 +12,14 @@ const todoManager = require('./business-logic-layer/todoManager')
 const blogsManager = require('./business-logic-layer/blogsManager')
 
 //SQL repositories
-//const accountRepository = require('./data-access-layer/accountRepository')
-//const todoRepository = require('./data-access-layer/todoRepository')
-//const blogsRepository = require('./data-access-layer/blogsRepository')
+const accountRepository = require('./data-access-layer/accountRepository')
+const todoRepository = require('./data-access-layer/todoRepository')
+const blogsRepository = require('./data-access-layer/blogsRepository')
 
 //Sequelize repositories
-const accountRepository = require('./data-access-layer-sequelize/accountRepository')
-const todoRepository = require('./data-access-layer-sequelize/todoRepository')
-const blogsRepository = require('./data-access-layer-sequelize/blogsRepository')
+//const accountRepository = require('./data-access-layer-sequelize/accountRepository')
+//const todoRepository = require('./data-access-layer-sequelize/todoRepository')
+//const blogsRepository = require('./data-access-layer-sequelize/blogsRepository')
 
 //Routers
 const accountRouter = require('./presentation-layer/routers/accountsRouter')

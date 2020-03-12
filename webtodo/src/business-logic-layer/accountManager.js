@@ -42,8 +42,6 @@ module.exports = function ({ accountRepository, accountValidator }) {
 	}
 }
 
-
-
 /*exports.getAllAccounts = function(callback){
 	accountRepository.getAllAccounts(callback)
 }
