@@ -15,11 +15,10 @@ INSERT INTO accounts (username, password) VALUES ("Max", "123");
 -- Create a todo.
 CREATE TABLE IF NOT EXISTS todos (
 	id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-	todo VARCHAR(100) NOT NULL
+	todo VARCHAR(100) NOT NULL,
+	username INT,
+	FOREIGN KEY (username) REFERENCES accounts(username)
 );
-
--- Create a dummy todo for testing.
-INSERT INTO todos (todo) VALUES ("Do the dishes");
 
 -- Create a table to store blogposts in.
 CREATE TABLE IF NOT EXISTS blogposts (
