@@ -18,7 +18,9 @@ CREATE TABLE IF NOT EXISTS todos (
 CREATE TABLE IF NOT EXISTS blogposts (
 	id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 	title VARCHAR(100) NOT NULL,
-	post VARCHAR(500) NOT NULL
+	post VARCHAR(500) NOT NULL,
+	account_user VARCHAR(30) NOT NULL,
+	FOREIGN KEY (account_user) REFERENCES accounts(username)
 );
 
 -- Create a dummy account for testing.
@@ -29,6 +31,7 @@ INSERT INTO accounts (username, password) VALUES ("Bob", "123");
 INSERT INTO todos (todo, account_id) VALUES ("Do the dishes Alice",1);
 INSERT INTO todos (todo, account_id) VALUES ("Do the dishes Bob",2);
 
-INSERT INTO blogposts (title, post) VALUES ("This is a blog post", "this is a blog post desc");
+INSERT INTO blogposts (title, post, account_user) VALUES ("This is a blog post", "this is a blog post desc", "Alice");
+INSERT INTO blogposts (title, post, account_user) VALUES ("Bob blogposts", "this is another blog post desc", "Bob");
 
 

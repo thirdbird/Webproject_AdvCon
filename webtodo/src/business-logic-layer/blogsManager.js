@@ -7,12 +7,12 @@ module.exports = function ({ blogsRepository, todoValidator }) {
         //Get all blogs
 
         //get blog post by id
-        getBlogPostById: function (id, callback) {
-            blogsRepository.getBlogPostById(id, callback)
+        getBlogPostById: function (blogPost,callback) {
+            blogsRepository.getBlogPostById(blogPost, callback)
         },
 
         //create a blog post
-        createBlogPost: function (blogPost, callback) {
+        createBlogPost: function (blogPost,accountUser, callback) {
             const errors = todoValidator.blogErrors(blogPost)
 
             if (0 < errors.length) {
@@ -20,7 +20,7 @@ module.exports = function ({ blogsRepository, todoValidator }) {
                 return
             }
 
-            blogsRepository.createBlogPost(blogPost, callback)
+            blogsRepository.createBlogPost(blogPost,accountUser, callback)
         },
 
         getAllBlogPosts: function (callback) {

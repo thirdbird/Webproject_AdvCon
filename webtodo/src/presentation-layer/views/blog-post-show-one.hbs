@@ -1,5 +1,4 @@
 <div class="content">
-<h1>Blog post</h1>
 {{#if errors.length}}
 	<p>Oh no, something went wrong:</p>
 	<ul>
@@ -10,15 +9,11 @@
 {{else}}
 	
 	{{#if blogPost}}
-		<dl>
-
-			<p>By: author</p>
+		<dl>		
+			<h4>{{blogPost.title}}</h4>
+			<p>By: {{blogPost.account_user}}</p>
 			
-			<dt>Title:</dt>
-			<dd>{{blogPost.title}}</dd>
-			
-			<dt>Post:</dt>
-			<dd>{{blogPost.post}}</dd>
+			<p>{{blogPost.post}}</p>
 			
 		</dl>
 	{{else}}

@@ -16,7 +16,7 @@ module.exports = function ({ }) {
         },
 
         getBlogPostById: function (blogPost, callback) {
-            const query = `SELECT * FROM blogposts WHERE id = ? LIMIT 1`
+            const query = `SELECT * FROM blogposts WHERE id  = ?  LIMIT 1`
             const values = [blogPost.id]
 
             db.query(query, values, function (error, blogPosts) {
@@ -28,9 +28,9 @@ module.exports = function ({ }) {
             })
         },
 
-        createBlogPost: function (blogPost, callback) {
-            const query = `INSERT INTO blogposts (title, post) VALUES (?, ?)`
-            const values = [blogPost.title, blogPost.post]
+        createBlogPost: function (blogPost, accountUser, callback) {
+            const query = `INSERT INTO blogposts (title, post, account_user) VALUES (?, ?, ?)`
+            const values = [blogPost.title, blogPost.post, accountUser]
 
             db.query(query, values, function (error, results) {
                 if (error) {

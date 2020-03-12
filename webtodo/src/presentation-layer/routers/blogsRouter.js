@@ -24,15 +24,16 @@ module.exports = function ({ blogsManager }) {
 
     //read blog post
     router.get('/:id', function (request, response) {
-        const id = { id: request.params.id }
+        const blogPost = { id: request.params.id }
 
-        blogsManager.getBlogPostById(id, function (errors, blogPost) {
+        blogsManager.getBlogPostById(blogPost, function (errors, blogPost) {
             const model = {
                 errors: errors,
                 blogPost: blogPost,
                 account: request.session.account,
                 loggedIn: request.session.loggedIn
             }
+            console.log(blogPost)
             response.render("blog-post-show-one.hbs", model)
         })
     })
@@ -52,8 +53,10 @@ module.exports = function ({ blogsManager }) {
             account: request.session.account,
             loggedIn: request.session.loggedIn
         }
+
         if (auth.loggedIn) {
-            blogsManager.createBlogPost(blogPost, function (errors, blogPost) {
+            const accountUser = auth.account.username
+            blogsManager.createBlogPost(blogPost,accountUser, function (errors, blogPost) {
                 blogsManager.getAllBlogPosts(function (errors2, blogPosts) {
                     const model = {
                         errors: errors,
@@ -66,6 +69,7 @@ module.exports = function ({ blogsManager }) {
                     if (errors.length != 0) {
                         response.render("blogs-list-all.hbs", model)
                     } else {
+                        model.formHolder = ""
                         response.render("blogs-list-all.hbs", model)
                     }
                 })
