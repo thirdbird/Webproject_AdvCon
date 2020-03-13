@@ -25,6 +25,14 @@ module.exports = function ({ blogsRepository, todoValidator }) {
 
         getAllBlogPosts: function (callback) {
             blogsRepository.getAllBlogPosts(callback)
-        }
+        },
+
+        updateBlogPost: function (blogPost,accountUser, callback) {
+			blogsRepository.updateBlogPost(blogPost,accountUser, callback)
+		},
+
+		deleteBlogPost: function (id, callback) {
+			blogsRepository.deleteBlogPost(id, callback)
+		}
     }
 }

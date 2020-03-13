@@ -40,6 +40,35 @@ module.exports = function ({ }) {
                     callback([], results.insertId)
                 }
             })
+        },
+
+        updateBlogPost: function (blogPost, accountUser, callback) {
+            const query = `UPDATE blogposts SET title = ?, post = ?, account_user = ? WHERE id = ?`
+            const values = [blogPost.title, blogPost.post, accountUser, blogPost.id]
+
+            console.log(values)
+
+            db.query(query, values, function (error) {
+                if (error) {
+                    callback(['databaseError'], null)
+                } else {
+                    callback([], 0 < this.changes)
+                }
+            })
+        },
+
+        deleteBlogPost: function (id, callback) {
+            const query = `DELETE FROM blogposts WHERE id = ?`
+            const values = [id]
+
+            db.query(query, values, function (error) {
+                if (error) {
+                    callback(["databaseError"])
+                } else {
+                    callback([], 0 < this.changes)
+                }
+            })
         }
+
     }
 }

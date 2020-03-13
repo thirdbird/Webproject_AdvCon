@@ -8,15 +8,15 @@ services:
     volumes:
       - "./webtodo/src:/webtodo/src"
     depends_on: 
-      - db
+      - db2
       - redis
-  db:
-    build: ./db
+  db2:
+    build: ./db2
     ports: 
       - "3306:3306"
     environment: 
       - "MYSQL_ROOT_PASSWORD=abc123"
-      - "MYSQL_DATABASE=myDB"
+      - "MYSQL_DATABASE=myDB2"
   redis:
     image: "redis"
     ports: 

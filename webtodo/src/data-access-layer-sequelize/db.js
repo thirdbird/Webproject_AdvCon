@@ -1,4 +1,4 @@
-/*
+
 const Sequelize = require('sequelize')
 
 const sequelize = new Sequelize('myDB2', 'root', 'abc123', {
@@ -28,5 +28,3 @@ function makeConnectionBeforeSync(sequelizeObject, boolIsConnected) {
 makeConnectionBeforeSync(sequelize, false)
 
 module.exports = sequelize
-
-*/

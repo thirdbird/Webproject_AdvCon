@@ -10,7 +10,8 @@ app.use(bodyParser.urlencoded({
 }))
 
 
-app.use('/todolist', awilix.theTodolistRouterAPI)
+
+app.use('/blogs', awilix.theBlogsRouterAPI)
 app.use('/accounts', awilix.theAccountRouterAPI)
 
 app.listen(8080, function () {

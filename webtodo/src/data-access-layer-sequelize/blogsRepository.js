@@ -32,6 +32,23 @@ module.exports = function ({ blogsModel }) {
 				.catch(function (error) {
 					callback([error], null)
 				})
-		}
+		},
+
+		updateTodoById: function (blogPost, callback) {
+            blogsModel.update({ title: blogPost.title, post: blogPost.post }, { where: { id: blogPost.id } })
+                .then(function (blogPost) {
+                    callback([], blogPost)
+                })
+                .catch(function (error) {
+                    callback([error])
+                })
+        },
+
+        deleteTodo: function (id, callback) {
+            blogsModel.destroy({ where: { id: id } })
+                .then(function (deleteBlogPost) {
+                    callback([], deleteBlogPost)
+                })
+        }
 	}
 }

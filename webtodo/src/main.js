@@ -12,14 +12,14 @@ const todoManager = require('./business-logic-layer/todoManager')
 const blogsManager = require('./business-logic-layer/blogsManager')
 
 //SQL repositories
-const accountRepository = require('./data-access-layer/accountRepository')
-const todoRepository = require('./data-access-layer/todoRepository')
-const blogsRepository = require('./data-access-layer/blogsRepository')
+//const accountRepository = require('./data-access-layer/accountRepository')
+//const todoRepository = require('./data-access-layer/todoRepository')
+//const blogsRepository = require('./data-access-layer/blogsRepository')
 
 //Sequelize repositories
-//const accountRepository = require('./data-access-layer-sequelize/accountRepository')
-//const todoRepository = require('./data-access-layer-sequelize/todoRepository')
-//const blogsRepository = require('./data-access-layer-sequelize/blogsRepository')
+const accountRepository = require('./data-access-layer-sequelize/accountRepository')
+const todoRepository = require('./data-access-layer-sequelize/todoRepository')
+const blogsRepository = require('./data-access-layer-sequelize/blogsRepository')
 
 //Routers
 const accountRouter = require('./presentation-layer/routers/accountsRouter')
@@ -33,8 +33,8 @@ const todoModel = require('./data-access-layer-sequelize/todoModel')
 const blogsModel = require('./data-access-layer-sequelize/blogsModel')
 
 //API routers
-const todolistRouterAPI = require('./presentation-layer-REST-API/todolistRouterAPI')
 const accountsRouterAPI = require('./presentation-layer-REST-API/accountsRouterAPI')
+const blogsRouterAPI = require('./presentation-layer-REST-API/blogsRouterAPI')
 
 // Create a container and add the dependencies we want to use.
 const container = awilix.createContainer()
@@ -62,7 +62,7 @@ container.register("blogsModel", awilix.asFunction(blogsModel))
 
 //API
 container.register("accountsRouterAPI", awilix.asFunction(accountsRouterAPI))
-container.register("todolistRouterAPI", awilix.asFunction(todolistRouterAPI))
+container.register("blogsRouterAPI", awilix.asFunction(blogsRouterAPI))
 
 
 // Retrieve the router, which resolves all other dependencies.
@@ -72,6 +72,6 @@ const theVariousRouter = container.resolve("variousRouter")
 const theBlogsRouter = container.resolve("blogsRouter")
 
 const theAccountRouterAPI = container.resolve("accountsRouterAPI")
-const theTodolistRouterAPI = container.resolve("todolistRouterAPI")
+const theBlogsRouterAPI = container.resolve("blogsRouterAPI")
 
-module.exports = {theAccountRouter,theTodolistRouter,theVariousRouter, theBlogsRouter}
+module.exports = {theAccountRouterAPI,theBlogsRouterAPI,theVariousRouter, theBlogsRouter}

@@ -93,7 +93,7 @@ module.exports = function ({ accountManager }) {
                     response.status(400).json(errors)
                 } else {
                     jwt.sign({ userId: account.id, username: account.username }, serverIdSecret, { expiresIn: '10min' }, function (errorId, idToken) {
-                        jwt.sign({ id: account.id }, serverSecret, { expiresIn: '10min' }, function (errorAccess, accessToken) {
+                        jwt.sign({ id: account.id, username: account.username }, serverSecret, { expiresIn: '10min' }, function (errorAccess, accessToken) {
                             if (errorId) {
                                 response.status(500).json(errorId)
                             } else if (errorAccess) {
@@ -109,31 +109,6 @@ module.exports = function ({ accountManager }) {
             response.status(500).json.end()
         }
     })
-
-    router.put("/:username", function (request, response) {
-        const account = {
-            username: request.body.username
-        }
-        accountManager.updateAccountById(account, function (errors, accountExists) {
-            if (errors.includes("databaseError")) {
-                response.status(500).end()
-            } else if (0 < errors.length) {
-                response.status(400).json(errors)
-            } else if (!accountExists) {
-                response.status(404).end()
-            } else {
-                response.status(204).end()
-            }
-        })
-    })
-
-
-    //DELETE
-
-    router.delete("/:username", function (request, response) {
-        //delete username 
-    })
-
 
     return router
 
