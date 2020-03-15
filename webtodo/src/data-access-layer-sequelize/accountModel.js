@@ -11,8 +11,16 @@ module.exports = function ({ }) {
         password: {
             type: Sequelize.TEXT,
             allowNull: false
-        }
+        },
+        
     })
+
+    Accounts.associate = (models) =>{
+        Accounts.hasMany(models.Todos, {as: "todos", foreignKey: "account_id"})
+        Accounts.hasMany(models.Blogs, {as: "blogs", foreignKey: "account_user"})
+    }
+
+    
 
     return Accounts
 }

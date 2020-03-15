@@ -3,21 +3,25 @@ module.exports = function ({ todoModel }) {
 
     return {
 
-        getAllTodos: function (callback) {
-            todoModel.findAll({ raw: true })
+        getAllTodos: function (accountId,callback) {
+            todoModel.findAll({where: {account_id: accountId}, raw: true })
                 .then(function (todos) {
                     callback([], todos)
                 })
-                .catch(function (error) {
-                    callback([error], null)
+                .catch(function () {
+                    callback(["databaseError"], null)
                 })
 
         },
 
-        createTodo: function (todo, callback) {
-            todoModel.create({ todo: todo })
-                .then(function (todo) { callback([], todo) })
-                .catch(function (error) { callback([error], null) })
+        createTodo: function (todo, accountId, callback) {
+            todoModel.create({ todo: todo, account_id: accountId })
+                .then(function (todo) {
+                     callback([], todo) 
+                })
+                .catch(function (error) {
+                     callback([error], null) 
+                })
         },
 
         updateTodoById: function (todo, callback) {

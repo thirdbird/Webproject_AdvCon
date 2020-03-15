@@ -1,6 +1,7 @@
 /*
-tableName: 'events',
+tableName: 'Accounts',
     associate: function (models) {
-        events.belongsTo(models.some_other_model, { foreignKey: 'some_other_fkey' })
+        Accounts.hasMany(models.Todos, { foreignKey: 'account_id' })
 
-    }*/
+    }
+*/

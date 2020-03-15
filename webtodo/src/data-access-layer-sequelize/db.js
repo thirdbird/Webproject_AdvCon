@@ -7,7 +7,6 @@ const sequelize = new Sequelize('myDB2', 'root', 'abc123', {
     dialect: 'mysql',
 });
 
-
 function makeConnectionBeforeSync(sequelizeObject, boolIsConnected) {
     if (!boolIsConnected) {
         setTimeout(function () {

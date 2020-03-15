@@ -24,8 +24,8 @@ module.exports = function ({ blogsModel }) {
 				})
 		},
 
-		createBlogPost: function (blogPost, callback) {
-			blogsModel.create({ title: blogPost.title, post: blogPost.post })
+		createBlogPost: function (blogPost,accountUser, callback) {
+			blogsModel.create({ title: blogPost.title, post: blogPost.post, account_user: accountUser })
 				.then(function (blogPost) {
 					callback([], blogPost)
 				})
@@ -34,8 +34,8 @@ module.exports = function ({ blogsModel }) {
 				})
 		},
 
-		updateTodoById: function (blogPost, callback) {
-            blogsModel.update({ title: blogPost.title, post: blogPost.post }, { where: { id: blogPost.id } })
+		updateTodoById: function (blogPost,accountUser, callback) {
+            blogsModel.update({ title: blogPost.title, post: blogPost.post, account_user: accountUser }, { where: { id: blogPost.id } })
                 .then(function (blogPost) {
                     callback([], blogPost)
                 })

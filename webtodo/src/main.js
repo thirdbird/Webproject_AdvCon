@@ -74,4 +74,4 @@ const theBlogsRouter = container.resolve("blogsRouter")
 const theAccountRouterAPI = container.resolve("accountsRouterAPI")
 const theBlogsRouterAPI = container.resolve("blogsRouterAPI")
 
-module.exports = {theAccountRouterAPI,theBlogsRouterAPI,theVariousRouter, theBlogsRouter}
+module.exports = {theAccountRouter,theTodolistRouter,theVariousRouter, theBlogsRouter}
