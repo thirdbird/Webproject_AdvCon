@@ -97,3 +97,7 @@ input.todoButton{
   border-radius: 10px;
   float: right;
 }
+
+.BlogPostContainer{
+  margin-bottom: 50px;
+}

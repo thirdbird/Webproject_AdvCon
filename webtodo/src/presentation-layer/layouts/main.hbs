@@ -33,9 +33,14 @@
 
 				<div class="navbar-start">
 					<a class="navbar-item" href="/">Home</a>
+					{{#if loggedIn}}
 					<a class="navbar-item" href="/todolist">Your todo lists</a>
-					<a class="navbar-item" href="/accounts">Accounts</a>
-					<a class="navbar-item" href="/blogs">Blogs</a>
+					<!--<a class="navbar-item" href="/accounts">Accounts</a>-->
+					<a class="navbar-item" href="/createABlogPost">Create a blog post</a>
+					{{/if}}
+
+					<a class="navbar-item" href="/blogs">Blog posts</a>
+			
 					{{#if loggedIn}}
 					<a class="navbar-item" id="loggedAs">Signed in as: {{account.username}}</a>
 					{{/if}}

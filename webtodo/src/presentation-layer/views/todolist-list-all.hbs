@@ -1,28 +1,29 @@
 
-<div class="container">
+ 
+ <div class="TodoContainer">
 
-    <form method="POST">
-        <label for="new-task">Add Todo</label>
-        <input name="todo" type="todoInput" class="todoInput">
-        <input type="submit" value="Add" class="todoButton button is-success">
-    </form>
-    <div class="content">
-        {{#if errors.length}}
+        <form method="POST">
+            <label for="new-task">Add Todo</label>
+            <input name="todo" type="todoInput" class="todoInput">
+            <input type="submit" value="Add" class="todoButton button is-success">
+        </form>
+        <div class="content">
+            {{#if errors.length}}
+            <ul>
+                {{#each errors}}
+                <p id="ErrorMessage">{{this}}</p>
+                {{/each}}
+            </ul>
+            {{/if}}
+        </div>
+
+
+        <h3 class="has-text-weight-bold">Todo</h3>
+        {{#if todos.length}}
         <ul>
-            {{#each errors}}
-            <p id="ErrorMessage">{{this}}</p>
+            {{#each todos}}
+            <li class="todosList">{{todo}}</li>  <!-- <button class="delete">Delete</button>  -->
             {{/each}}
         </ul>
         {{/if}}
     </div>
-
-
-    <h3 class="has-text-weight-bold">Todo</h3>
-    {{#if todos.length}}
-    <ul>
-        {{#each todos}}
-        <li class="todosList">{{todo}}</li>  <!-- <button class="delete">Delete</button>  -->
-        {{/each}}
-    </ul>
-    {{/if}}
-</div>

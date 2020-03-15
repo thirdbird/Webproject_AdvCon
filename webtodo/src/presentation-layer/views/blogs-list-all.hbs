@@ -1,24 +1,5 @@
-<div class="container">
 
-    <form method="POST">
-        <label for="new-task">Add Blog Post</label>
-        <p>Title:</p>
-        <input name="title" type="todoInput" class="todoInput" value="{{formHolder.titleholder}}">
-        <p>Post:</p>
-        <textarea id="subject" name="post" placeholder="Write something.."
-            style="height:200px">{{formHolder.postholder}}</textarea>
-        <input type="submit" value="Add" class="todoButton button is-success">
-    </form>
-    <div class="content">
-        {{#if errors.length}}
-        <ul>
-            {{#each errors}}
-            <p id="ErrorMessage">{{this}}</p>
-            {{/each}}
-        </ul>
-        {{/if}}
-    </div>
-
+<div class="BlogContainer">
     <h3 class="has-text-weight-bold">All Blog Posts</h3>
     {{#if blogPosts.length}}
     <ul>
@@ -28,3 +9,4 @@
     </ul>
     {{/if}}
 </div>
+

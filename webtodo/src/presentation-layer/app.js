@@ -58,6 +58,7 @@ app.use('/', awilix.theVariousRouter)
 app.use('/accounts', awilix.theAccountRouter)
 app.use('/todolist', awilix.theTodolistRouter)
 app.use('/blogs', awilix.theBlogsRouter)
+app.use('/createABlogPost', awilix.theCreateABlogPostRouter)
 
 //Start listening for incoming HTTP requests!
 app.listen(8080, function () {
