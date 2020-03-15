@@ -9,7 +9,7 @@ module.exports = function ({ accountModel }) {
 					callback([], accounts)
 				})
 				.catch(function (error) {
-					callback([error], null)
+					callback(["databaseError"], null)
 				})
 		},
 
@@ -19,7 +19,7 @@ module.exports = function ({ accountModel }) {
 					callback([], account)
 				})
 				.catch(function (error) {
-					callback([error], null)
+					callback(["databaseError"], null)
 				})
 		},
 
@@ -50,7 +50,7 @@ module.exports = function ({ accountModel }) {
 						callback([], deleteAccount)
 					})
 					.catch(function (error) {
-						callback([error], null)
+						callback(["databaseError"], null)
 					})
 			})
 		},

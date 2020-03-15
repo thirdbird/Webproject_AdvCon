@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({
 
 
 
-app.use('/blogs', awilix.theBlogsRouterAPI)
+app.use('/blogPosts', awilix.theBlogsRouterAPI)
 app.use('/accounts', awilix.theAccountRouterAPI)
 
 app.listen(8080, function () {

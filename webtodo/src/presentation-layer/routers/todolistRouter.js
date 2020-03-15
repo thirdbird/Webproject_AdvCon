@@ -27,7 +27,7 @@ module.exports = function ({ todoManager }) {
         const formHolder = {
             todo: request.body.todo
         }
-        const accountId = request.session.account.username
+        const accountId = request.session.account.id
         todoManager.createTodo(todo,accountId, function (errors, todo) {
             todoManager.getAllTodos(accountId,function (errors2, todos) { //if we get db error the errors2 is not gonna display it because hbs file does not catch that error
                 const model = {

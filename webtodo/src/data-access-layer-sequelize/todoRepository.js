@@ -20,7 +20,7 @@ module.exports = function ({ todoModel }) {
                      callback([], todo) 
                 })
                 .catch(function (error) {
-                     callback([error], null) 
+                     callback(["databaseError"], null) 
                 })
         },
 
@@ -30,7 +30,7 @@ module.exports = function ({ todoModel }) {
                     callback([], todo)
                 })
                 .catch(function (error) {
-                    callback([error])
+                    callback(["databaseError"])
                 })
         },
 

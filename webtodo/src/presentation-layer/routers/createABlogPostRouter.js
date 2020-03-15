@@ -26,7 +26,6 @@ module.exports = function ({ blogsManager }) {
             postholder: request.body.post
         }
 
-
         const accountUser = request.session.account.username
 
         blogsManager.createBlogPost(blogPost,accountUser, function (errors, blogPost) {

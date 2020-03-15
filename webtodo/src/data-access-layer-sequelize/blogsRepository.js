@@ -10,7 +10,7 @@ module.exports = function ({ blogsModel }) {
 
 				})
 				.catch(function (error) {
-					callback([error], null)
+					callback(["databaseError"], null)
 				})
 		},
 
@@ -20,7 +20,7 @@ module.exports = function ({ blogsModel }) {
 					callback([], blogPost)
 				})
 				.catch(function (error) {
-					callback([error], null)
+					callback(["databaseError"], null)
 				})
 		},
 
@@ -30,21 +30,21 @@ module.exports = function ({ blogsModel }) {
 					callback([], blogPost)
 				})
 				.catch(function (error) {
-					callback([error], null)
+					callback(["databaseError"], null)
 				})
 		},
 
-		updateTodoById: function (blogPost,accountUser, callback) {
+		updateBlogPost: function (blogPost,accountUser, callback) {
             blogsModel.update({ title: blogPost.title, post: blogPost.post, account_user: accountUser }, { where: { id: blogPost.id } })
                 .then(function (blogPost) {
                     callback([], blogPost)
                 })
-                .catch(function (error) {
-                    callback([error])
+                .catch(function () {
+                    callback(["databaseError"])
                 })
         },
 
-        deleteTodo: function (id, callback) {
+        deleteBlogPost: function (id, callback) {
             blogsModel.destroy({ where: { id: id } })
                 .then(function (deleteBlogPost) {
                     callback([], deleteBlogPost)
