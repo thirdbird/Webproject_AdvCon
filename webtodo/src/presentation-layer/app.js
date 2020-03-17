@@ -1,6 +1,5 @@
 const path = require('path')
 const express = require('express')
-const mysql2 = require('mysql2')
 const expressHandlebars = require('express-handlebars')
 const awilix = require('../main')
 const session = require('express-session')
@@ -22,7 +21,6 @@ const app = express()
 
 //Set up express-handlebars.
 app.set('views', path.join(__dirname, 'views'))
-//app.set('views", "src/presentation-layer/views')
 
 app.engine('hbs', expressHandlebars({
 	extname: 'hbs',
@@ -58,7 +56,6 @@ app.use('/', awilix.theVariousRouter)
 app.use('/accounts', awilix.theAccountRouter)
 app.use('/todolist', awilix.theTodolistRouter)
 app.use('/blogPosts', awilix.theBlogsRouter)
-app.use('/blogPost', awilix.theCreateABlogPostRouter)
 
 //Start listening for incoming HTTP requests!
 app.listen(8080, function () {

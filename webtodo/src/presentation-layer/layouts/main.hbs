@@ -36,7 +36,7 @@
 					{{#if loggedIn}}
 					<a class="navbar-item" href="/todolist">Your todo lists</a>
 					<!--<a class="navbar-item" href="/accounts">Accounts</a>-->
-					<a class="navbar-item" href="/blogPost">Create a blog post</a>
+					<a class="navbar-item" href="/blogPosts/create">Create a blog post</a>
 					{{/if}}
 
 					<a class="navbar-item" href="/blogPosts">Blog posts</a>
@@ -50,10 +50,10 @@
 					<div class="navbar-item">
 						<div class="buttons">
 							{{#if loggedIn}}
-							<a class="button is-danger" id="logOutButton" href="/accounts/sign-out">Sign out</a>
+							<a class="button is-danger" id="logOutButton" href="/accounts/signOut">Sign out</a>
 							{{else}}
-							<a class="button is-info" href="/accounts/sign-up">Sign up</a>
-							<a class="button is-success" id="loginButton" href="/accounts/sign-in">Sign in</a>
+							<a class="button is-info" href="/accounts/signUp">Sign up</a>
+							<a class="button is-success" id="loginButton" href="/accounts/signIn">Sign in</a>
 							{{/if}}
 						</div>
 					</div>

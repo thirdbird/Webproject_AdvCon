@@ -9,16 +9,16 @@ module.exports = function ({ accountManager }) {
 
 	//------------------GET REQUEST------------------//
 
-	router.get("/sign-up", function (request, response) {
+	router.get("/signUp", function (request, response) {
 		response.render("accounts-sign-up.hbs")
 
 	})
 
-	router.get("/sign-in", function (request, response) {
+	router.get("/signIn", function (request, response) {
 		response.render("accounts-sign-in.hbs")
 	})
 
-	router.get("/sign-out", function (request, response) {
+	router.get("/signOut", function (request, response) {
 		request.session.destroy()
 		response.redirect('/')
 	})
@@ -55,7 +55,7 @@ module.exports = function ({ accountManager }) {
 
 	//------------------POST REQUEST------------------//
 
-	router.post('/sign-up', function (request, response) {
+	router.post('/signUp', function (request, response) {
 		const account = {
 			username: request.body.username,
 			password: request.body.password,
@@ -81,7 +81,7 @@ module.exports = function ({ accountManager }) {
 
 	})
 
-	router.post("/sign-in", function (request, response) {
+	router.post("/signIn", function (request, response) {
 		const account = {
 			username: request.body.username,
 			password: request.body.password

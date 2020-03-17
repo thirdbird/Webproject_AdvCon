@@ -21,3 +21,8 @@ services:
     image: "redis"
     ports: 
       - "6379:6379"
+  spa:
+    build: ./spa
+    image: nginx
+    ports:
+      - "3000:3000"

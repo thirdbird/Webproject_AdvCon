@@ -26,7 +26,6 @@ const accountRouter = require('./presentation-layer/routers/accountsRouter')
 const todolistRouter = require('./presentation-layer/routers/todolistRouter')
 const variousRouter = require('./presentation-layer/routers/variousRouter')
 const blogsRouter = require('./presentation-layer/routers/blogsRouter')
-const createABlogPostRouter = require('./presentation-layer/routers/createABlogPostRouter')
 
 //Models
 const accountModel = require('./data-access-layer-sequelize/accountModel')
@@ -55,7 +54,6 @@ container.register("accountRouter", awilix.asFunction(accountRouter))
 container.register("todolistRouter", awilix.asFunction(todolistRouter))
 container.register("variousRouter", awilix.asFunction(variousRouter))
 container.register("blogsRouter", awilix.asFunction(blogsRouter))
-container.register("createABlogPostRouter", awilix.asFunction(createABlogPostRouter))
 
 //Models
 container.register("accountModel", awilix.asFunction(accountModel))
@@ -72,9 +70,8 @@ const theAccountRouter = container.resolve("accountRouter")
 const theTodolistRouter = container.resolve("todolistRouter")
 const theVariousRouter = container.resolve("variousRouter")
 const theBlogsRouter = container.resolve("blogsRouter")
-const theCreateABlogPostRouter = container.resolve("createABlogPostRouter")
 
 const theAccountRouterAPI = container.resolve("accountsRouterAPI")
 const theBlogsRouterAPI = container.resolve("blogsRouterAPI")
 
-module.exports = {theAccountRouter,theTodolistRouter,theVariousRouter, theBlogsRouter,theCreateABlogPostRouter}
+module.exports = {theAccountRouter,theTodolistRouter,theVariousRouter, theBlogsRouter, theAccountRouterAPI, theBlogsRouterAPI}
