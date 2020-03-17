@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WebProjectAPI</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="./navHandler.js"></script>
+
 </head>
 
 <body>
@@ -17,12 +20,78 @@
         <ul>
             <li><a href="/">Home</a></li>
             <li><a href="/accounts">Accounts</a></li>
-            <li><a href="/todolist">Todolist</a></li>
-            <li><a href="/signIn">Sign in</a></li>
+            <li><a class="isLoggedIn" href="/blogposts">Blog posts</a></li>
+            <li><a class="isLoggedIn" href="/blogposts/create">Create post</a></li>
+            <li><a class="isLoggedOut" href="/signin">Sign in</a></li>
+            <li><a class="isLoggedOut" href="/signup">Sign up</a></li>
         </ul>
     </nav>
 
     <main>
+
+        <div id="home-page">
+            <h1>Home</h1>
+            <p>There is supposed to be a grand picture here, but there is not ...</p>
+        </div>
+
+        <div id="about-page">
+            <h1>About</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Optio est minus porro vitae quae,
+                consequuntur enim natus provident magnam atque reiciendis laboriosam,
+                iure ipsum, sunt incidunt dicta. Facere, animi dolores!
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Soluta, ut. Adipisci distinctio placeat ducimus,
+                aut vitae saepe error blanditiis commodi iure inventore?
+                Fugit facere harum earum ex, inventore id labore!
+            </p>
+        </div>
+
+        <div id="contact-page">
+            <h1>Contact</h1>
+            <p>
+                Contacting us is currently unavailable untill further notice.
+            </p>
+        </div>
+
+        <div id="signin-page">
+            <h1>Sign in</h1>
+            <form action="SignIn">
+                <div>
+                    Username: <input type="text" class="username">
+                </div>
+                <div>
+                    Password: <input type="text" class="password">
+                </div>
+                <input type="submit" value="Login">
+            </form>
+        </div>
+
+        <div id="error-page">
+            <h1>Error</h1>
+            <p>Oups, something went wrong ^^</p>
+        </div>
+
+        <div id="blogposts-page">
+            <h1>Blog Posts</h1>
+            <div>Id: <span class="id"></span></div>
+            <div>Title: <span class="title"></span></div>
+            <div>Post: <span class="post"></span></div>
+
+        </div>
+
+        <div id="create-blog-page">
+            <h1>Create Blog Post</h1>
+            <form action="">
+                <div>
+                    Title: <input type="text" class="title">
+                </div>
+                <div>
+                    Post: <textarea name="post" id="post" cols="30" rows="10"></textarea>
+                </div>
+                <input type="submit" value="Create">
+            </form>
+        </div>
 
     </main>
 
