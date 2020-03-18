@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function(){
 			const url = event.target.getAttribute("href")
 			goToPage(url)
 		}
-	})
+    })
 
 })
 

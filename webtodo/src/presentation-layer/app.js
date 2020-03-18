@@ -1,6 +1,7 @@
 const path = require('path')
 const express = require('express')
 const expressHandlebars = require('express-handlebars')
+const bodyParser = require('body-parser')
 const awilix = require('../main')
 const session = require('express-session')
 const redis = require('redis')
@@ -18,6 +19,11 @@ const {
 } = process.env
 
 const app = express()
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({
+	extended: false
+}))
 
 app.use(function(request, response, next){
 	response.setHeader("Access-Control-Allow-Origin", "*")
@@ -54,10 +60,6 @@ app.use(session({
 		tt1: 86400
 	})
 }))
-
-//Enable hashing.
-//app.use(bodyParser.json())
-//app.use(bodyParser.urlencoded({extended: true}))
 
 //Attach all routers.
 app.use('/', awilix.theVariousRouter)

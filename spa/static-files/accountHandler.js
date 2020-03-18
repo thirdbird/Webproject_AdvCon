@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function(){
 		const password = document.querySelector("#signin-page .password").value
 		
 		fetch(
-			"http://localhost:8080/tokens", {
+			"http://localhost:8080/accounts/tokens", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/x-www-form-urlencoded"
@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function(){
         }
 	
 		fetch(
-			"http://localhost:8080/tokens/create", {
+			"http://localhost:8080/accounts/tokens/create", {
 				method: "POST",
 				body: JSON.stringify(account)
 			}
