@@ -23,9 +23,7 @@ services:
       - "6379:6379"
   spa:
     build: ./spa
-    image: nginx
     ports:
       - "3000:3000"
-      - "9239:9239"
     volumes:
-      - "./spa/frontend:/spa/frontend"
+      - "./spa:/spa"

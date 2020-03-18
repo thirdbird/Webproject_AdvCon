@@ -1,5 +1,5 @@
 body{
-	background-color: silver;
+	background-color: white;
 }
 
 header{
@@ -24,10 +24,12 @@ nav ul{
 
 nav ul li{
 	display: inline-block;
+	padding: 5px;
 }
 
 nav ul li a{
 	color: black;
+	text-decoration: none;
 }
 
 main{
