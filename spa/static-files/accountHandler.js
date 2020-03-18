@@ -7,11 +7,11 @@ document.addEventListener("DOMContentLoaded", function(){
 		logout()
 	}
 
-    document.querySelector("#login-page form").addEventListener("submit", function(event){
+    document.querySelector("#signin-page form").addEventListener("submit", function(event){
 		event.preventDefault()
 		
-		const username = document.querySelector("#login-page .username").value
-		const password = document.querySelector("#login-page .password").value
+		const username = document.querySelector("#signin-page .username").value
+		const password = document.querySelector("#signin-page .password").value
 		
 		fetch(
 			"http://localhost:8080/tokens", {
@@ -34,25 +34,23 @@ document.addEventListener("DOMContentLoaded", function(){
 		
     })
     
-    document.querySelector("#create-pet-page form").addEventListener("submit", function(event){
+    document.querySelector("#signup-page form").addEventListener("submit", function(event){
 		event.preventDefault()
 		
-		const name = document.querySelector("#create-pet-page .name").value
-		
-		const pet = {
-			name
-		}
-		
-		// TODO: Build an SDK (e.g. a separate JS file)
-		// handling the communication with the backend.
+        const username = document.querySelector("#signup-page .username").value
+		const password = document.querySelector("#signup-page .password").value
+        const confirmPassword = document.querySelector("#signup-page .confirmPassword").value
+        
+        account = {
+            username,
+            password,
+            confirmPassword
+        }
+	
 		fetch(
-			"http://localhost:8080/pets", {
+			"http://localhost:8080/tokens/create", {
 				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-					"Authorization": "Bearer "+localStorage.accessToken
-				},
-				body: JSON.stringify(pet)
+				body: JSON.stringify(account)
 			}
 		).then(function(response){
 			// TODO: Check status code to see if it succeeded. Display errors if it failed.

@@ -53,8 +53,12 @@ function changeToPage(url){
         document.getElementById("contact-page").classList.add("current-page")
     } else if (url == "/signin") {
         document.getElementById("signin-page").classList.add("current-page")
+    } else if (url == "/signup") {
+        document.getElementById("signup-page").classList.add("current-page")
     } else if (url == "/accounts") {
         document.getElementById("accounts-page").classList.add("current-page")
+    } else if (url == "/account") {
+        document.getElementById("account-page").classList.add("current-page")
     } else if (url == "/blogposts") {
         document.getElementById("blogposts-page").classList.add("current-page")
     } else if (url == "/blogposts/create") {

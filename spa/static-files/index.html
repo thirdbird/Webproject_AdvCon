@@ -20,7 +20,7 @@
     <nav>
         <ul>
             <li><a href="/">Home</a></li>
-            <li><a href="/accounts" href="/accounts">Accounts</a></li>
+            <li><a href="/accounts">Accounts</a></li>
             <li><a class="isLoggedIn" href="/blogposts">Blog posts</a></li>
             <li><a class="isLoggedIn" href="/blogposts/create">Create post</a></li>
             <li><a class="isLoggedOut" href="/signin">Sign in</a></li>
@@ -64,29 +64,51 @@
                 <div>
                     Password: <input type="text" class="password">
                 </div>
-                <input type="submit" value="Login">
+                <input type="submit" value="Sign in">
+            </form>
+        </div>
+
+        <div id="signup-page">
+            <h1>Sign up</h1>
+            <form action="SignUp">
+                <div>
+                    Username: <input type="text" class="username">
+                </div>
+                <div>
+                    Password: <input type="text" class="password">
+                </div>
+                <div>
+                    Password(repeat): <input type="text" class="confirmPassword">
+                </div>
+                <input type="submit" value="Sign up">
             </form>
         </div>
 
         <div id="accounts-page">
-			<h1>Accounts</h1>
-			<ul>
-				
-			</ul>
+            <h1>Accounts</h1>
+            <ul>
+
+            </ul>
         </div>
-        
+
         <div id="account-page">
             <h1>Account</h1>
             <div>Id: <span class="id"></span></div>
-			<div>Name: <span class="name"></span></div>
-		</div>
+            <div>Name: <span class="name"></span></div>
+        </div>
 
         <div id="blogposts-page">
+            <h1>Blog Posts</h1>
+            <ul>
+                
+            </ul>
+        </div>
+
+        <div id="blogpost-page">
             <h1>Blog Posts</h1>
             <div>By: <span class="by"></span></div>
             <div>Title: <span class="title"></span></div>
             <div>Post: <span class="post"></span></div>
-
         </div>
 
         <div id="create-blog-page">
