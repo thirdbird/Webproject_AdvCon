@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WebProjectAPI</title>
     <link rel="stylesheet" href="./styles.css">
-    <script src="./nav.js"></script>
+    <script src="./navigationHandler.js"></script>
+    <script src="./accountHandler.js"></script>
 
 </head>
 
@@ -19,7 +20,7 @@
     <nav>
         <ul>
             <li><a href="/">Home</a></li>
-            <li><a href="/accounts">Accounts</a></li>
+            <li><a href="/accounts" href="/accounts">Accounts</a></li>
             <li><a class="isLoggedIn" href="/blogposts">Blog posts</a></li>
             <li><a class="isLoggedIn" href="/blogposts/create">Create post</a></li>
             <li><a class="isLoggedOut" href="/signin">Sign in</a></li>
@@ -67,10 +68,18 @@
             </form>
         </div>
 
-        <div id="error-page">
-            <h1>Error</h1>
-            <p>Oups, something went wrong ^^</p>
+        <div id="accounts-page">
+			<h1>Accounts</h1>
+			<ul>
+				
+			</ul>
         </div>
+        
+        <div id="account-page">
+            <h1>Account</h1>
+            <div>Id: <span class="id"></span></div>
+			<div>Name: <span class="name"></span></div>
+		</div>
 
         <div id="blogposts-page">
             <h1>Blog Posts</h1>
@@ -91,6 +100,11 @@
                 </div>
                 <input type="submit" value="Create">
             </form>
+        </div>
+
+        <div id="error-page">
+            <h1>Error</h1>
+            <p>Oups, something went wrong ^^</p>
         </div>
 
     </main>

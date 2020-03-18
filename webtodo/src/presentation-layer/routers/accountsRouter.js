@@ -109,7 +109,7 @@ module.exports = function ({ accountManager }) {
 				console.log("we are under true loggedin")
 				request.session.userId = account.id
 				request.session.account = account
-				response.render("home-logged-in.hbs", model)
+				response.render("home.hbs", model)
 				console.log("bottom of else")
 			}
 		})
