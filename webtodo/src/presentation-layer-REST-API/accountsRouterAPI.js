@@ -39,7 +39,7 @@ module.exports = function ({ accountManager }) {
                     if (0 < errors.length) {
                         response.status(500).end()
                     } else {
-                        response.status(200).json({ accounts })
+                        response.status(200).json( accounts )
                     }
                 })
             }

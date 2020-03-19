@@ -1,4 +1,4 @@
-
+/*
 document.addEventListener("DOMContentLoaded", function(){
 
     if(localStorage.accessToken){
@@ -118,3 +118,4 @@ function fetchAccount(id){
 	})
 	
 }
+*/

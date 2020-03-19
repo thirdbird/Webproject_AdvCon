@@ -20,6 +20,7 @@ module.exports = function ({ }) {
         Accounts.hasMany(models.Blogs, {as: "blogs", foreignKey: "account_user"})
     }
 
+    //Accounts.create({username: "Alice", password: "12322"})
     
 
     return Accounts

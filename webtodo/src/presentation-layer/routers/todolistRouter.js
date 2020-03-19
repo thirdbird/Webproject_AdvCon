@@ -8,6 +8,7 @@ module.exports = function ({ todoManager }) {
 
     router.get('/', function (request, response) {
         const accountId = request.session.account.id
+    
        
         todoManager.getAllTodos(accountId,function (errors, todos) {
             const model = {

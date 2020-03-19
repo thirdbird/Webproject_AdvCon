@@ -12,5 +12,9 @@ module.exports = function ({ }) {
         Blogs.belongsTo(models.Accounts, {as: "accounts", foreignKey: "account_user"})
     }
 
+
+    //Blogs.create({title: "heje", post: "dsbnkjsd"})
+
+
     return Blogs
 }
