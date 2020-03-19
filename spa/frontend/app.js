@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 
-app.use(express.static("static-files"))
+app.use(express.static(__dirname + '/static-files'))
 
 
 app.use(function (request, response, next) {

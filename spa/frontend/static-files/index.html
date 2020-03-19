@@ -5,15 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WebProjectAPI</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="./navHandler.js"></script>
+    <link rel="stylesheet" href="./styles.css">
+    <script src="./navigationHandler.js"></script>
+    <script src="./accountHandler.js"></script>
 
 </head>
 
 <body>
 
-    <header class="is-size-1 has-text-centered">
-        To Do List
+    <header>
+        To do list
     </header>
 
     <nav>
@@ -63,21 +64,51 @@
                 <div>
                     Password: <input type="text" class="password">
                 </div>
-                <input type="submit" value="Login">
+                <input type="submit" value="Sign in">
             </form>
         </div>
 
-        <div id="error-page">
-            <h1>Error</h1>
-            <p>Oups, something went wrong ^^</p>
+        <div id="signup-page">
+            <h1>Sign up</h1>
+            <form action="SignUp">
+                <div>
+                    Username: <input type="text" class="username">
+                </div>
+                <div>
+                    Password: <input type="text" class="password">
+                </div>
+                <div>
+                    Password(repeat): <input type="text" class="confirmPassword">
+                </div>
+                <input type="submit" value="Sign up">
+            </form>
+        </div>
+
+        <div id="accounts-page">
+            <h1>Accounts</h1>
+            <ul>
+
+            </ul>
+        </div>
+
+        <div id="account-page">
+            <h1>Account</h1>
+            <div>Id: <span class="id"></span></div>
+            <div>Name: <span class="name"></span></div>
         </div>
 
         <div id="blogposts-page">
             <h1>Blog Posts</h1>
-            <div>Id: <span class="id"></span></div>
+            <ul>
+                
+            </ul>
+        </div>
+
+        <div id="blogpost-page">
+            <h1>Blog Posts</h1>
+            <div>By: <span class="by"></span></div>
             <div>Title: <span class="title"></span></div>
             <div>Post: <span class="post"></span></div>
-
         </div>
 
         <div id="create-blog-page">
@@ -91,6 +122,11 @@
                 </div>
                 <input type="submit" value="Create">
             </form>
+        </div>
+
+        <div id="error-page">
+            <h1>Error</h1>
+            <p>Oups, something went wrong ^^</p>
         </div>
 
     </main>

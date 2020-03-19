@@ -1,50 +1,40 @@
-
-document.addEventListener("DOMContentLoaded", function () {
-
-    changeToPage(location.pathname)
-
-    if (localStorage.accessToken) {
-        login(localStorage.accessToken)
-    } else {
-        logout()
-    }
-
-    document.body.addEventListener("click", function (event) {
-        if (event.target.tagName == "A") {
-            event.preventDefault()
-            const url = event.target.getAttribute("href")
-            goToPage(url)
-        }
+// TODO: Don't write all JS code in the same file.
+document.addEventListener("DOMContentLoaded", function(){
+	
+	changeToPage(location.pathname)
+		
+	document.body.addEventListener("click", function(event){
+		if(event.target.tagName == "A"){
+			event.preventDefault()
+			const url = event.target.getAttribute("href")
+			goToPage(url)
+		}
     })
-})
-
-window.addEventListener("popstate", function (event) {
-    const url = this.location.pathname
-    changeToPage(url)
 
 })
 
-function goToPage(url) {
-    changeToPage(url)
-    history.pushState({}, "", url)
+window.addEventListener("popstate", function(event){
+	const url = location.pathname
+	changeToPage(url)
+})
+
+function goToPage(url){
+	changeToPage(url)
+	history.pushState({}, "", url)
 }
 
-function changeToPage(url) {
-    //TODO
-    const currentPageDiv = document.getElementsByClassName("current-page")[0]
-    if (currentPageDiv) {
-        currentPageDiv.classList.remove("current-page")
-    }
-    /*var divElements = document.querySelectorAll('div')
-
+function changeToPage(url){
+	
+	const currentPageDiv = document.getElementsByClassName("current-page")[0]
+	if(currentPageDiv){
+		currentPageDiv.classList.remove("current-page")
+	}
+	/*var divElements = document.querySelectorAll('div')
     document.getElementById("home-page").classList.add("current-page")
-
     for (let i = 0; i < divElements.length; i++) {
-
         li.addEventListener('click', () => {
             var div = document.querySelectorAll('div')[i]
             var visibleDiv = document.querySelector("div.current-page")
-
             if (visibleDiv) {
                 visibleDiv.classList.remove("current-page")
             }
@@ -59,6 +49,12 @@ function changeToPage(url) {
         document.getElementById("contact-page").classList.add("current-page")
     } else if (url == "/signin") {
         document.getElementById("signin-page").classList.add("current-page")
+    } else if (url == "/signup") {
+        document.getElementById("signup-page").classList.add("current-page")
+    } else if (url == "/accounts") {
+        document.getElementById("accounts-page").classList.add("current-page")
+    } else if (url == "/account") {
+        document.getElementById("account-page").classList.add("current-page")
     } else if (url == "/blogposts") {
         document.getElementById("blogposts-page").classList.add("current-page")
     } else if (url == "/blogposts/create") {
@@ -66,16 +62,4 @@ function changeToPage(url) {
     } else {
         document.getElementById("error-page").classList.add("current-page")
     }
-}
-
-function login(accessToken){
-	localStorage.accessToken = accessToken
-	document.body.classList.remove("isLoggedOut")
-	document.body.classList.add("isLoggedIn")
-}
-
-function logout(){
-	localStorage.accessToken = ""
-	document.body.classList.remove("isLoggedIn")
-	document.body.classList.add("isLoggedOut")
 }
