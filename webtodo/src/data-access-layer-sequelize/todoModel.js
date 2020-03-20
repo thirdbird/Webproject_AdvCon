@@ -1,7 +1,5 @@
 const Sequelize = require('sequelize')
 const db = require('./db')
-const Accounts = require('./accountModel')
-
 
 module.exports = function ({ }) {
     const Todos = db.define('todos', {

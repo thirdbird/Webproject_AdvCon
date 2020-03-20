@@ -8,7 +8,7 @@ module.exports = function ({ accountManager }) {
     const router = express.Router()
 
     function retrieveToken(request, response, next) {
-        const authorizationHeader = request.get('authorization')
+        const authorizationHeader = request.get('Authorization')
         if (typeof authorizationHeader !== 'undefined') {
             const accessToken = authorizationHeader.substr("Bearer ".length)
             request.token = accessToken
@@ -87,6 +87,7 @@ module.exports = function ({ accountManager }) {
             username: request.body.username,
             password: request.body.password
         }
+
         try {
             accountManager.getAccount(account, function (errors, account) {
                 if (0 < errors.length) {

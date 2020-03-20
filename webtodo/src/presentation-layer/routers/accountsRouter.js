@@ -4,8 +4,6 @@ module.exports = function ({ accountManager }) {
 
 	const router = express.Router()
 
-	router.use(express.urlencoded({ extended: false }))
-
 
 	//------------------GET REQUEST------------------//
 

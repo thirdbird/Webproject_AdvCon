@@ -4,6 +4,7 @@ const expressHandlebars = require('express-handlebars')
 const awilix = require('../main')
 const session = require('express-session')
 const redis = require('redis')
+const bodyParser = require('body-parser')
 const redisClient = redis.createClient({
 	host: 'redis',
 	port: 6379
@@ -18,6 +19,11 @@ const {
 } = process.env
 
 const app = express()
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({
+	extended: false
+}))
 
 app.use(function(request, response, next){
 	response.setHeader("Access-Control-Allow-Origin", "*")
@@ -65,8 +71,8 @@ app.use('/accounts', awilix.theAccountRouter)
 app.use('/todolist', awilix.theTodolistRouter)
 app.use('/blogPosts', awilix.theBlogsRouter)
 
-app.use('/blogPosts', awilix.theBlogsRouterAPI)
-app.use('/accounts', awilix.theAccountRouterAPI)
+app.use('/api/blogPosts', awilix.theBlogsRouterAPI)
+app.use('/api/accounts', awilix.theAccountRouterAPI)
 
 
 //Start listening for incoming HTTP requests!

@@ -4,12 +4,12 @@ const jwt = require('jsonwebtoken')
 const serverSecret = "sdfkjdslkfjslkfd"
 const serverIdSecret = "eqjhrgbczvlkuyearjhbjhg"
 
-module.exports = function ({ blogsManager, accountManager }) {
+module.exports = function ({ blogsManager }) {
 
     const router = express.Router()
 
     function retrieveToken(request, response, next) {
-        const authorizationHeader = request.get('authorization')
+        const authorizationHeader = request.get('Authorization')
         if (typeof authorizationHeader !== 'undefined') {
             const accessToken = authorizationHeader.substr("Bearer ".length)
             request.token = accessToken
@@ -19,20 +19,15 @@ module.exports = function ({ blogsManager, accountManager }) {
         }
     }
 
-    router.get('/', retrieveToken, function (request, response) {
-        jwt.verify(request.token, serverSecret, function (error, decoded) {
-            if (error) {
-                response.sendStatus(403)
+    router.get('/', function (request, response) {
+        blogsManager.getAllBlogPosts(function (errors, blogPosts) {
+            if (0 < errors.length) {
+                response.status(500).end()
             } else {
-                blogsManager.getAllBlogPosts(function (errors, blogPosts) {
-                    if (0 < errors.length) {
-                        response.status(500).end()
-                    } else {
-                        response.status(200).json(blogPosts)
-                    }
-                })
+                response.status(200).json(blogPosts)
             }
         })
+    
     })
 
     router.get('/:id',retrieveToken, function (request, response) {

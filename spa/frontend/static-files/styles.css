@@ -45,14 +45,6 @@ main > div.current-page{
 	display: block;
 }
 
-body.isLoggedOut .showIfLoggedIn{
-	display: none;
-}
-
-body.isLoggedIn .showIfLoggedOut{
-	display: none;
-}
-
 footer{
 	border-top: 1px solid black;
 	width: 80%;
@@ -63,4 +55,12 @@ footer{
 
 footer a{
 	color: black;
+}
+
+.BlogPostCreate{
+	display: none;
+}
+
+nav ul li .isLoggedIn{
+	display: none;
 }

@@ -5,6 +5,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     changeToPage(location.pathname)
 
+    if(localStorage.accessToken){
+		login(localStorage.accessToken)
+	}else{
+		logout()
+	}
+
     document.body.addEventListener("click", function (event) {
         if (event.target.tagName == "A") {
             event.preventDefault()
@@ -13,7 +19,99 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     })
 
+    document.querySelector("#create-blog-page form").addEventListener("submit", function(event){
+        event.preventDefault()
+        
+        const title = document.querySelector("#create-blog-page .title").value
+        const post = document.querySelector("#create-blog-page .post").value
+
+        const blogPost = {
+            title,
+            post
+        }
+        console.log(blogPost)
+        fetch(
+            "http://localhost:8080/api/blogPosts", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer "+localStorage.accessToken
+                }, // TODO: Escape username and password in case they contained reserved characters in the x-www-form-urlencoded format.
+                body: JSON.stringify(blogPost)
+            }
+            ).then(function(response){
+                // TODO: Check status code to see if it succeeded. Display errors if it failed.
+                return response.json()
+            }).then(function(body){
+                // TODO: Read out information about the user account from the id_token.
+                login(body.accessToken)
+        }).catch(function(error){
+            console.log(error)
+        })
+        
+    })
+
+    document.querySelector("#signin-page form").addEventListener("submit", function(event){
+        event.preventDefault()
+        
+        const username = document.querySelector("#signin-page .username").value
+        const password = document.querySelector("#signin-page .password").value
+        
+        fetch(
+            "http://localhost:8080/api/accounts/tokens", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                }, // TODO: Escape username and password in case they contained reserved characters in the x-www-form-urlencoded format.
+                body: "grant_type=password&username="+username+"&password="+password
+            }
+            ).then(function(response){
+                // TODO: Check status code to see if it succeeded. Display errors if it failed.
+                return response.json()
+            }).then(function(body){
+                // TODO: Read out information about the user account from the id_token.
+                login(body.accessToken)
+        }).catch(function(error){
+            console.log(error)
+        })
+        
+    })
+
+    document.querySelector("#signup-page form").addEventListener("submit", function(event){
+        event.preventDefault()
+        
+        const username = document.querySelector("#signup-page  .username").value
+        const password = document.querySelector("#signup-page .password").value
+        const confirmPassword = document.querySelector("#signup-page  .confirmPassword").value
+
+        const account = {
+            username,
+            password,
+            confirmPassword
+        }
+        console.log(account)
+        fetch(
+            "http://localhost:8080/api/accounts/tokens/create", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer "+localStorage.accessToken
+                }, // TODO: Escape username and password in case they contained reserved characters in the x-www-form-urlencoded format.
+                body: JSON.stringify(account)
+            }
+            ).then(function(response){
+                // TODO: Check status code to see if it succeeded. Display errors if it failed.
+                return response.json()
+            }).then(function(body){
+                // TODO: Read out information about the user account from the id_token.
+                login(body.accessToken)
+        }).catch(function(error){
+            console.log(error)
+        })
+        
+    })
 })
+
 
 window.addEventListener("popstate", function (event) {
     const url = location.pathname
@@ -75,7 +173,12 @@ function changeToPage(url) {
 function fetchAllAccounts() {
 
     fetch(
-		"http://localhost:8080/accounts"
+        "http://localhost:8080/api/accounts",{
+        method: "GET",
+            headers: {
+                "Authorization": "Bearer "+localStorage.accessToken   
+            }
+        }
 	).then(function(response){
 		// TODO: Check status code to see if it succeeded. Display errors if it failed.
 		return response.json()
@@ -96,8 +199,14 @@ function fetchAllAccounts() {
 }
 
 function fetchAllBlogPosts() {
+
     fetch(
-		"http://localhost:8080/blogPosts"
+        "http://localhost:8080/api/blogPosts", {
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer "+localStorage.accessToken   
+            }
+        }
 	).then(function(response){
 		// TODO: Check status code to see if it succeeded. Display errors if it failed.
 		return response.json()
@@ -119,18 +228,21 @@ function fetchAllBlogPosts() {
 
 function fetchBlogPost(id){
 
-    console.log("fetching")
-	
 	fetch(
-		"http://localhost:8080/blogPosts/"+id
+        "http://localhost:8080/api/blogPosts/"+id,{
+        method: "GET",
+            headers: {
+                "Authorization": "Bearer "+localStorage.accessToken   
+            }
+        }
 	).then(function(response){
-		// TODO: Check status code to see if it succeeded. Display errors if it failed.
+        // TODO: Check status code to see if it succeeded. Display errors if it failed.
+        console.log(response)
 		return response.json()
 	}).then(function(blogPost){
         const titleSpan = document.querySelector("#blogpost-page .title")
         const nameSpan = document.querySelector("#blogpost-page .by")
         const idSpan = document.querySelector("#blogpost-page .post")
-        console.log(blogPost)
         titleSpan.innerText = blogPost.title
         nameSpan.innerText = blogPost.account_user
 		idSpan.innerText = blogPost.post
@@ -140,9 +252,14 @@ function fetchBlogPost(id){
 	
 }
 
-function login(){
+function login(accessToken){
+	localStorage.accessToken = accessToken
+	document.body.classList.remove("isLoggedOut")
+    document.body.classList.add("isLoggedIn")
+}
 
-    
-
-
+function logout(){
+	localStorage.accessToken = ""
+	document.body.classList.remove("isLoggedIn")
+    document.body.classList.add("isLoggedOut")
 }

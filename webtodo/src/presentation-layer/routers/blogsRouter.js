@@ -4,8 +4,6 @@ module.exports = function ({ blogsManager }) {
 
     const router = express.Router()
 
-    router.use(express.urlencoded({ extended: false }))
-
     //get all blog post
     router.get('/', function (request, response) {
         blogsManager.getAllBlogPosts(function (errors, blogPosts) {

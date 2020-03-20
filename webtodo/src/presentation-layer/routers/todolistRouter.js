@@ -4,7 +4,7 @@ module.exports = function ({ todoManager }) {
 
     const router = express.Router()
 
-    router.use(express.urlencoded({ extended: false }))
+    //router.use(express.urlencoded({ extended: false }))
 
     router.get('/', function (request, response) {
         const accountId = request.session.account.id

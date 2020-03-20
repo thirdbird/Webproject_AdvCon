@@ -20,11 +20,11 @@
     <nav>
         <ul>
             <li><a href="/">Home</a></li>
-            <li><a href="/accounts">Accounts</a></li>
-            <li><a class="isLoggedIn" href="/blogposts">Blog posts</a></li>
+            <li><a href="/blogposts">Blog posts</a></li>
             <li><a class="isLoggedIn" href="/blogposts/create">Create post</a></li>
-            <li><a class="isLoggedOut" href="/signin">Sign in</a></li>
             <li><a class="isLoggedOut" href="/signup">Sign up</a></li>
+            <li><a class="isLoggedOut" href="/signin">Sign in</a></li>
+            <button onClick="logout()" class="isLoggedIn">Sign out</button>
         </ul>
     </nav>
 
@@ -57,12 +57,12 @@
 
         <div id="signin-page">
             <h1>Sign in</h1>
-            <form action="SignIn" method="POST">
+            <form action="">
                 <div>
                     Username: <input type="text" class="username">
                 </div>
                 <div>
-                    Password: <input type="text" class="password">
+                    Password: <input type="password" class="password">
                 </div>
                 <input type="submit" value="Sign in">
             </form>
@@ -75,10 +75,10 @@
                     Username: <input type="text" class="username">
                 </div>
                 <div>
-                    Password: <input type="text" class="password">
+                    Password: <input type="password" class="password">
                 </div>
                 <div>
-                    Password(repeat): <input type="text" class="confirmPassword">
+                    Password(repeat): <input type="password" class="confirmPassword">
                 </div>
                 <input type="submit" value="Sign up">
             </form>
@@ -107,8 +107,8 @@
         <div id="blogpost-page">
             <h1>Blog Posts</h1>
             <div>By: <span class="by"></span></div>
-            <div>Title: <span class="title"></span></div>
-			<div>Post: <span class="post"></span></div>
+            <div><span class="title"></span></div>
+			<div><span class="post"></span></div>
         </div>
 
         <div id="create-blog-page">
@@ -118,7 +118,7 @@
                     Title: <input type="text" class="title">
                 </div>
                 <div>
-                    Post: <textarea name="post" id="post" cols="30" rows="10"></textarea>
+                    Post: <textarea class="post" name="post" cols="30" rows="10"></textarea>
                 </div>
                 <input type="submit" value="Create">
             </form>
