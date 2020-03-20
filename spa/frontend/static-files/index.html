@@ -21,10 +21,10 @@
         <ul>
             <li><a href="/">Home</a></li>
             <li><a href="/blogposts">Blog posts</a></li>
-            <li><a class="isLoggedIn" href="/blogposts/create">Create post</a></li>
-            <li><a class="isLoggedOut" href="/signup">Sign up</a></li>
-            <li><a class="isLoggedOut" href="/signin">Sign in</a></li>
-            <button onClick="logout()" class="isLoggedIn">Sign out</button>
+            <li><a class="showIfLoggedOut" href="/signup">Sign up</a></li>
+            <li><a class="showIfLoggedOut" href="/signin">Sign in</a></li>
+            <li><a class="showIfLoggedIn" href="/blogposts/create">Create post</a></li>
+            <button onClick="logout()" class="showIfLoggedIn">Sign out</button>
         </ul>
     </nav>
 
@@ -108,7 +108,7 @@
             <h1>Blog Posts</h1>
             <div>By: <span class="by"></span></div>
             <div><span class="title"></span></div>
-			<div><span class="post"></span></div>
+            <div><span class="post"></span></div>
         </div>
 
         <div id="create-blog-page">

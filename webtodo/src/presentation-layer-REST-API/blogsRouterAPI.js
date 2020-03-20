@@ -31,22 +31,17 @@ module.exports = function ({ blogsManager }) {
     })
 
     router.get('/:id',retrieveToken, function (request, response) {
-        jwt.verify(request.token, serverSecret, function (error, decoded) {
-            if (error) {
-                response.sendStatus(403)
+        const blogPost = { id: request.params.id }
+        blogsManager.getBlogPostById(blogPost, function (errors, blogPost) {
+            if (0 < errors.length) {
+                response.status(500).end()
+            } else if (!blogPost) {
+                response.status(404).end()
             } else {
-                const blogPost = { id: request.params.id }
-                blogsManager.getBlogPostById(blogPost, function (errors, blogPost) {
-                    if (0 < errors.length) {
-                        response.status(500).end()
-                    } else if (!blogPost) {
-                        response.status(404).end()
-                    } else {
-                        response.status(200).json(blogPost)
-                    }
-                })
+                response.status(200).json(blogPost)
             }
         })
+            
     })
 
 

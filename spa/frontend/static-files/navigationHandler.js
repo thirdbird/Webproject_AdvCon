@@ -41,10 +41,8 @@ document.addEventListener("DOMContentLoaded", function () {
             }
             ).then(function(response){
                 // TODO: Check status code to see if it succeeded. Display errors if it failed.
-                return response.json()
             }).then(function(body){
                 // TODO: Read out information about the user account from the id_token.
-                login(body.accessToken)
         }).catch(function(error){
             console.log(error)
         })
@@ -66,7 +64,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 body: "grant_type=password&username="+username+"&password="+password
             }
             ).then(function(response){
-                // TODO: Check status code to see if it succeeded. Display errors if it failed.
+                if(response.ok){
+                    //successfully signed in
+                }
+                else{
+                    //status code 
+                    //dispaly it
+                }
                 return response.json()
             }).then(function(body){
                 // TODO: Read out information about the user account from the id_token.
@@ -89,22 +93,24 @@ document.addEventListener("DOMContentLoaded", function () {
             password,
             confirmPassword
         }
-        console.log(account)
+
         fetch(
             "http://localhost:8080/api/accounts/tokens/create", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": "Bearer "+localStorage.accessToken
+                    
                 }, // TODO: Escape username and password in case they contained reserved characters in the x-www-form-urlencoded format.
                 body: JSON.stringify(account)
             }
             ).then(function(response){
-                // TODO: Check status code to see if it succeeded. Display errors if it failed.
-                return response.json()
-            }).then(function(body){
-                // TODO: Read out information about the user account from the id_token.
-                login(body.accessToken)
+                if(response.ok){
+                    //successfully created
+                }
+                else{
+                    //const status = response.status
+                    //status innerText
+                }
         }).catch(function(error){
             console.log(error)
         })
@@ -141,6 +147,8 @@ function changeToPage(url) {
             div.classList.add("current-page")
         })
     }*/
+
+
     if (url == "/") {
         document.getElementById("home-page").classList.add("current-page")
     } else if (url == "/about") {
@@ -162,7 +170,8 @@ function changeToPage(url) {
     }else if(new RegExp("^/blogposts/[0-9]+$").test(url)){
 		document.getElementById("blogpost-page").classList.add("current-page")
 		const id = url.split("/")[2]
-		fetchBlogPost(id)
+        fetchBlogPost(id)
+        delbutt() 
     } else if (url == "/blogposts/create") {
         document.getElementById("create-blog-page").classList.add("current-page")
     } else {
@@ -245,7 +254,27 @@ function fetchBlogPost(id){
         const idSpan = document.querySelector("#blogpost-page .post")
         titleSpan.innerText = blogPost.title
         nameSpan.innerText = blogPost.account_user
-		idSpan.innerText = blogPost.post
+        idSpan.innerText = blogPost.post
+        delbutt()
+	}).catch(function(error){
+		console.log(error)
+	})
+	
+}
+
+function deleteBlogPost(id){
+
+	fetch(
+        "http://localhost:8080/api/blogPosts/"+id,{
+        method: "DELETE",
+            headers: {
+                "Authorization": "Bearer "+localStorage.accessToken   
+            }
+        }
+	).then(function(response){
+        // TODO: Check status code to see if it succeeded. Display errors if it failed.
+        console.log(response)
+		return response.json()
 	}).catch(function(error){
 		console.log(error)
 	})
@@ -262,4 +291,12 @@ function logout(){
 	localStorage.accessToken = ""
 	document.body.classList.remove("isLoggedIn")
     document.body.classList.add("isLoggedOut")
+}
+
+function delbutt(){
+    const blogpostPage = document.getElementById("blogpost-page")
+    const delbutt = document.createElement("button")
+    delbutt.innerText = "Delete"
+    blogpostPage.appendChild(delbutt)
+
 }

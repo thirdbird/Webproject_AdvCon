@@ -12,7 +12,6 @@ nav{
 	border-bottom: 1px solid black;
 	width: 80%;
 	margin: 0 auto;
-	padding: 0.5em;
 }
 
 nav ul{
@@ -24,12 +23,12 @@ nav ul{
 
 nav ul li{
 	display: inline-block;
-	padding: 5px;
 }
 
 nav ul li a{
 	color: black;
 	text-decoration: none;
+	padding: 5px;
 }
 
 main{
@@ -57,10 +56,14 @@ footer a{
 	color: black;
 }
 
-.BlogPostCreate{
+body.isLoggedOut .showIfLoggedIn{
 	display: none;
+	padding: 0px;
 }
 
-nav ul li .isLoggedIn{
+body.isLoggedIn .showIfLoggedOut{
 	display: none;
+	padding: 0px;
+	
 }
+
