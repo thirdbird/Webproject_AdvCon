@@ -86,6 +86,8 @@ module.exports = function ({ blogsManager }) {
                 }
                 const accountUser = decoded.username
 
+                console.log("from the rest api",blogPost)
+
                 blogsManager.updateBlogPost(blogPost, accountUser, function (errors, blogPost) {
                     if(errors.includes("databaseError")){
                         response.status(500).end()

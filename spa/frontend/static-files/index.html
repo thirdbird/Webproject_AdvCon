@@ -110,8 +110,8 @@
             <div>By: <span class="by"></span></div>
             <div><span class="title"></span></div>
             <div><span class="post"></span></div>
-            <div id="deleteButton" onClick="deleteButton()"><button>Delete</button> </div>
-            <div id="updateButton" onClick="updateButton()" ><button>Put</button> </div>
+            <div id="deleteButton" class="showIfLoggedIn" onClick="deleteButton()"><button>Delete</button> </div>
+            <div id="updateButton" class="showIfLoggedIn" onClick="updateButton()" ><button>Put</button> </div>
             <p id="errorMessage"></p>
         </div>
 
@@ -127,6 +127,20 @@
                 <input type="submit" value="Create">
             </form>
             <p id="createAblogError"></p>
+        </div>
+
+        <div id="update-blog-page">
+            <h1>Update Blog Post</h1>
+            <form action="">
+                <div>
+                    Title: <input type="text" class="title">
+                </div>
+                <div>
+                    Post: <textarea class="post" name="post" cols="30" rows="10"></textarea>
+                </div>
+                <input type="submit" value="Update">
+            </form>
+            <p id="updateABlogPostError"></p>
         </div>
 
         <div id="error-page">

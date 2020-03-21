@@ -10,10 +10,10 @@ app.use(bodyParser.urlencoded({
 }))
 
 app.use(function(request, response, next){
-	response.setHeader("Access-Control-Allow-Origin", "http://localhost:8080")
+	response.setHeader("Access-Control-Allow-Origin", "*")
 	response.setHeader("Access-Control-Allow-Methods", "*")
-	response.setHeader("Access-Control-Allow-Headers", "Authorization Content-Type")
-	response.setHeader("Access-Control-Expose-Headers", "Authorization Content-Type")
+	response.setHeader("Access-Control-Allow-Headers", "*")
+	response.setHeader("Access-Control-Expose-Headers", "*")
 	next()
 })
 

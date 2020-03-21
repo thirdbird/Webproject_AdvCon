@@ -53,6 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 if(response.ok){
                     const url = "/blogposts"
                     goToPage(url)
+                    location.reload()
                 }
                 else{
                     return response.json()
@@ -67,6 +68,46 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         
     })
+
+    document.querySelector("#update-blog-page form").addEventListener("submit", function(event){
+        event.preventDefault()
+        
+        const title = document.querySelector("#update-blog-page .title").value
+        const post = document.querySelector("#update-blog-page .post").value
+
+        const blogPost = {
+            title,
+            post
+        }
+
+        fetch(
+            "http://localhost:8080/api/blogPosts/"+idValue, {
+                method: "PUT",
+                headers: {
+                    'Content-Type': 'application/json',
+                    "Authorization": "Bearer "+localStorage.accessToken
+                },
+                body: JSON.stringify(blogPost)
+            }
+            ).then(function(response){
+                if(response.ok){
+                    const url = "/blogposts"
+                    goToPage(url)
+                    location.reload()
+                }
+                else{
+                    return response.json()
+                }
+            }).then(function(errors){
+                const errorMessage = document.getElementById("updateABlogPostError")
+                errorMessage.innerText = [errors]
+    
+        }).catch(function(error){
+            console.log(error)
+        })
+        
+    })
+
 
     document.querySelector("#signin-page form").addEventListener("submit", function(event){
         event.preventDefault()
@@ -127,6 +168,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 if(response.ok){
                     const url = "/signin"
                     goToPage(url)
+                    location.reload()
                 }
                 else{
                     return response.json()
@@ -195,6 +237,8 @@ function changeToPage(url) {
         fetchBlogPost(id)
     } else if (url == "/blogposts/create") {
         document.getElementById("create-blog-page").classList.add("current-page")
+    }else if (url == "/blogposts/update"){
+        document.getElementById("update-blog-page").classList.add("current-page")
     } else {
         document.getElementById("error-page").classList.add("current-page")
     }
@@ -304,6 +348,26 @@ function deleteBlogPost(id){
 	
 }
 
+function updateBlogPost(id){
+
+	fetch(
+        "http://localhost:8080/api/blogPosts/"+id,{
+        method: "UPDATE",
+            headers: {
+                "Authorization": "Bearer "+localStorage.accessToken   
+            }
+        }
+	).then(function(response){
+        if(response.ok){
+            const url = "/blogposts"
+            goToPage(url)
+        }
+	}).catch(function(error){
+		console.log(error)
+	})
+	
+}
+
 function login(accessToken){
 	localStorage.accessToken = accessToken
 	document.body.classList.remove("isLoggedOut")
@@ -327,6 +391,14 @@ function deleteButton(){
 }
 
 function updateButton(){
-    
+    if(loggedInUser.username == userValue){
+        const url = "/blogposts/update"
+        goToPage(url)
+        //updateBlogPost(idValue)
+    }
+    else{
+        const errorMessage = document.getElementById("errorMessage")
+        errorMessage.innerText = "You cant update that that"
+    }
 }
 

@@ -28,6 +28,13 @@ module.exports = function ({ blogsRepository, todoValidator }) {
         },
 
         updateBlogPost: function (blogPost,accountUser, callback) {
+            const errors = todoValidator.blogErrors(blogPost)
+
+            if (0 < errors.length) {
+                callback(errors, null)
+                return
+            }
+            
 			blogsRepository.updateBlogPost(blogPost,accountUser, callback)
 		},
 
