@@ -17,9 +17,9 @@ module.exports = function ({ }) {
         account_id: Sequelize.INTEGER
     })
 
-    
-    Todos.associate = (models) =>{
-        Todos.belongsTo(models.Accounts, {as: "accounts", foreignKey: "account_id"})
+
+    Todos.associate = (models) => {
+        Todos.belongsTo(models.Accounts, { as: "accounts", foreignKey: "account_id" })
     }
 
     return Todos

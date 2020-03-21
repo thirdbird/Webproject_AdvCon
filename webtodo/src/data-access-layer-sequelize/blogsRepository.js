@@ -24,7 +24,7 @@ module.exports = function ({ blogsModel }) {
 				})
 		},
 
-		createBlogPost: function (blogPost,accountUser, callback) {
+		createBlogPost: function (blogPost, accountUser, callback) {
 			blogsModel.create({ title: blogPost.title, post: blogPost.post, account_user: accountUser })
 				.then(function (blogPost) {
 					callback([], blogPost)
@@ -34,21 +34,21 @@ module.exports = function ({ blogsModel }) {
 				})
 		},
 
-		updateBlogPost: function (blogPost,accountUser, callback) {
-            blogsModel.update({ title: blogPost.title, post: blogPost.post, account_user: accountUser }, { where: { id: blogPost.id } })
-                .then(function (blogPost) {
-                    callback([], blogPost)
-                })
-                .catch(function () {
-                    callback(["databaseError"])
-                })
-        },
+		updateBlogPost: function (blogPost, accountUser, callback) {
+			blogsModel.update({ title: blogPost.title, post: blogPost.post, account_user: accountUser }, { where: { id: blogPost.id } })
+				.then(function (blogPost) {
+					callback([], blogPost)
+				})
+				.catch(function () {
+					callback(["databaseError"])
+				})
+		},
 
-        deleteBlogPost: function (id, callback) {
-            blogsModel.destroy({ where: { id: id } })
-                .then(function (deleteBlogPost) {
-                    callback([], deleteBlogPost)
-                })
-        }
+		deleteBlogPost: function (id, callback) {
+			blogsModel.destroy({ where: { id: id } })
+				.then(function (deleteBlogPost) {
+					callback([], deleteBlogPost)
+				})
+		}
 	}
 }

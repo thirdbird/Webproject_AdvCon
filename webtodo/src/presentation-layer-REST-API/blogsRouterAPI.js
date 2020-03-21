@@ -27,10 +27,10 @@ module.exports = function ({ blogsManager }) {
                 response.status(200).json(blogPosts)
             }
         })
-    
+
     })
 
-    router.get('/:id',retrieveToken, function (request, response) {
+    router.get('/:id', retrieveToken, function (request, response) {
         const blogPost = { id: request.params.id }
         blogsManager.getBlogPostById(blogPost, function (errors, blogPost) {
             if (0 < errors.length) {
@@ -41,12 +41,12 @@ module.exports = function ({ blogsManager }) {
                 response.status(200).json(blogPost)
             }
         })
-            
+
     })
 
 
     //TODO ACCOUNT USER FIX
-    router.post('/',retrieveToken, function (request, response) {
+    router.post('/', retrieveToken, function (request, response) {
         jwt.verify(request.token, serverSecret, function (error, decoded) {
             if (error) {
                 response.sendStatus(403)
@@ -67,14 +67,14 @@ module.exports = function ({ blogsManager }) {
                         response.setHeader("Location", "/blogPosts/" + blogPost.id)
                         response.status(201).end()
                     }
-                
+
                 })
             }
         })
     })
 
     //TODO ACCOUNT USER FIX
-    router.put('/:id',retrieveToken, function (request, response) {
+    router.put('/:id', retrieveToken, function (request, response) {
         jwt.verify(request.token, serverSecret, function (error, decoded) {
             if (error) {
                 response.sendStatus(403)
@@ -86,10 +86,10 @@ module.exports = function ({ blogsManager }) {
                 }
                 const accountUser = decoded.username
 
-                console.log("from the rest api",blogPost)
+                console.log("from the rest api", blogPost)
 
                 blogsManager.updateBlogPost(blogPost, accountUser, function (errors, blogPost) {
-                    if(errors.includes("databaseError")){
+                    if (errors.includes("databaseError")) {
                         response.status(500).end()
                     }
                     else if (0 < errors.length) {
@@ -104,7 +104,7 @@ module.exports = function ({ blogsManager }) {
         })
     })
 
-    router.delete('/:id',retrieveToken, function (request, response) {
+    router.delete('/:id', retrieveToken, function (request, response) {
         jwt.verify(request.token, serverSecret, function (error, decoded) {
             if (error) {
                 response.sendStatus(403)

@@ -34,7 +34,6 @@ module.exports = function ({ }) {
 
             db.query(query, values, function (error, results) {
                 if (error) {
-                    // TODO: Look for usernameUnique violation.
                     callback(['databaseError'], null)
                 } else {
                     callback([], results.insertId)

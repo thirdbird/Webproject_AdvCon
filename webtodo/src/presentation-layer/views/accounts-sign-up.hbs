@@ -1,22 +1,21 @@
-
 <div class="content">
 	<h2>Sign up</h2>
 </div>
 {{#if errors.length}}
-	<ul>
-		{{#each errors}}
-			<li id="ErrorMessage">{{this}}</li>
-		{{/each}}
-	</ul>
+<ul>
+	{{#each errors}}
+	<li id="ErrorMessage">{{this}}</li>
+	{{/each}}
+</ul>
 {{/if}}
 <form action="/accounts/signUp" id="createAccountForm" method="POST">
-		
+
 	<div>Username: <input type="text" name="username" id="username" value="{{formHolder.usernameholder}}"></div>
-	
+
 	<div>Password: <input type="password" name="password" id="password"></div>
-	
+
 	<div>Password (repeat): <input type="password" name="confirmPassword" id="confirmPassword"></div>
-	
+
 	<input type="submit" value="Create account">
-	
+
 </form>

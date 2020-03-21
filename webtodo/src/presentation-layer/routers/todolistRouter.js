@@ -4,13 +4,11 @@ module.exports = function ({ todoManager }) {
 
     const router = express.Router()
 
-    //router.use(express.urlencoded({ extended: false }))
-
     router.get('/', function (request, response) {
         const accountId = request.session.account.id
-    
-       
-        todoManager.getAllTodos(accountId,function (errors, todos) {
+
+
+        todoManager.getAllTodos(accountId, function (errors, todos) {
             const model = {
                 errors: errors,
                 todos: todos,
@@ -29,8 +27,8 @@ module.exports = function ({ todoManager }) {
             todo: request.body.todo
         }
         const accountId = request.session.account.id
-        todoManager.createTodo(todo,accountId, function (errors, todo) {
-            todoManager.getAllTodos(accountId,function (errors2, todos) { //if we get db error the errors2 is not gonna display it because hbs file does not catch that error
+        todoManager.createTodo(todo, accountId, function (errors, todo) {
+            todoManager.getAllTodos(accountId, function (errors2, todos) { //if we get db error the errors2 is not gonna display it because hbs file does not catch that error
                 const model = {
                     errors: errors,
                     errors2: errors2,
@@ -48,7 +46,7 @@ module.exports = function ({ todoManager }) {
                 }
             })
         })
-    
+
     })
 
     return router

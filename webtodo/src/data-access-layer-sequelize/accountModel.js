@@ -12,23 +12,16 @@ module.exports = function ({ }) {
             type: Sequelize.TEXT,
             allowNull: false
         },
-        
+
     })
 
-    Accounts.associate = (models) =>{
-        Accounts.hasMany(models.Todos, {as: "todos", foreignKey: "account_id"})
-        Accounts.hasMany(models.Blogs, {as: "blogs", foreignKey: "account_user"})
+    Accounts.associate = (models) => {
+        Accounts.hasMany(models.Todos, { as: "todos", foreignKey: "account_id" })
+        Accounts.hasMany(models.Blogs, { as: "blogs", foreignKey: "account_user" })
     }
 
     //Accounts.create({username: "Alice", password: "12322"})
-    
+
 
     return Accounts
 }
-
-/*,
-        {
-            indexes: [
-                { fields: ['username'], unique: true }
-            ]
-        })*/

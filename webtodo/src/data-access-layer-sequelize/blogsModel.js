@@ -8,8 +8,8 @@ module.exports = function ({ }) {
         account_user: Sequelize.TEXT
     })
 
-    Blogs.associate = (models) =>{
-        Blogs.belongsTo(models.Accounts, {as: "accounts", foreignKey: "account_user"})
+    Blogs.associate = (models) => {
+        Blogs.belongsTo(models.Accounts, { as: "accounts", foreignKey: "account_user" })
     }
 
 

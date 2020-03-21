@@ -5,16 +5,16 @@
         <input name="title" type="todoInput" class="todoInput" value="{{formHolder.titleholder}}">
         <p>Post:</p>
         <textarea id="subject" name="post" placeholder="Write something.."
-        style="height:200px">{{formHolder.postholder}}</textarea>
+            style="height:200px">{{formHolder.postholder}}</textarea>
         <input type="submit" value="Add" class="todoButton button is-success">
     </form>
-<div class="content">
-    {{#if errors.length}}
+    <div class="content">
+        {{#if errors.length}}
         <ul>
             {{#each errors}}
             <p id="ErrorMessage">{{this}}</p>
             {{/each}}
         </ul>
-    {{/if}}
+        {{/if}}
     </div>
 </div>

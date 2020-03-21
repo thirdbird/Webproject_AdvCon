@@ -2,7 +2,7 @@
 module.exports = function ({ todoRepository, todoValidator }) {
 
 	return {
-		getAllTodos: function (accountId,callback) {
+		getAllTodos: function (accountId, callback) {
 			todoRepository.getAllTodos(accountId, callback)
 		},
 
