@@ -101,14 +101,11 @@ module.exports = function ({ accountManager }) {
 				response.render("accounts-sign-in.hbs", model)
 			}
 			else {
-				console.log('HEUHEUHEUHEUHEUE', account.id)
 				model.loggedIn = true
 				request.session.loggedIn = true
-				console.log("we are under true loggedin")
 				request.session.userId = account.id
 				request.session.account = account
-				response.render("home-logged-in.hbs", model)
-				console.log("bottom of else")
+				response.render("home.hbs", model)
 			}
 		})
 

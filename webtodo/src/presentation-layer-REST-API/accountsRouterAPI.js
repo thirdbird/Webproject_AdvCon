@@ -82,8 +82,8 @@ module.exports = function ({ accountManager }) {
                 if (0 < errors.length) {
                     response.status(400).json(errors)
                 } else {
-                    jwt.sign({ userId: account.id, username: account.username }, serverIdSecret, { expiresIn: '10min' }, function (errorId, idToken) {
-                        jwt.sign({ id: account.id, username: account.username }, serverSecret, { expiresIn: '10min' }, function (errorAccess, accessToken) {
+                    jwt.sign({ userId: account.id, username: account.username }, serverIdSecret,{ expiresIn: '10min' }, function (errorId, idToken) {
+                        jwt.sign({ id: account.id, username: account.username }, serverSecret,{ expiresIn: '10min' }, function (errorAccess, accessToken) {
                             if (errorId) {
                                 response.status(500).json(errorId)
                             } else if (errorAccess) {

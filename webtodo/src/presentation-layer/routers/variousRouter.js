@@ -19,7 +19,7 @@ module.exports = function ({ }) {
 			}
 			console.log('home session:', request.session)
 			console.log('home username:', model.account.username)
-			response.render('home-logged-in.hbs', model)
+			response.render('home.hbs', model)
 		}
 	})
 

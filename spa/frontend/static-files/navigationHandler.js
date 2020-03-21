@@ -1,6 +1,6 @@
 var idValue = 0
 var userValue = ""
-var loggedInUser = ""
+const loggedInUser = parseJwt(localStorage.accessToken)
 
 function parseJwt (token) {
     var base64Url = token.split('.')[1];
@@ -40,6 +40,8 @@ document.addEventListener("DOMContentLoaded", function () {
             title,
             post
         }
+
+
         fetch(
             "http://localhost:8080/api/blogPosts", {
                 method: "POST",
@@ -51,9 +53,10 @@ document.addEventListener("DOMContentLoaded", function () {
             }
             ).then(function(response){
                 if(response.ok){
+                    resetCreateBlogPostForm()
                     const url = "/blogposts"
                     goToPage(url)
-                    location.reload()
+                    
                 }
                 else{
                     return response.json()
@@ -91,9 +94,9 @@ document.addEventListener("DOMContentLoaded", function () {
             }
             ).then(function(response){
                 if(response.ok){
+                    resetUpdateBlogPostForm()
                     const url = "/blogposts"
                     goToPage(url)
-                    location.reload()
                 }
                 else{
                     return response.json()
@@ -108,27 +111,31 @@ document.addEventListener("DOMContentLoaded", function () {
         
     })
 
-
     document.querySelector("#signin-page form").addEventListener("submit", function(event){
         event.preventDefault()
         
         const username = document.querySelector("#signin-page .username").value
         const password = document.querySelector("#signin-page .password").value
+
+        const account = {
+            username,
+            password
+        }
         
         fetch(
             "http://localhost:8080/api/accounts/tokens", {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/x-www-form-urlencoded"
-                }, // TODO: Escape username and password in case they contained reserved characters in the x-www-form-urlencoded format.
-                body: "grant_type=password&username="+username+"&password="+password
+                    "Content-Type": "application/json",
+                }, 
+                body: JSON.stringify(account)
             }
             ).then(function(response){
                 return response.json()
             }).then(function(body){
                 if(typeof body.accessToken !== 'undefined'){
                     login(body.accessToken)
-                    loggedInUser = parseJwt(body.idToken)
+                    resetSignInForm()
                     const url = "/"
                     goToPage(url)
                 }
@@ -166,9 +173,9 @@ document.addEventListener("DOMContentLoaded", function () {
             }
             ).then(function(response){
                 if(response.ok){
+                    resetSignUpForm()
                     const url = "/signin"
                     goToPage(url)
-                    location.reload()
                 }
                 else{
                     return response.json()
@@ -250,7 +257,7 @@ function fetchAllAccounts() {
         "http://localhost:8080/api/accounts",{
         method: "GET",
             headers: {
-                "Authorization": "Bearer "+localStorage.accessToken   
+                "Authorization": "Bearer "+localStorage.accessToken
             }
         }
 	).then(function(response){
@@ -274,11 +281,12 @@ function fetchAllAccounts() {
 
 function fetchAllBlogPosts() {
 
+
     fetch(
         "http://localhost:8080/api/blogPosts", {
             method: "GET",
             headers: {
-                "Authorization": "Bearer "+localStorage.accessToken   
+                "Authorization": "Bearer "+localStorage.accessToken
             }
         }
 	).then(function(response){
@@ -334,27 +342,7 @@ function deleteBlogPost(id){
         "http://localhost:8080/api/blogPosts/"+id,{
         method: "DELETE",
             headers: {
-                "Authorization": "Bearer "+localStorage.accessToken   
-            }
-        }
-	).then(function(response){
-        if(response.ok){
-            const url = "/blogposts"
-            goToPage(url)
-        }
-	}).catch(function(error){
-		console.log(error)
-	})
-	
-}
-
-function updateBlogPost(id){
-
-	fetch(
-        "http://localhost:8080/api/blogPosts/"+id,{
-        method: "UPDATE",
-            headers: {
-                "Authorization": "Bearer "+localStorage.accessToken   
+                "Authorization": "Bearer "+localStorage.accessToken
             }
         }
 	).then(function(response){
@@ -369,13 +357,13 @@ function updateBlogPost(id){
 }
 
 function login(accessToken){
-	localStorage.accessToken = accessToken
+    localStorage.accessToken = accessToken
 	document.body.classList.remove("isLoggedOut")
     document.body.classList.add("isLoggedIn")
 }
 
 function logout(){
-	localStorage.accessToken = ""
+    localStorage.accessToken = ""
 	document.body.classList.remove("isLoggedIn")
     document.body.classList.add("isLoggedOut")
 }
@@ -386,7 +374,7 @@ function deleteButton(){
     }
     else{
         const errorMessage = document.getElementById("errorMessage")
-        errorMessage.innerText = "You cant delete that"
+        errorMessage.innerText = "You can't delete that"
     }
 }
 
@@ -394,11 +382,25 @@ function updateButton(){
     if(loggedInUser.username == userValue){
         const url = "/blogposts/update"
         goToPage(url)
-        //updateBlogPost(idValue)
     }
     else{
         const errorMessage = document.getElementById("errorMessage")
-        errorMessage.innerText = "You cant update that that"
+        errorMessage.innerText = "You can't update that that"
     }
 }
 
+function resetCreateBlogPostForm() {
+    document.getElementById("createblogPostForm").reset();
+}
+
+function resetUpdateBlogPostForm() {
+    document.getElementById("updateblogPostForm").reset();
+}
+
+function resetSignUpForm() {
+    document.getElementById("signUpForm").reset();
+}
+
+function resetSignInForm() {
+    document.getElementById("signInForm").reset();
+}
