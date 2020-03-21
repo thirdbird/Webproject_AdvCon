@@ -29,7 +29,6 @@
     </nav>
 
     <main>
-
         <div id="home-page">
             <h1>Home</h1>
             <p>There is supposed to be a grand picture here, but there is not ...</p>
@@ -66,6 +65,7 @@
                 </div>
                 <input type="submit" value="Sign in">
             </form>
+            <p id="signInError"></p>
         </div>
 
         <div id="signup-page">
@@ -81,6 +81,7 @@
                     Password(repeat): <input type="password" class="confirmPassword">
                 </div>
                 <input type="submit" value="Sign up">
+                <p id="signUpError"></p>
             </form>
         </div>
 
@@ -109,6 +110,9 @@
             <div>By: <span class="by"></span></div>
             <div><span class="title"></span></div>
             <div><span class="post"></span></div>
+            <div id="deleteButton" onClick="deleteButton()"><button>Delete</button> </div>
+            <div id="updateButton" onClick="updateButton()" ><button>Put</button> </div>
+            <p id="errorMessage"></p>
         </div>
 
         <div id="create-blog-page">
@@ -122,6 +126,7 @@
                 </div>
                 <input type="submit" value="Create">
             </form>
+            <p id="createAblogError"></p>
         </div>
 
         <div id="error-page">

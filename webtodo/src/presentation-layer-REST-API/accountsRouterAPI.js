@@ -18,17 +18,6 @@ module.exports = function ({ accountManager }) {
         }
     }
 
-    router.get("/signUp", function (request, response) {
-        response.status(200).end()
-    })
-
-    router.get("/signIn", function (request, response) {
-        response.status(200).end()
-    })
-
-    router.get("/signOut", function (request, response) {
-        response.status(200).end()
-    })
 
     router.get("/", retrieveToken, function (request, response) {
         jwt.verify(request.token, serverSecret, function (error, decoded) {
@@ -100,7 +89,7 @@ module.exports = function ({ accountManager }) {
                             } else if (errorAccess) {
                                 response.status(500).json(errorAccess)
                             } else {
-                                response.status(200).json({ accessToken, idToken, account })
+                                response.status(200).json({ accessToken, idToken})
                             }
                         })
                     })

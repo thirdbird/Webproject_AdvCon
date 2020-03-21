@@ -1,4 +1,15 @@
+var idValue = 0
+var userValue = ""
+var loggedInUser = ""
 
+function parseJwt (token) {
+    var base64Url = token.split('.')[1];
+    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+    return JSON.parse(jsonPayload);
+};
 
 // TODO: Don't write all JS code in the same file.
 document.addEventListener("DOMContentLoaded", function () {
@@ -29,7 +40,6 @@ document.addEventListener("DOMContentLoaded", function () {
             title,
             post
         }
-        console.log(blogPost)
         fetch(
             "http://localhost:8080/api/blogPosts", {
                 method: "POST",
@@ -40,9 +50,18 @@ document.addEventListener("DOMContentLoaded", function () {
                 body: JSON.stringify(blogPost)
             }
             ).then(function(response){
-                // TODO: Check status code to see if it succeeded. Display errors if it failed.
+                if(response.ok){
+                    const url = "/blogposts"
+                    goToPage(url)
+                }
+                else{
+                    return response.json()
+                }
             }).then(function(body){
-                // TODO: Read out information about the user account from the id_token.
+                console.log(body)
+                const errorMessage = document.getElementById("createAblogError")
+                errorMessage.innerText = [body]
+    
         }).catch(function(error){
             console.log(error)
         })
@@ -64,17 +83,18 @@ document.addEventListener("DOMContentLoaded", function () {
                 body: "grant_type=password&username="+username+"&password="+password
             }
             ).then(function(response){
-                if(response.ok){
-                    //successfully signed in
-                }
-                else{
-                    //status code 
-                    //dispaly it
-                }
                 return response.json()
             }).then(function(body){
-                // TODO: Read out information about the user account from the id_token.
-                login(body.accessToken)
+                if(typeof body.accessToken !== 'undefined'){
+                    login(body.accessToken)
+                    loggedInUser = parseJwt(body.idToken)
+                    const url = "/"
+                    goToPage(url)
+                }
+                else{
+                    const errorMessage = document.getElementById("signInError")
+                    errorMessage.innerText = [body]
+                }
         }).catch(function(error){
             console.log(error)
         })
@@ -105,19 +125,21 @@ document.addEventListener("DOMContentLoaded", function () {
             }
             ).then(function(response){
                 if(response.ok){
-                    //successfully created
+                    const url = "/signin"
+                    goToPage(url)
                 }
                 else{
-                    //const status = response.status
-                    //status innerText
+                    return response.json()
                 }
+            }).then(function(body){
+                const errorMessage = document.getElementById("signUpError")
+                errorMessage.innerText = [body]
         }).catch(function(error){
             console.log(error)
         })
         
     })
 })
-
 
 window.addEventListener("popstate", function (event) {
     const url = location.pathname
@@ -171,7 +193,6 @@ function changeToPage(url) {
 		document.getElementById("blogpost-page").classList.add("current-page")
 		const id = url.split("/")[2]
         fetchBlogPost(id)
-        delbutt() 
     } else if (url == "/blogposts/create") {
         document.getElementById("create-blog-page").classList.add("current-page")
     } else {
@@ -251,11 +272,12 @@ function fetchBlogPost(id){
 	}).then(function(blogPost){
         const titleSpan = document.querySelector("#blogpost-page .title")
         const nameSpan = document.querySelector("#blogpost-page .by")
-        const idSpan = document.querySelector("#blogpost-page .post")
+        const postSpan = document.querySelector("#blogpost-page .post")
         titleSpan.innerText = blogPost.title
         nameSpan.innerText = blogPost.account_user
-        idSpan.innerText = blogPost.post
-        delbutt()
+        postSpan.innerText = blogPost.post
+        idValue = blogPost.id
+        userValue = blogPost.account_user
 	}).catch(function(error){
 		console.log(error)
 	})
@@ -272,9 +294,10 @@ function deleteBlogPost(id){
             }
         }
 	).then(function(response){
-        // TODO: Check status code to see if it succeeded. Display errors if it failed.
-        console.log(response)
-		return response.json()
+        if(response.ok){
+            const url = "/blogposts"
+            goToPage(url)
+        }
 	}).catch(function(error){
 		console.log(error)
 	})
@@ -293,10 +316,17 @@ function logout(){
     document.body.classList.add("isLoggedOut")
 }
 
-function delbutt(){
-    const blogpostPage = document.getElementById("blogpost-page")
-    const delbutt = document.createElement("button")
-    delbutt.innerText = "Delete"
-    blogpostPage.appendChild(delbutt)
-
+function deleteButton(){
+    if(loggedInUser.username == userValue){
+        deleteBlogPost(idValue)
+    }
+    else{
+        const errorMessage = document.getElementById("errorMessage")
+        errorMessage.innerText = "You cant delete that"
+    }
 }
+
+function updateButton(){
+    
+}
+

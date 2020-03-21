@@ -59,17 +59,15 @@ module.exports = function ({ blogsManager }) {
                 const accountUser = decoded.username
 
                 blogsManager.createBlogPost(blogPost, accountUser, function (errors, blogPost) {
-                    blogsManager.getAllBlogPosts(function (errors2, blogPosts) {
-                        console.log("post this error",errors2,errors)
-                        if (errors.includes("databaseError")) {
-                            response.status(500).end()
-                        } else if (0 < errors.length || 0 < errors2.length) {
-                            response.status(400).json(blogPosts)
-                        } else {
-                            response.setHeader("Location", "/blogPosts/" + blogPost.id)
-                            response.status(201).end()
-                        }
-                    })
+                    if (errors.includes("databaseError")) {
+                        response.status(500).end()
+                    } else if (0 < errors.length) {
+                        response.status(400).json(errors)
+                    } else {
+                        response.setHeader("Location", "/blogPosts/" + blogPost.id)
+                        response.status(201).end()
+                    }
+                
                 })
             }
         })
