@@ -1,5 +1,5 @@
 
-module.exports = function ({ todoRepository, todoValidator }) {
+module.exports = function ({ todoRepository, validator }) {
 
 	return {
 		getAllTodos: function (accountId, callback) {
@@ -7,11 +7,13 @@ module.exports = function ({ todoRepository, todoValidator }) {
 		},
 
 		createTodo: function (todo, accountId, callback) {
-			const errors = todoValidator.todoErrors(todo)
+			const errors = validator.todoErrors(todo)
+
 			if (0 < errors.length) {
 				callback(errors, null)
 				return
 			}
+
 			todoRepository.createTodo(todo, accountId, callback)
 		},
 

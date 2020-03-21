@@ -18,7 +18,6 @@ module.exports = function ({ accountManager }) {
         }
     }
 
-
     router.get("/", retrieveToken, function (request, response) {
         jwt.verify(request.token, serverSecret, function (error, decoded) {
             if (error) {

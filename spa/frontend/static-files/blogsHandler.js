@@ -1,3 +1,6 @@
+var blogPost_ID = 0
+var blogPost_ACCOUNT = ""
+
 document.addEventListener("DOMContentLoaded", function () {
 
     document.querySelector("#create-blog-page form").addEventListener("submit", function (event) {
@@ -93,8 +96,13 @@ function fetchAllBlogPosts() {
         }
     }
     ).then(function (response) {
-        // TODO: Check status code to see if it succeeded. Display errors if it failed.
-        return response.json()
+        if(response.ok){
+            return response.json()
+        }
+        else{
+            const errorMessage = document.getElementById("blogPostError")
+            errorMessage.innerText = "something wrong, come back later"
+        }
     }).then(function (blogPosts) {
         const ul = document.querySelector("#blogposts-page ul")
         ul.innerText = ""
@@ -132,8 +140,8 @@ function fetchBlogPost(id) {
         titleSpan.innerText = blogPost.title
         nameSpan.innerText = blogPost.account_user
         postSpan.innerText = blogPost.post
-        idValue = blogPost.id
-        userValue = blogPost.account_user
+        blogPost_ID = blogPost.id
+        blogPost_ACCOUNT = blogPost.account_user
     }).catch(function (error) {
         console.log(error)
     })
@@ -166,4 +174,27 @@ function resetCreateBlogPostForm() {
 
 function resetUpdateBlogPostForm() {
     document.getElementById("updateblogPostForm").reset();
+}
+
+function deleteButton() {
+    const loggedInUser = parseJwt(localStorage.accessToken)
+	if (loggedInUser.username == blogPost_ACCOUNT) {
+		deleteBlogPost(blogPost_ID)
+	}
+	else {
+		const errorMessage = document.getElementById("errorMessage")
+		errorMessage.innerText = "You can't delete that"
+	}
+}
+
+function updateButton() {
+	const loggedInUser = parseJwt(localStorage.accessToken)
+	if (loggedInUser.username == blogPost_ACCOUNT) {
+		const url = "/blogposts/update"
+		goToPage(url)
+	}
+	else {
+		const errorMessage = document.getElementById("errorMessage")
+		errorMessage.innerText = "You can't update that that"
+	}
 }

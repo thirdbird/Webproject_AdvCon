@@ -1,8 +1,7 @@
-//CRUD operation on todolist resource
+
 const express = require('express')
 const jwt = require('jsonwebtoken')
 const serverSecret = "sdfkjdslkfjslkfd"
-const serverIdSecret = "eqjhrgbczvlkuyearjhbjhg"
 
 module.exports = function ({ blogsManager }) {
 
@@ -44,8 +43,6 @@ module.exports = function ({ blogsManager }) {
 
     })
 
-
-    //TODO ACCOUNT USER FIX
     router.post('/', retrieveToken, function (request, response) {
         jwt.verify(request.token, serverSecret, function (error, decoded) {
             if (error) {
@@ -73,7 +70,6 @@ module.exports = function ({ blogsManager }) {
         })
     })
 
-    //TODO ACCOUNT USER FIX
     router.put('/:id', retrieveToken, function (request, response) {
         jwt.verify(request.token, serverSecret, function (error, decoded) {
             if (error) {

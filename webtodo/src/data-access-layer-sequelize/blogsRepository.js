@@ -39,7 +39,7 @@ module.exports = function ({ blogsModel }) {
 				.then(function (blogPost) {
 					callback([], blogPost)
 				})
-				.catch(function () {
+				.catch(function (error) {
 					callback(["databaseError"])
 				})
 		},

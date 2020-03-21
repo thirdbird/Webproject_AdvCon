@@ -20,7 +20,6 @@ module.exports = function ({ todoManager }) {
 
     })
 
-    //router post // create a todo
     router.post('/', function (request, response) {
         const todo = request.body.todo
         const formHolder = {
@@ -28,7 +27,7 @@ module.exports = function ({ todoManager }) {
         }
         const accountId = request.session.account.id
         todoManager.createTodo(todo, accountId, function (errors, todo) {
-            todoManager.getAllTodos(accountId, function (errors2, todos) { //if we get db error the errors2 is not gonna display it because hbs file does not catch that error
+            todoManager.getAllTodos(accountId, function (errors2, todos) { 
                 const model = {
                     errors: errors,
                     errors2: errors2,
@@ -53,5 +52,4 @@ module.exports = function ({ todoManager }) {
 
 }
 
-// router delete // delete the todo and mark it as complete or delete it from the list
 

@@ -1,5 +1,3 @@
-var idValue = 0
-var userValue = ""
 
 
 function parseJwt(token) {

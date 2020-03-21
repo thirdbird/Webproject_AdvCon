@@ -1,7 +1,7 @@
 const path = require('path')
 const express = require('express')
 const expressHandlebars = require('express-handlebars')
-const awilix = require('../main')
+const awilix = require('../awilix')
 const session = require('express-session')
 const redis = require('redis')
 const bodyParser = require('body-parser')
@@ -60,10 +60,6 @@ app.use(session({
 		tt1: 86400
 	})
 }))
-
-//Enable hashing.
-//app.use(bodyParser.json())
-//app.use(bodyParser.urlencoded({extended: true}))
 
 //Attach all routers.
 app.use('/', awilix.theVariousRouter)

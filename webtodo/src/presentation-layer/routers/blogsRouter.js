@@ -4,7 +4,8 @@ module.exports = function ({ blogsManager }) {
 
     const router = express.Router()
 
-    //get all blog post
+    //------------------GET REQUEST------------------//
+
     router.get('/', function (request, response) {
         blogsManager.getAllBlogPosts(function (errors, blogPosts) {
             const model = {
@@ -29,7 +30,6 @@ module.exports = function ({ blogsManager }) {
         response.render("createABlogPost.hbs", model)
     })
 
-    //get blog post
     router.get('/:id', function (request, response) {
         const blogPost = { id: request.params.id }
 
@@ -45,8 +45,8 @@ module.exports = function ({ blogsManager }) {
         })
     })
 
+    //------------------POST REQUEST------------------//
 
-    //create blog post
     router.post('/create', function (request, response) {
         const blogPost = {
             title: request.body.title,

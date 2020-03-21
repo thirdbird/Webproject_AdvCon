@@ -4,7 +4,7 @@ const awilix = require('awilix')
 
 //Validators
 const accountValidator = require('./business-logic-layer/accountValidator')
-const todoValidator = require('./business-logic-layer/todoValidator')
+const validator = require('./business-logic-layer/validator')
 
 //Managers
 const accountManager = require('./business-logic-layer/accountManager')
@@ -40,7 +40,7 @@ const blogsRouterAPI = require('./presentation-layer-REST-API/blogsRouterAPI')
 const container = awilix.createContainer()
 
 container.register("accountValidator", awilix.asFunction(accountValidator))
-container.register("todoValidator", awilix.asFunction(todoValidator))
+container.register("validator", awilix.asFunction(validator))
 
 container.register("accountManager", awilix.asFunction(accountManager))
 container.register("todoManager", awilix.asFunction(todoManager))

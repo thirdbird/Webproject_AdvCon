@@ -57,10 +57,6 @@ module.exports = function ({ }) {
 
 			return errors
 
-		},
-
-		usernameExists: function (account) {
-
 		}
 	}
 }

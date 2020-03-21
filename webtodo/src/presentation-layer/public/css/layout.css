@@ -63,6 +63,12 @@ li.todosList {
   border-bottom: 1px solid #eee;
 }
 
+li.blogPostList{
+  overflow: hidden;
+  padding: 20px 0;
+  border-bottom: 1px solid #eee;
+}
+
 div.container .delete{
 	margin: 0;
 	position: absolute;

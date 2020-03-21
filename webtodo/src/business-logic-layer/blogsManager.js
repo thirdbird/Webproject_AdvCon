@@ -1,19 +1,14 @@
 
 
-module.exports = function ({ blogsRepository, todoValidator }) {
+module.exports = function ({ blogsRepository, validator }) {
 
     return {
-
-
-
-        //get blog post by id
         getBlogPostById: function (blogPost, callback) {
             blogsRepository.getBlogPostById(blogPost, callback)
         },
 
-        //create a blog post
         createBlogPost: function (blogPost, accountUser, callback) {
-            const errors = todoValidator.blogErrors(blogPost)
+            const errors = validator.blogErrors(blogPost)
 
             if (0 < errors.length) {
                 callback(errors, null)
@@ -22,13 +17,13 @@ module.exports = function ({ blogsRepository, todoValidator }) {
 
             blogsRepository.createBlogPost(blogPost, accountUser, callback)
         },
-        //Get all blogs
+
         getAllBlogPosts: function (callback) {
             blogsRepository.getAllBlogPosts(callback)
         },
 
         updateBlogPost: function (blogPost, accountUser, callback) {
-            const errors = todoValidator.blogErrors(blogPost)
+            const errors = validator.blogErrors(blogPost)
 
             if (0 < errors.length) {
                 callback(errors, null)

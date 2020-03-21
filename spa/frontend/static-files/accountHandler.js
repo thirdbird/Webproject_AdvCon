@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			headers: {
 				"Content-Type": "application/json",
 
-			}, // TODO: Escape username and password in case they contained reserved characters in the x-www-form-urlencoded format.
+			}, 
 			body: JSON.stringify(account)
 		}
 		).then(function (response) {
@@ -97,7 +97,7 @@ function fetchAllAccounts() {
 		}
 	}
 	).then(function (response) {
-		// TODO: Check status code to see if it succeeded. Display errors if it failed.
+
 		return response.json()
 	}).then(function (accounts) {
 		const ul = document.querySelector("#accounts-page ul")
@@ -127,7 +127,6 @@ function logout() {
 	document.body.classList.add("isLoggedOut")
 }
 
-
 function resetSignUpForm() {
 	document.getElementById("signUpForm").reset();
 }
@@ -136,25 +135,3 @@ function resetSignInForm() {
 	document.getElementById("signInForm").reset();
 }
 
-function deleteButton() {
-	const loggedInUser = parseJwt(localStorage.accessToken)
-	if (loggedInUser.username == userValue) {
-		deleteBlogPost(idValue)
-	}
-	else {
-		const errorMessage = document.getElementById("errorMessage")
-		errorMessage.innerText = "You can't delete that"
-	}
-}
-
-function updateButton() {
-	const loggedInUser = parseJwt(localStorage.accessToken)
-	if (loggedInUser.username == userValue) {
-		const url = "/blogposts/update"
-		goToPage(url)
-	}
-	else {
-		const errorMessage = document.getElementById("errorMessage")
-		errorMessage.innerText = "You can't update that that"
-	}
-}
