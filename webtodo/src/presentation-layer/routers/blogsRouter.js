@@ -40,7 +40,6 @@ module.exports = function ({ blogsManager }) {
                 account: request.session.account,
                 loggedIn: request.session.loggedIn
             }
-            console.log(blogPost)
             response.render("blog-post-show-one.hbs", model)
         })
     })

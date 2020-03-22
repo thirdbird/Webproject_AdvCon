@@ -14,7 +14,13 @@ module.exports = function ({ }) {
             type: Sequelize.TEXT,
             allowNull: false
         },
-        account_id: Sequelize.INTEGER
+        account_id: {
+            type: Sequelize.INTEGER,
+            references: {         
+                model: 'accounts',
+                key: 'id'
+            }
+        }
     })
 
 

@@ -3,6 +3,12 @@ const db = require('./db')
 
 module.exports = function ({ }) {
     const Accounts = db.define('accounts', {
+        id: {
+            allowNull: false,
+            autoIncrement: true,
+            primaryKey: true,
+            type: Sequelize.INTEGER
+        },
         username: {
             type: Sequelize.STRING(50),
             allowNull: false,

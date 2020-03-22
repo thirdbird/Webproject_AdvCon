@@ -26,8 +26,9 @@ app.use(bodyParser.urlencoded({
 }))
 
 app.use(function (request, response, next) {
-	response.setHeader("Access-Control-Allow-Origin", "*")
-	response.setHeader("Access-Control-Allow-Methods", "*")
+	response.setHeader("Access-Control-Allow-Origin", "http://localhost:3000")
+	response.setHeader("Access-Control-Allow-Credentials", true)
+	response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE")
 	response.setHeader("Access-Control-Allow-Headers", "*")
 	response.setHeader("Access-Control-Expose-Headers", "*")
 	next()

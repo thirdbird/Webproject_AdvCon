@@ -6,7 +6,6 @@ module.exports = function ({ }) {
 
 	router.get('/', function (request, response) {
 		let sess = request.session
-		console.log(sess)
 		if (sess.userId === undefined) {
 			response.render('home.hbs')
 		} else {

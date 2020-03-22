@@ -19,6 +19,8 @@ document.addEventListener("DOMContentLoaded", function () {
 			password
 		}
 
+		console.log(account)
+
 		fetch(
 			"http://localhost:8080/api/accounts/tokens", {
 			method: "POST",
@@ -28,8 +30,16 @@ document.addEventListener("DOMContentLoaded", function () {
 			body: JSON.stringify(account)
 		}
 		).then(function (response) {
-			return response.json()
+			console.log(response)
+			if (response.ok) {
+				return response.json()
+			}
+			else {
+				const errorMessage = document.getElementById("signInError")
+				errorMessage.innerText = "You have to write something"
+			}
 		}).then(function (body) {
+			console.log(body)
 			if (typeof body.accessToken !== 'undefined') {
 				login(body.accessToken)
 				resetSignInForm()
@@ -41,7 +51,8 @@ document.addEventListener("DOMContentLoaded", function () {
 				errorMessage.innerText = [body]
 			}
 		}).catch(function (error) {
-			console.log(error)
+			const errorMessage = document.getElementById("signInError")
+			errorMessage.innerText = "something wrong, come back later"
 		})
 
 	})
@@ -65,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			headers: {
 				"Content-Type": "application/json",
 
-			}, 
+			},
 			body: JSON.stringify(account)
 		}
 		).then(function (response) {
@@ -81,7 +92,8 @@ document.addEventListener("DOMContentLoaded", function () {
 			const errorMessage = document.getElementById("signUpError")
 			errorMessage.innerText = [body]
 		}).catch(function (error) {
-			console.log(error)
+			const errorMessage = document.getElementById("signUpError")
+			errorMessage.innerText = "something wrong, come back later"
 		})
 
 	})
@@ -97,8 +109,13 @@ function fetchAllAccounts() {
 		}
 	}
 	).then(function (response) {
-
-		return response.json()
+		if (response.ok) {
+			return response.json()
+		}
+		else {
+			const errorMessage = document.getElementById("accountError")
+			errorMessage.innerText = "something wrong, come back later"
+		}
 	}).then(function (accounts) {
 		const ul = document.querySelector("#accounts-page ul")
 		ul.innerText = ""
@@ -111,7 +128,8 @@ function fetchAllAccounts() {
 			ul.append(li)
 		}
 	}).catch(function (error) {
-		console.log(error)
+		const errorMessage = document.getElementById("signUpError")
+		errorMessage.innerText = "something wrong, come back later"
 	})
 }
 

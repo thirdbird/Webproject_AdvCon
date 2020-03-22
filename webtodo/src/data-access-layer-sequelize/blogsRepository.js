@@ -25,11 +25,12 @@ module.exports = function ({ blogsModel }) {
 		},
 
 		createBlogPost: function (blogPost, accountUser, callback) {
-			blogsModel.create({ title: blogPost.title, post: blogPost.post, account_user: accountUser })
+			blogsModel.create({ title: blogPost.title, post: blogPost.post, account_user: accountUser})
 				.then(function (blogPost) {
 					callback([], blogPost)
 				})
 				.catch(function (error) {
+					console.log(error)
 					callback(["databaseError"], null)
 				})
 		},

@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": "Bearer " + localStorage.accessToken
-            }, // TODO: Escape username and password in case they contained reserved characters in the x-www-form-urlencoded format.
+            },
             body: JSON.stringify(blogPost)
         }
         ).then(function (response) {
@@ -46,7 +46,8 @@ document.addEventListener("DOMContentLoaded", function () {
             const errorMessage = document.getElementById("createAblogError")
             errorMessage.innerText = [body]
         }).catch(function (error) {
-            console.log(error)
+            const errorMessage = document.getElementById("createAblogError")
+            errorMessage.innerText = "something wrong, come back later"
         })
 
     })
@@ -85,7 +86,8 @@ document.addEventListener("DOMContentLoaded", function () {
             errorMessage.innerText = [errors]
 
         }).catch(function (error) {
-            console.log(error)
+            const errorMessage = document.getElementById("updateABlogPostError")
+            errorMessage.innerText = "something wrong, come back later"
         })
 
     })
