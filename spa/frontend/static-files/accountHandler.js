@@ -19,8 +19,6 @@ document.addEventListener("DOMContentLoaded", function () {
 			password
 		}
 
-		console.log(account)
-
 		fetch(
 			"http://localhost:8080/api/accounts/tokens", {
 			method: "POST",
@@ -30,7 +28,6 @@ document.addEventListener("DOMContentLoaded", function () {
 			body: JSON.stringify(account)
 		}
 		).then(function (response) {
-			console.log(response)
 			if (response.ok) {
 				return response.json()
 			}
@@ -39,7 +36,6 @@ document.addEventListener("DOMContentLoaded", function () {
 				errorMessage.innerText = "You have to write something"
 			}
 		}).then(function (body) {
-			console.log(body)
 			if (typeof body.accessToken !== 'undefined') {
 				login(body.accessToken)
 				resetSignInForm()

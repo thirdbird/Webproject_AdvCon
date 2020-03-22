@@ -29,7 +29,7 @@ module.exports = function ({ accountModel }) {
 					callback([], loggedAccount)
 				})
 				.catch(function () {
-					callback(["Username or password doesn't match"], null)
+					callback(["databaseError"], null)
 				})
 		},
 

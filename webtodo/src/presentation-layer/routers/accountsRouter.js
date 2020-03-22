@@ -98,15 +98,22 @@ module.exports = function ({ accountManager }) {
 				formHolder: formHolder
 			}
 			if (errors.length != 0) {
+				console.log("errors")
 				response.render("accounts-sign-in.hbs", model)
 			}
-			else {
+			else if(account != null){
+				console.log("loggedin")
 				model.loggedIn = true
 				request.session.loggedIn = true
 				request.session.userId = account.id
 				request.session.account = account
 				response.render("home.hbs", model)
 			}
+			else{
+				model.errors = ["Username or password doesnt match"]
+				response.render("accounts-sign-in.hbs", model)
+			}
+			
 		})
 
 	})

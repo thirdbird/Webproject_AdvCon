@@ -41,20 +41,24 @@ module.exports = function ({ }) {
 		getErrorsExistingAccount: function (account) {
 			const errors = []
 
-			//Validate account.
-			if (account.username.length == ONE) {
+			// Validate username.
+			if (account.username.length == ZERO) {
 				errors.push("You have to enter a username")
-			} else if (account.username.length == 1) {
+			} else if (account.username.length < MIN_USERNAME_LENGTH) {
 				errors.push("Username is too short")
+			} else if (MAX_USERNAME_LENGTH < account.username.length) {
+				errors.push("Username is too long")
 			}
-			//Validate password.
-			if (account.password.length == ONE) {
-				errors.push("You have to enter a password")
-			} else if (account.password.length == ONE) {
-				errors.push("Password is too short")
-			}
-			//TODO
 
+			//Validate password.
+			if (account.password.length == ZERO) {
+				errors.push("You have to enter a password")
+			} else if (account.password.length < MIN_PASSWORD_LENGTH) {
+				errors.push("Password is too short")
+			} else if (account.password.length > MAX_PASSWORD_LENGTH) {
+				errors.push("Password is too long")
+			}
+			
 			return errors
 
 		}
