@@ -85,7 +85,8 @@ document.addEventListener("DOMContentLoaded", function () {
             errorMessage.innerText = [errors]
 
         }).catch(function (error) {
-            console.log(error)
+            const errorMessage = document.getElementById("updateABlogPostError")
+            errorMessage.innerText = "something wrong, come back later"
         })
 
     })
@@ -103,10 +104,10 @@ function fetchAllBlogPosts() {
         }
     }
     ).then(function (response) {
-        if(response.ok){
+        if (response.ok) {
             return response.json()
         }
-        else{
+        else {
             const errorMessage = document.getElementById("blogPostsError")
             errorMessage.innerText = "something wrong, come back later"
         }
@@ -138,10 +139,10 @@ function fetchBlogPost(id) {
         }
     }
     ).then(function (response) {
-        if(response.ok){
+        if (response.ok) {
             return response.json()
         }
-        else{
+        else {
             const errorMessage = document.getElementById("blogPostError")
             errorMessage.innerText = "something wrong, come back later"
         }
@@ -192,23 +193,23 @@ function resetUpdateBlogPostForm() {
 
 function deleteButton() {
     const loggedInUser = parseJwt(localStorage.accessToken)
-	if (loggedInUser.username == blogPost_ACCOUNT) {
-		deleteBlogPost(blogPost_ID)
-	}
-	else {
-		const errorMessage = document.getElementById("errorMessage")
-		errorMessage.innerText = "You can't delete that"
-	}
+    if (loggedInUser.username == blogPost_ACCOUNT) {
+        deleteBlogPost(blogPost_ID)
+    }
+    else {
+        const errorMessage = document.getElementById("errorMessage")
+        errorMessage.innerText = "You can't delete that"
+    }
 }
 
 function updateButton() {
-	const loggedInUser = parseJwt(localStorage.accessToken)
-	if (loggedInUser.username == blogPost_ACCOUNT) {
-		const url = "/blogposts/update"
-		goToPage(url)
-	}
-	else {
-		const errorMessage = document.getElementById("errorMessage")
-		errorMessage.innerText = "You can't update that that"
-	}
+    const loggedInUser = parseJwt(localStorage.accessToken)
+    if (loggedInUser.username == blogPost_ACCOUNT) {
+        const url = "/blogposts/update"
+        goToPage(url)
+    }
+    else {
+        const errorMessage = document.getElementById("errorMessage")
+        errorMessage.innerText = "You can't update that that"
+    }
 }
