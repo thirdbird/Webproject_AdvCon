@@ -11,6 +11,12 @@ module.exports = function ({ accountRepository, accountValidator }) {
 		},
 
 		getAccount: function (account, callback) {
+			const error = accountValidator.getErrorsNewAccount(account)
+
+			if (0 < error.length) {
+				callback(error, null)
+				return
+			}
 			accountRepository.getAccount(account, callback)
 		},
 
